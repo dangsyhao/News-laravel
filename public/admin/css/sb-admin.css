@@ -65,9 +65,12 @@ body.fixed-nav {
   z-index: 1;
 }
 
+
 #mainNav .navbar-collapse {
   overflow: auto;
   max-height: 75vh;
+  overflow: scroll;
+  
 }
 
 #mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {

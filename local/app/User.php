@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role'
+        'name', 'email', 'password','phone_number','address','author_id'
     ];
 
     /**
@@ -27,6 +27,10 @@ class User extends Authenticatable
         //
     ];
 
-    //ten bang
-    protected $table='users';
+    public function authorCategory()
+    {
+        return $this->belongsTo('App\Author_category','author_id');
+    }
+
+    
 }
