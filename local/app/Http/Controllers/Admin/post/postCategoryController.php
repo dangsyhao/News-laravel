@@ -22,15 +22,14 @@ class postCategoryController extends Controller
     public function post()
     {  
         $post_category=Post_Category::paginate(5);
-        
-        return view('admin.post.category.postCategory-post',['post_category'=>$post_category]);
+        return view('admin.post.category.getList',['post_category'=>$post_category]);
     
     }
 
 
     public function getAdd()
     {
-        return view('admin.post.category.postCategory-Add');
+        return view('admin.post.category.getAdd');
     }
 
 
@@ -43,7 +42,7 @@ class postCategoryController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('admin.postCategory-getAdd')
+            return redirect()->route('admin.getPostCategoryTable-getAdd')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -52,15 +51,15 @@ class postCategoryController extends Controller
         $post_category->value = $request->value;
         $post_category->description = $request->description;
         $post_category->save();
-        return redirect()->route('admin.postCategory-post');
+        return redirect()->route('admin.getPostCategoryTable-post');
 
     }
 
 
     public function getEdit($id)
     {
-        $postCategory_edit=Post_Category::where('id',$id)->get();
-       return view('admin.post.category.postCategory-edit',['postCategory_edit'=>$postCategory_edit]);
+        $getPostCategoryTable_edit=Post_Category::where('id',$id)->get();
+       return view('admin.post.category.getEdit',['getPostCategoryTable_edit'=>$getPostCategoryTable_edit]);
     }
 
 
@@ -74,7 +73,7 @@ class postCategoryController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('admin.postCategory-getEdit',['id'=>$request->id])
+            return redirect()->route('admin.getPostCategoryTable-getEdit',['id'=>$request->id])
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -83,7 +82,7 @@ class postCategoryController extends Controller
         $post_category->value = $request->value;
         $post_category->description = $request->description;
         $post_category->save();
-        return redirect()->route('admin.postCategory-post');
+        return redirect()->route('admin.getPostCategoryTable-post');
 
     }
 
@@ -91,6 +90,6 @@ class postCategoryController extends Controller
     {
         $post_category= Post_Category::find($id);
         $post_category->delete();        
-        return redirect()->route('admin.postCategory-post');
+        return redirect()->route('admin.getPostCategoryTable-post');
     }
 }

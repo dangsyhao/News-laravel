@@ -6,7 +6,7 @@
 		<div class="grid box">
 			<div class="grid-header">
 				<ul class="category-list">
-					<h5 class="post-category_head">{{$row->postCategory->value}}</h5>
+					<h5 class="post-category_head">{{$row->getPostCategoryTable->value}}</h5>
 				</ul>
 				<a class="gotosingle" href="#">{{$row->title}}</a>
 				<ul>
@@ -24,11 +24,11 @@
     </div>
     
     <ul class="comment-list">
-        <h5 class="post-author_head"><strong>Theo</strong>: {{$row->authorList->name}}</h5>
+        <h5 class="post-author_head"><strong>Theo</strong>: {{$row->getAuthorByUsersTable->name}}</h5>
     </ul>
     <div class="content-form">
          <div class="fb-comments" data-href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" data-numposts="5">

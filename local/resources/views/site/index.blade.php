@@ -12,7 +12,7 @@
 						@foreach($page_index as $row)
 							<div class="page-index-grid">
 								<a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -32,7 +32,7 @@
 				@foreach($hot_news as $row)
 					<div class="hot-news-grid">
 						<p><a href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -58,7 +58,7 @@
 						<div class="world-news-grid">
 							<img src="{{$row->image_avatar}}" alt="" />
 							<a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">{{$row->title}}</a>
@@ -72,7 +72,7 @@
 					<ul>
 				@foreach($chinh_tri_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -94,7 +94,7 @@
 						<div class="world-news-grid">
 							<img src="{{$row->image_avatar}}" alt="" />
 							<a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -109,7 +109,7 @@
 					<ul>
 				@foreach($kinh_te_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -131,7 +131,7 @@
 						<div class="world-news-grid">
 							<img src="{{$row->image_avatar}}" alt="" />
 							<a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -146,7 +146,7 @@
 					<ul>
 				@foreach($giao_duc_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -168,7 +168,7 @@
 					<div class="desk">
 						<table>
 						<tr><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -184,7 +184,7 @@
 					<ul>
 				@foreach($quoc_te_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -203,7 +203,7 @@
 					<div class="desk">
 						<table>
 						<tr><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -219,7 +219,7 @@
 						<ul>
 					@foreach($van_hoa_link as $row)
 							<li> <a href="{{route('site.singlePage',[
-																		'post_category'=>str_slug($row->postCategory->value),
+																		'post_category'=>str_slug($row->getPostCategoryTable->value),
 																		'post_name'=>str_slug($row->title),
 																		'post_id'=>$row->id
 																		])}}" class="title">
@@ -239,7 +239,7 @@
 					<div class="desk">
 						<table>
 						<tr><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -255,7 +255,7 @@
 					<ul>
 				@foreach($y_te_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -276,7 +276,7 @@
 					<div class="desk">
 						<table>
 						<tr><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -292,7 +292,7 @@
 					<ul>
 				@foreach($phap_luat_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -310,7 +310,7 @@
 					<div class="desk">
 						<table>
 						<tr><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -326,7 +326,7 @@
 					<ul>
 				@foreach($ban_doc_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -344,7 +344,7 @@
 					<div class="desk">
 						<table>
 						<tr><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}" class="title">
@@ -360,7 +360,7 @@
 					<ul>
 				@foreach($the_thao_link as $row)
 						<li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">

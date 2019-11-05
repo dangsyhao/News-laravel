@@ -9,4 +9,7 @@ class Date extends Model
     protected $fillable = [
         'values', 'description'
     ];
+    //
+    protected $table='dates';
+
 }

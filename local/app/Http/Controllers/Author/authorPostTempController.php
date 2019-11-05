@@ -23,8 +23,8 @@ class authorPostTempController extends Controller
     public function getTemp(Request $request)
     {
     
-        $review_content= PostList::with('postCategory')->where([ 
-                                        ['author_id','=',$request->user()->id],
+        $review_content= PostList::with('getPostCategoryTable')->where([ 
+                                        ['user_id','=',$request->user()->id],
                                         ['status','=','0']
                                         ])->paginate('1');
                          
@@ -36,7 +36,7 @@ class authorPostTempController extends Controller
     
         $review_content= PostList::where([ 
                                         ['id','=',$id],
-                                        ['author_id','=',$request->user()->id],
+                                        ['user_id','=',$request->user()->id],
                                         ['status','=','0']
                                         ])->select('id','content')->get();
     
@@ -47,7 +47,7 @@ class authorPostTempController extends Controller
 
     public function getEdit(Request $request,$id)
     {  
-        $post_list=PostList::with('postCategory')->where('id','=',$id)->get();
+        $post_list=PostList::with('getPostCategoryTable')->where('id','=',$id)->get();
         $post_category=Post_category::select('id','value')->get();
         $image_name = Storage::allFiles($request->user()->email, 'local');
 
@@ -80,7 +80,7 @@ class authorPostTempController extends Controller
         $post_list= PostList::find($request->id);
         $post_list->title = $request->title;
         $post_list->post_category_id = $request->post_category_id;
-        $post_list->author_id = $request->user()->id;
+        $post_list->user_id = $request->user()->id;
         $post_list->image_avatar = $request->image_avatar;
         $post_list->quotes_content = $request->quotes_content;
         $post_list->content = $request->editor1;

@@ -37,12 +37,12 @@ class AdminResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin');
+        $this->middleware('dashboard_auth:web');
     }
 
     protected function guard()
     {
-      return Auth::guard('admin');
+      return Auth::guard('web');
     }
 
     protected function broker()

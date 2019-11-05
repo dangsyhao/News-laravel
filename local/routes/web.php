@@ -1,111 +1,88 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+/**
+ * install Authenticate route
+ */
+Auth::routes();
 
-  /*
-  |-> Admin Group
-  */
-Route::middleware('auth:admin')->group(function() {
+/**
+ * Admin Group
+ */
+
+Route::middleware('dashboard_auth:web')->middleware('auth-admin')->group(function() {
 
   Route::prefix('admin')->group(function() {
     //Redirect to Author Index Page
-    Route::get('/', 'Admin\dashboardController@dashboard')->name('admin.dashboard');
-    Route::get('/index', 'Admin\dashboardController@dashboard')->name('admin.dashboard');
+    Route::get('/dashboard', 'Admin\dashboardController@dashboard')->name('admin.dashboard');
 
 /**
 * Notificate items
 */
 Route::get('/notifi-getNotifi', 'Admin\notifi\notificateController@notifi')->name('admin.notifi-getNotifi');
-//Admin ->getAdd
+//getAdd
 Route::get('/notifi-getAdd', 'Admin\notifi\notificateController@getAdd')->name('admin.notifi-getAdd');
-//Admin ->Add
+//Add
 Route::post('/notifi-add', 'Admin\notifi\notificateController@add')->name('admin.notifi-add');
-//Admin ->getEdit
+//getEdit
 Route::get('/notifi-getEdit/{id}','Admin\notifi\notificateController@getEdit')->name('admin.notifi-getEdit');
-//Admin ->Edit
+//Edit
 Route::post('/notifi-edit', 'Admin\notifi\notificateController@edit')->name('admin.notifi-edit');
-//Admin ->Edit
+//Edit
 Route::get('/notifi-read/{id}', 'Admin\notifi\notificateController@read')->name('admin.notifi-read');
-//Admin ->Delete
+//Delete
 Route::get('/notifi-del/{id}', 'Admin\notifi\notificateController@del')->name('admin.notifi-del');
-
-/**
-* Admin items
-*/
-Route::get('/admin/list', 'Admin\admin\adminListController@list')->name('admin.admin-list');
-//Admin ->getAdd
-Route::get('/admin/list-getAdd', 'Admin\admin\adminListController@getAdd')->name('admin.admin-getAdd');
-//Admin ->Add
-Route::post('/admin/list-add', 'Admin\admin\adminListController@add')->name('admin.admin-add');
-//Admin ->getEdit
-Route::get('/admin/list-getEdit/{id}','Admin\admin\adminListController@getEdit')->name('admin.admin-getEdit');
-//Admin ->Edit
-Route::post('/admin/list-edit', 'Admin\admin\adminListController@edit')->name('admin.admin-edit');
-//Admin ->Filter
-Route::get('/admin/list-filter', 'Admin\admin\adminListController@filter')->name('admin.admin-filter');
-//Admin ->Delete
-Route::get('/admin/list-del/{id}', 'Admin\admin\adminListController@del')->name('admin.admin-del');
 
 /**
 * Advertise
 */
 Route::get('/advertise-getAdvertise', 'Admin\advertise\advertiseController@getAdvertise')->name('admin.advertise-getAdvertise');
-//Admin ->getAdd
+//getAdd
 Route::get('/advertise-getAdd', 'Admin\advertise\advertiseController@getAdd')->name('admin.advertise-getAdd');
-//Admin ->Add
+//Add
 Route::post('/advertise-add', 'Admin\advertise\advertiseController@add')->name('admin.advertise-add');
-//Admin ->getEdit
+//getEdit
 Route::get('/advertise-getEdit/{id}','Admin\advertise\advertiseController@getEdit')->name('admin.advertise-getEdit');
-//Admin ->Edit
+//Edit
 Route::post('/advertise-edit', 'Admin\advertise\advertiseController@edit')->name('admin.advertise-edit');
-//Admin ->Edit
+//Edit
 Route::get('/advertise-read/{id}', 'Admin\advertise\advertiseController@read')->name('admin.advertise-read');
-//Admin ->Delete
+//Delete
 Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->name('admin.advertise-del');
 
 /**
-* Admin ->AuthorList
+* User Manager
 */
-  Route::get('/admin/authorList', 'Admin\author\authorListController@author')->name('admin.authorList-author');
-  //Admin ->getAdd
-  Route::get('/admin/authorList-getAdd', 'Admin\author\authorListController@getAdd')->name('admin.authorList-getAdd');
-  //Admin ->Add
-  Route::post('/admin/authorList-add', 'Admin\author\authorListController@add')->name('admin.authorList-add');
-  //Admin ->getEdit
-  Route::get('/admin/authorList-getEdit/{id}','Admin\author\authorListController@getEdit')->name('admin.authorList-getEdit');
-  //Admin ->Edit
-  Route::post('/admin/authorList-edit', 'Admin\author\authorListController@edit')->name('admin.authorList-edit');
-  //Admin ->Delete
-  Route::get('/admin/authorList-del/{id}', 'Admin\author\authorListController@del')->name('admin.authorList-del');
+  Route::get('/user/get.list', 'Admin\user\userListController@getList')->name('admin.user.getList');
+  //getAdd
+  Route::get('/user/get.add', 'Admin\user\userListController@getAdd')->name('admin.user.getAdd');
+  //Add
+  Route::post('/user/set.add', 'Admin\user\userListController@setAdd')->name('admin.user.setAdd');
+  //getEdit
+  Route::get('/user/get.edit/{id}','Admin\user\userListController@getEdit')->name('admin.user.getEdit');;
+  //Edit
+  Route::post('/user/set.edit','Admin\user\userListController@setEdit')->name('admin.user.setEdit');
+  //Delete
+  Route::get('/user/set.delete/{id}','Admin\user\userListController@setDelete');
 
   /**
-   * Admin ->AuthorCategory
+   * AuthorCategory
    */
-  Route::get('/admin/authorCategory', 'admin\author\authorCategoryController@author')->name('admin.authorCategory-author');
-  //Admin ->getAdd
-  Route::get('/admin/authorCategory-getAdd', 'admin\author\authorCategoryController@getAdd')->name('admin.authorCategory-getAdd');
-  //Admin ->Add
-  Route::post('/admin/authorCategory-add', 'admin\author\authorCategoryController@add')->name('admin.authorCategory-add');
-  //Admin ->getEdit
-  Route::get('/admin/authorCategory-getEdit/{id}','admin\author\authorCategoryController@getEdit')->name('admin.authorCategory-getEdit');
-  //Admin ->Edit
-  Route::post('/admin/authorCategory-edit', 'admin\author\authorCategoryController@edit')->name('admin.authorCategory-edit');
-  //Admin ->Delete
-  Route::get('/admin/authorCategory-del/{id}', 'admin\author\authorCategoryController@del')->name('admin.authorCategory-del');
+  Route::get('/user_role/get.list', 'Admin\user\userRoleController@getList')->name('admin.user.role.getList');
+  //getAdd
+  Route::get('/user_role/get.add', 'Admin\user\userRoleController@getAdd')->name('admin.user.role.getAdd');
+  //Add
+  Route::post('/user_role/set.add', 'Admin\user\userRoleController@setAdd')->name('admin.user.role.setAdd');
+  //getEdit
+  Route::get('/user_role/get.edit/{id}','Admin\user\userRoleController@getEdit');
+  //Edit
+  Route::post('/user_role/set.edit', 'Admin\user\userRoleController@setEdit')->name('admin.user.role.setEdit');
+  //Delete
+  Route::get('/user_role/set.delete/{id}', 'Admin\user\userRoleController@setDelete');
 
   /**
-   * Admin ->PostList
+   * PostList
    */
-  Route::get('/post/postList', 'Admin\post\postListController@getList')->name('admin.postList-getList');
+  Route::get('/post/get.posts', 'Admin\post\postListController@getPostsByFilter')->name('admin.post.getPost');
   /*******/
   Route::get('/post/postList-del/{id}', 'Admin\post\postListController@del')->name('admin.postList-del');
   /*******/
@@ -114,74 +91,72 @@ Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->na
   Route::get('/post/postList-accept/{id}', 'Admin\post\postListController@accept')->name('admin.postList-accept');
   /*******/
   Route::get('/post/postList-accept_index/{id}', 'Admin\post\postListController@accept_index')->name('admin.postList-accept_index');
-  /*******/
-  Route::get('/post/postList-filter', 'Admin\post\postListController@filter')->name('admin.postList-filter');
 
   /**
-   * Admin ->PostCategory
+   * getPostCategoryTable
    */
-  Route::get('/post/postCategory', 'Admin\post\postCategoryController@post')->name('admin.postCategory-post');
+  Route::get('/post/getPostCategoryTable', 'Admin\post\postCategoryController@post')->name('admin.getPostCategoryTable-post');
   /*******/
-  Route::get('/post/postCategory-getAdd', 'Admin\post\postCategoryController@getAdd')->name('admin.postCategory-getAdd');
+  Route::get('/post/getPostCategoryTable-getAdd', 'Admin\post\postCategoryController@getAdd')->name('admin.getPostCategoryTable-getAdd');
   /*******/
-  Route::post('/post/postCategory-add', 'Admin\post\postCategoryController@add')->name('admin.postCategory-add');
+  Route::post('/post/getPostCategoryTable-add', 'Admin\post\postCategoryController@add')->name('admin.getPostCategoryTable-add');
   /*******/
-  Route::get('/post/postCategory-getEdit/{id}','Admin\post\postCategoryController@getEdit')->name('admin.postCategory-getEdit');
+  Route::get('/post/getPostCategoryTable-getEdit/{id}','Admin\post\postCategoryController@getEdit')->name('admin.getPostCategoryTable-getEdit');
   /*******/
-  Route::post('/post/postCategory-edit', 'Admin\post\postCategoryController@edit')->name('admin.postCategory-edit');
+  Route::post('/post/getPostCategoryTable-edit', 'Admin\post\postCategoryController@edit')->name('admin.getPostCategoryTable-edit');
   /*******/
-  Route::get('/post/postCategory-del/{id}', 'Admin\post\postCategoryController@del')->name('admin.postCategory-del');
+  Route::get('/post/getPostCategoryTable-del/{id}', 'Admin\post\postCategoryController@del')->name('admin.getPostCategoryTable-del');
 
 /**
-* Admin ->Images Gallery
+* Images Gallery
 */
 Route::get('/imageGallery-getList', 'Admin\imageGallery\imageGalleryController@getList')->name('admin.imageGallery-getList');
-//Admin ->getAdd
+//getAdd
 Route::get('/imageGallery-getAdd', 'Admin\imageGallery\imageGalleryController@getAdd')->name('admin.imageGallery-getAdd');
-//Admin ->Add
+//Add
 Route::post('/imageGallery-add', 'Admin\imageGallery\imageGalleryController@add')->name('admin.imageGallery-add');
-//Admin ->getEdit
+//getEdit
 Route::get('/imageGallery-getEdit/{id}','Admin\imageGallery\imageGalleryController@getEdit')->name('admin.imageGallery-getEdit');
-//Admin ->Edit
+//Edit
 Route::post('/imageGallery-edit', 'Admin\imageGallery\imageGalleryController@edit')->name('admin.imageGallery-edit');
-//Admin ->Edit
+//Edit
 Route::get('/imageGallery-read/{id}', 'Admin\imageGallery\imageGalleryController@read')->name('admin.imageGallery-read');
-//Admin ->Delete
+//Delete
 Route::get('/imageGallery-del/{id}', 'Admin\imageGallery\imageGalleryController@del')->name('admin.imageGallery-del');
 
   /**
-   * Admin ->Navigation Bar
+   * Navigation Bar
    */
   Route::get('/navBar-getNavBar', 'Admin\navBar\navBarController@getNavBar')->name('admin.navBar-getNavBar');
-  //Admin ->getAdd
+  //getAdd
   Route::get('/navBar-getAdd', 'Admin\navBar\navBarController@getAdd')->name('admin.navBar-getAdd');
-  //Admin ->Add
+  //Add
   Route::post('/navBar-add', 'Admin\navBar\navBarController@add')->name('admin.navBar-add');
-  //Admin ->getEdit
+  //getEdit
   Route::get('/navBar-getEdit/{id}','Admin\navBar\navBarController@getEdit')->name('admin.navBar-getEdit');
-  //Admin ->Edit
+  //Edit
   Route::post('/navBar-edit', 'Admin\navBar\navBarController@edit')->name('admin.navBar-edit');
-  //Admin ->Delete
+  //Delete
   Route::get('/navBar-del/{id}', 'Admin\navBar\navBarController@del')->name('admin.navBar-del');
 
 /**
-* Admin ->Date
+* Date
 */
-    Route::get('/admin/date', 'admin\admin\adminDateController@date')->name('admin.admin.date-date');
-    //Admin ->getAdd
-    Route::get('/admin/date-getAdd', 'admin\admin\adminDateController@getAdd')->name('admin.admin.date-getAdd');
-    //Admin ->Add
-    Route::post('/admin/date-add', 'admin\admin\adminDateController@add')->name('admin.admin.date-add');
-    //Admin ->getEdit
-    Route::get('/admin/date-getEdit/{id}','admin\admin\adminDateController@getEdit')->name('admin.admin.date-getEdit');
-    //Admin ->Edit
-    Route::post('/admin/date-edit', 'admin\admin\adminDateController@edit')->name('admin.admin.date-edit');
-    //Admin ->Delete
-    Route::get('/admin/date-del/{id}', 'admin\admin\adminDateController@del')->name('admin.admin.date-del');
+    Route::get('/date/get.list', 'Admin\date\dateController@date')->name('admin.date.getList');
+    //getAdd
+    Route::get('/date/get.add', 'Admin\date\dateController@getAdd')->name('admin.date.date-getAdd');
+    //Add
+    Route::post('/date/set.add', 'Admin\date\dateController@setAdd')->name('admin.date.setAdd');
+    //getEdit
+    Route::get('/date/get.edit/{id}','Admin\date\dateController@getEdit');
+    //Edit
+    Route::post('/date/set.edit', 'Admin\date\dateController@setEdit')->name('admin.date.setEdit');
+    //Delete
+    Route::get('/date/set.delete/{id}', 'Admin\date\dateController@setDelete');
   });
 
     /*
-    |->Admin ->Photos
+    |->Photos
     */
    Route::get('/photos-getList', 'admin\photos\photoPublicController@getList')->name('admin.photos-getList');
     /*******/
@@ -191,44 +166,18 @@ Route::get('/imageGallery-del/{id}', 'Admin\imageGallery\imageGalleryController@
 
 });
 
- /*
-  |->Admin ->Login
-*/
-Route::prefix('admin')->group(function() {
-  
-  Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-  Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-
-  //Register
-  Route::get('/Register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.Register');
-  Route::post('/Register', 'Auth\AdminRegisterController@Register')->name('admin.Register.submit');
-
-  // Password reset routes
-  Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-  Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-  Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
-  Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
-  //Admin Logout
-  Route::get('/logout', 'Auth\AdminLogoutController@logout')->name('admin.logout');
-
-});
-
 
 /*
   |->AUTHOR Page
 */
 
-Route::middleware('auth')->group(function() {
+Route::middleware('dashboard_auth:web')->group(function() {
   // Login Author Page
   Route::prefix('author')->group(function() {
 
 //Author->Author Dashboard
-  Route::get('/','author\authorDashboardController@dashboard')->name('author.dashboard');
-    //***
-  Route::get('/dashboard', 'author\authorDashboardController@dashboard')->name('author.dashboard');
-   //***
-  Route::get('/login', 'author\authorDashboardController@dashboard')->name('author.dashboard');
-  
+  Route::get('/dashboard', 'Author\authorDashboardController@dashboard')->name('author.dashboard');
+
    //Author->Notification
    //***
   Route::get('/notifi-read/{id}', 'author\authorNotificateController@read')->name('author.notifi-read');
@@ -273,12 +222,7 @@ Route::middleware('auth')->group(function() {
   Route::get('/imageEditor-del','Author\imageEditorController@del')->name('author.imageEditor-del');
   }); 
 
- 
-
 }); 
-
-// Auth::routes
-Auth::routes();
 
 /*
 |-> Site Page
@@ -291,7 +235,25 @@ Route::get('/{post_category}/{post_name}/{post_id}','Site\singlePageController@s
 Route::get('/{category_name}/{category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
 
 
+/**
+ * Site Authenticate
+ */
 
+//
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('site.login');
+Route::post('/login_submit', 'Auth\LoginController@login')->name('login.submit');
+
+//Register
+//Route::get('/Register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.Register');
+//Route::post('/Register', 'Auth\AdminRegisterController@Register')->name('admin.Register.submit');
+//
+//// Password reset routes
+//Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+//Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+//Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
+//Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
+//Admin Logout
+Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
 
 
 

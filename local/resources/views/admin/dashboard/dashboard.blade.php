@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.app')
 @section('content')
         <div class="container-fluid">
             <!-- Breadcrumbs-->
@@ -59,12 +59,8 @@
             </div>
     </div>
 
-   
-   
     <!-- Page level plugin JavaScript-->
     <script src="{{asset('public/admin/vendor/chart.js/Chart.min.js')}}"></script>
     <!-- Custom scripts for this page-->
     <script src="{{asset('public/admin/js/sb-admin-charts.min.js')}}"></script>
-
-
 @endsection 

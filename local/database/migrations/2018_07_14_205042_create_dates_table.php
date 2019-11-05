@@ -17,7 +17,6 @@ class CreateDatesTable extends Migration
             $table->increments('id');
             $table->string('values');
             $table->string('description');
-
             $table->timestamps();
         });
     }

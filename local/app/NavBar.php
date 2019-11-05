@@ -8,7 +8,7 @@ class NavBar extends Model
 {
     //
 
-    public function postCategory()
+    public function getPostCategoryTable()
     {
         return $this->belongsTo('App\Post_Category','post_category_id');
     }

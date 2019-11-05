@@ -5,7 +5,7 @@
 	
 		<div class="category-cricket">
 		@foreach($post_list_index as $row)
-			<h3>{{$row->postCategory->value}}</h3>
+			<h3>{{$row->getPostCategoryTable->value}}</h3>
 		@endforeach
 			<div class="category-top">
 				<div class="page-index-category" id='trang_nhat'>
@@ -14,7 +14,7 @@
 						@foreach($post_list_index as $row)
 							<div class="page-index-category-grid">
 								<a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -34,7 +34,7 @@
 					@foreach($post_list_hot_news as $row)
 						<div class="category-hot-news-grid">
 							<p><a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">
@@ -50,14 +50,14 @@
 				<div class="s-grid-small">
 					<div class="sc-image">
 						<a  href="{{route('site.singlePage',[
-															'post_category'=>str_slug($row->postCategory->value),
+															'post_category'=>str_slug($row->getPostCategoryTable->value),
 															'post_name'=>str_slug($row->title),
 															'post_id'=>$row->id
 															])}}"><img src="{{$row->image_avatar}}" alt="" /></a>
 					</div>
 					<div class="sc-text">
 						<a class="power"  href="{{route('site.singlePage',[
-																			'post_category'=>str_slug($row->postCategory->value),
+																			'post_category'=>str_slug($row->getPostCategoryTable->value),
 																			'post_name'=>str_slug($row->title),
 																			'post_id'=>$row->id
 																			])}}">{{$row->title}}</a>

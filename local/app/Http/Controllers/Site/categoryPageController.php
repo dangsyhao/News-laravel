@@ -15,7 +15,7 @@ class categoryPageController extends Controller
   public function categoryPage($category_name,$category_id){
 
     //PostList
-    $post_list=PostList::with('postCategory')->select(
+    $post_list=PostList::with('getPostCategoryTable')->select(
                                                   'id',
                                                   'title',
                                                   'image_avatar',

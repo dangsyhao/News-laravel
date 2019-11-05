@@ -10,7 +10,7 @@ class AdminRegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('dashboard_auth:web');
     }
 
     public function showRegisterForm()

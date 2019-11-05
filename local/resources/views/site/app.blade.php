@@ -1,10 +1,3 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -242,7 +235,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				@if(isset($nav_bar)) 
 				@foreach($nav_bar as $row)          
 					<li>
-						<a href="{{$row->url}}">{{$row->postCategory->value}}</a>
+						<a href="{{$row->url}}">{{$row->getPostCategoryTable->value}}</a>
 					</li>
 				@endforeach
 				@endif
@@ -274,7 +267,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								@foreach($du_lich_gallery as $row)	
 									 <li>	
 										<a  href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}"><img src="{{$row->image_avatar}}" alt="" /></a>							
@@ -327,7 +320,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="world-news-grid">
 								<img src="{{$row->image_avatar}}" alt="" />
 								<a  href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->postCategory->value),
+																	'post_category'=>str_slug($row->getPostCategoryTable->value),
 																	'post_name'=>str_slug($row->title),
 																	'post_id'=>$row->id
 																	])}}" class="title">{{$row->title}}</a>
@@ -349,7 +342,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="popular-grid">
 								<i>{{$row->updated_at}}</i>
 								<p><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->postCategory->value),
+																'post_category'=>str_slug($row->getPostCategoryTable->value),
 																'post_name'=>str_slug($row->title),
 																'post_id'=>$row->id
 																])}}">

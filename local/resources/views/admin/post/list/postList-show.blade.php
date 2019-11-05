@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.app')
 @section('content')
 
 <div class="container-fluid">
@@ -34,6 +34,8 @@
                         @if($row->status=='2')
                             <a role="button" class="btn btn-md btn-danger" href="{{route('admin.postList-accept_index',['id'=>$row->id])}}">Đăng Trang Nhất</a>
                         @endif
+                            <a role="button" class="btn btn-md btn-danger" href="{{route('admin.post.getPost')}}">Back</a>
+
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('author.layouts.app')
+@extends('author.app')
 @section('content')
 <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -48,7 +48,7 @@
                                  <tr role="row" class="odd">
                                     <td>{{$row->id}}</td>
                                     <td><strong>{{$row->title}}</strong></td>
-                                    <td>{{$row->postCategory->value}}</td>
+                                    <td>{{$row->getPostCategoryTable->value}}</td>
                                     <td>{{$row->updated_at}}</td>
                                     <td class='d-flex flex-row'>
                                         <a role='button'  class='btn btn-sm btn-outline-primary m-1' href="{{route('author.postTemp-showDemo',['id'=>$row->id])}}" >Show</a>
@@ -64,7 +64,7 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"><!--Showing 1 to 10 of 57 entries!--></div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">

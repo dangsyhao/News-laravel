@@ -1,4 +1,4 @@
-@extends('author.layouts.app')
+@extends('author.app')
 @section('content')
 
 <!-- CSS Image-dialog!-->
@@ -59,7 +59,7 @@
 
                             <div class="col-md-6">
                                 <select id="post_category_id"  name="post_category_id" class="form-control" required autofocus>        
-                                    <option selected value="{{ $row->post_category_id}}">{{ $row->postCategory->value}}</option>
+                                    <option selected value="{{ $row->post_category_id}}">{{ $row->getPostCategoryTable->value}}</option>
                             @if(isset($post_category))
                                 @foreach($post_category as $value)       
                                     <option value="{{$row->id}}">{{$row->value}}</option>     

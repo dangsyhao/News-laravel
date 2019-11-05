@@ -1,4 +1,4 @@
-@extends('author.layouts.app')
+@extends('author.app')
 @section('content')
 <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -64,8 +64,8 @@
                                             <tr role="row" class="odd">
                                                 <td class="sorting_1">{{$row->id}}</td>
                                                 <td>{{$row->title}}</td>
-                                                <td>{{$row->authorList->name}}</td>
-                                                <td>{{$row->postCategory->value}}</td>
+                                                <td>{{$row->getAuthorByUsersTable->name}}</td>
+                                                <td>{{$row->getPostCategoryTable->value}}</td>
                                                 <td>{{$row->view}}</td>
                                                 <td>
                                                     @if($row->status=='1')
@@ -98,7 +98,7 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"><!--Showing 1 to 10 of 57 entries!--></div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">

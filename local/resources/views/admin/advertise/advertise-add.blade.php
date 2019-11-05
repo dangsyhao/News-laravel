@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.app')
 @section('content')
 <!-- CSS Image-dialog!-->
 <link href="{{asset('public/author/image-dialog/image-dialog.css')}}" rel="stylesheet">

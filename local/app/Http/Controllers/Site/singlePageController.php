@@ -14,7 +14,7 @@ class singlePageController extends Controller
   public function singlePage($post_category,$post_name,$post_id){
 
     
-    $post_list=PostList::with('authorList','postCategory')
+    $post_list=PostList::with('getAuthorByUsersTable','getPostCategoryTable')
                         ->where([
                           ['id','=',$post_id],['status','>','1'],
                           ])->get();

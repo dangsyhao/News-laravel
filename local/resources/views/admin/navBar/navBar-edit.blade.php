@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.app')
 @section('content')
 
 <!-- CSS Image-dialog!-->
@@ -35,7 +35,7 @@
                             <label for="post_category_id" class="col-md-4 control-label">Values</label>
                             <div class="col-md-6">
                                 <select id="post_category_id"  name="post_category_id" class="form-control" required autofocus>                   
-                                    <option selected value="{{$row->post_category_id}}">{{$row->postCategory->value}}</option>
+                                    <option selected value="{{$row->post_category_id}}">{{$row->getPostCategoryTable->value}}</option>
                             @if(isset($post_category))
                                 @foreach($post_category as $row2)       
                                     <option value="{{$row2->id}}">{{$row2->value}}</option>           
@@ -66,7 +66,7 @@
                         <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}">
                             <label for="url" class="col-md-6 control-label">Url (etc : "kinh te")</label>
                             <div class="col-md-6">
-                                <input id="url" type="text" class="form-control" name="url" value="{{$row->postCategory->value}}">
+                                <input id="url" type="text" class="form-control" name="url" value="{{$row->getPostCategoryTable->value}}">
 
                                 @if ($errors->has('url'))
                                     <span class="help-block">

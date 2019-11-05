@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,20 +18,10 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-      switch ($guard) {
-        case 'admin':
-          if (Auth::guard($guard)->check()) {
-            return redirect()->route('admin.dashboard');
+          if ( Auth::guard($guard)->check()) {
+              return $next($request);
           }
-          break;
-
-        default:
-          if (Auth::guard($guard)->check()) {
-              return redirect()->route('author.dashboard');;
-          }
-          break;
-      }
-      return $next($request);
+        return redirect()->route('site.login');
     }
 
 }

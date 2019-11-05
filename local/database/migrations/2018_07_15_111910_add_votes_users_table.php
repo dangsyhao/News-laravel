@@ -14,7 +14,7 @@ class AddVotesUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->renameColumn('value', 'author_id');
+            $table->renameColumn('value', 'user_id');
         });
     }
 

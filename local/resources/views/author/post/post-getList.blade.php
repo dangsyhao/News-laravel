@@ -1,4 +1,4 @@
-@extends('author.layouts.app')
+@extends('author.app')
 @section('content')
 <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -20,10 +20,10 @@
                                     {{ csrf_field() }}
                
                                         <div class="form-group">
-                                                <select  name="author_id" class="form-control">
+                                                <select  name="user_id" class="form-control">
                                                     <option selected value='none'>-Tên Tác giả-</option>
                                                     @foreach($author_fill as $row)
-                                                    <option value="{{$row->author_id}}">{{$row->authorList->name}}</option>
+                                                    <option value="{{$row->user_id}}">{{$row->getAuthorByUsersTable->name}}</option>
                                                     @endforeach
                                                 </select>
                                         </div>
@@ -32,7 +32,7 @@
                                                  <select name="post_category_id" class="form-control ml-2">
                                                     <option selected value='none'>-Chủ đề-</option>
                                                     @foreach($post_category_fill as $row)
-                                                    <option value="{{$row->post_category_id}}">{{$row->postCategory->value}}</option>  
+                                                    <option value="{{$row->post_category_id}}">{{$row->getPostCategoryTable->value}}</option>
                                                     @endforeach
                                                 </select>
                                         </div>
@@ -125,8 +125,8 @@
                                  <tr role="row" class="odd">
                                     <td class="sorting_1">{{$row->id}}</td>
                                     <td><strong>{{$row->title}}</strong></td>
-                                   <!-- <td>{{$row->authorList->name}}</td>!-->
-                                    <td>{{$row->postCategory->value}}</td>
+                                   <!-- <td>{{$row->getAuthorByUsersTable->name}}</td>!-->
+                                    <td>{{$row->getPostCategoryTable->value}}</td>
                                     <td>{{$row->view}}</td>
                                     <td>   
                                         @if($row->status=='0')
@@ -161,7 +161,7 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"><!--Showing 1 to 10 of 57 entries!--></div>
                     </div>
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">

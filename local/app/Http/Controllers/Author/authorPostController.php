@@ -29,14 +29,14 @@ class authorPostController extends Controller
 
     public function getList(Request $request)
     {  
-        $post_list=PostList::with(['authorList','postCategory'])->where('author_id','=',$request->user()->id)->paginate('10');
+        $post_list=PostList::with(['getAuthorByUsersTable','getPostCategoryTable'])->where('user_id','=',$request->user()->id)->paginate('10');
        
         //Filter Controller 
-        $post_filter=PostList::with(['authorList','postCategory'])
-                                                                    ->where('author_id','=',$request->user()->id)
+        $post_filter=PostList::with(['getAuthorByUsersTable','getPostCategoryTable'])
+                                                                    ->where('user_id','=',$request->user()->id)
                                                                     ->select(
                                                                         'id',
-                                                                        'author_id',
+                                                                        'user_id',
                                                                         'post_category_id',
                                                                         'status',
                                                                         'view',
@@ -49,7 +49,7 @@ class authorPostController extends Controller
         $post_category_fill=$collection->unique('post_category_id');
         $post_category_fill->all();
 
-        $author_fill=$collection->unique('author_id');
+        $author_fill=$collection->unique('user_id');
         $author_fill->all();
 
         $status_fill=$collection->unique('status');
@@ -110,7 +110,7 @@ class authorPostController extends Controller
         $post_list= new PostList;
         $post_list->title = $request->title;
         $post_list->post_category_id = $request->post_category_id;
-        $post_list->author_id = $request->user()->id;
+        $post_list->user_id = $request->user()->id;
         $post_list->image_avatar = $request->image_avatar;
         $post_list->quotes_content = $request->quotes_content;
         $post_list->content = $request->editor1;
@@ -132,7 +132,7 @@ class authorPostController extends Controller
         $filter_3=$request->status;
         $filter_date=$request->updated_at;
         //Put $this $Field->value >>> If Field not Use , fill values='none' ! .
-        $field_1='author_id';    
+        $field_1='user_id';
         $field_2='post_category_id';
         $field_3='status';
         $field_date='updated_at';
