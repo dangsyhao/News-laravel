@@ -1,17 +1,6 @@
 @extends('author.app')
 @section('content')
-        <div class="container-fluid">
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"> <a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active">Add Notificate</li>
-            </ol>
-            <!-- Example DataTables Card-->
-            <div class="card mb-3">
-                <div class="card-header"><i class="fa fa-table"></i> Thêm Thông Báo</div>
-                <div class="card-body">
                     <div class="container">
-
                             <div class="jumbotron">
                                     @if(isset($notifi_list))    
                                         @foreach($notifi_list as $row)
@@ -46,25 +35,11 @@
                                     <div class="card-body">
                                         <canvas id="myAreaChart" width="100%" height="30"></canvas>
                                     </div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                    <div class="card-footer small text-muted"><!--Updated yesterday at 11:59 PM!--></div>
                                 </div>
                             </div>
                         </div>    
                             <!-- /.container-fluid-->
-
                     </div>
-                </div>
-             <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-            
-            </div>
-    </div>
-
-   
-   
-    <!-- Page level plugin JavaScript-->
-    <script src="{{asset('public/admin/vendor/chart.js/Chart.min.js')}}"></script>
-    <!-- Custom scripts for this page-->
-    <script src="{{asset('public/admin/js/sb-admin-charts.min.js')}}"></script>
-
 
 @endsection 

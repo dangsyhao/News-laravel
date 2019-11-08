@@ -39,30 +39,24 @@ class advertiseController extends Controller
 
     public function add(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
             'customer' => 'required|max:300',
             'image_url' => 'required|max:300',
-            'address' => 'required|max:300',
+            'info' => 'required|max:300',
             'link' => 'required|max:300',
         ]);
-
         if ($validator->fails()) {
             return redirect()->route('admin.advertise-getAdd')
                         ->withErrors($validator)
                         ->withInput();
         }
-        
         $advertise = new Advertise;
-       
         $advertise->customer = $request->customer;
         $advertise->image_url = $request->image_url;
-        $advertise->address = $request->address;
+        $advertise->info = $request->info;
         $advertise->link = $request->link; 
         $advertise->save();
         return redirect()->route('admin.advertise-getAdvertise');
-
-
     }
 
     public function getEdit($id)
@@ -76,22 +70,21 @@ class advertiseController extends Controller
     {
         
         $validator = Validator::make($request->all(), [
-
             'customer' => 'required|max:300',
             'image_url' => 'required|max:300',
-            'address' => 'required|max:300',
+            'info' => 'required|max:300',
             'link' => 'required|max:300',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('admin.advertise-getEdit')
+            return redirect()->route('admin.advertise-getEdit',['id'=>$request->id])
                         ->withErrors($validator)
                         ->withInput();
         }
         $advertise= Advertise::find($request->id);
         $advertise->customer = $request->customer;
         $advertise->image_url = $request->image_url;
-        $advertise->address = $request->address;
+        $advertise->info = $request->info;
         $advertise->link = $request->link; 
         $advertise->save();
         return redirect()->route('admin.advertise-getAdvertise');
@@ -100,9 +93,9 @@ class advertiseController extends Controller
 
     public function read($id)
     {
-        $image_url= Advertise::where('id','=',$id)->get();
+        $customer_info= Advertise::where('id','=',$id)->get();
                 
-        return view('admin.advertise.advertise-read',['image_url'=>$image_url]);
+        return view('admin.advertise.advertise-read',['customer_info'=>$customer_info]);
     }
 
     public function del($id)

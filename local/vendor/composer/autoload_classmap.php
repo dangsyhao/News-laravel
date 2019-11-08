@@ -29,7 +29,7 @@ return array(
     'App\\Http\\Controllers\\Author\\authorPostTempController' => $baseDir . '/app/Http/Controllers/Author/authorPostTempController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\admin\\photos\\photoPublicController' => $baseDir . '/app/Http/Controllers/Admin/photos/photoPublicController.php',
-    'App\\Http\\Controllers\\admin\\post\\getPostCategoryTableController' => $baseDir . '/app/Http/Controllers/Admin/post/getPostCategoryTableController.php',
+    'App\\Http\\Controllers\\admin\\post\\postCategoryController' => $baseDir . '/app/Http/Controllers/Admin/post/postCategoryController.php',
     'App\\Http\\Controllers\\admin\\user\\userRoleController' => $baseDir . '/app/Http/Controllers/Admin/user/userRoleController.php',
     'App\\Http\\Controllers\\author\\authorPostController' => $baseDir . '/app/Http/Controllers/Author/authorPostController.php',
     'App\\Http\\Controllers\\author\\imageEditorController' => $baseDir . '/app/Http/Controllers/Author/imageEditorController.php',

@@ -367,7 +367,7 @@ class ComposerStaticInitb28104078f722fd61b237c59ea8a6af3
         'App\\Http\\Controllers\\Author\\authorPostTempController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/authorPostTempController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\admin\\photos\\photoPublicController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/photos/photoPublicController.php',
-        'App\\Http\\Controllers\\admin\\post\\getPostCategoryTableController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/post/getPostCategoryTableController.php',
+        'App\\Http\\Controllers\\admin\\post\\postCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/post/postCategoryController.php',
         'App\\Http\\Controllers\\admin\\user\\userRoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/user/userRoleController.php',
         'App\\Http\\Controllers\\author\\authorPostController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/authorPostController.php',
         'App\\Http\\Controllers\\author\\imageEditorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/imageEditorController.php',

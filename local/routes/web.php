@@ -107,23 +107,6 @@ Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->na
   /*******/
   Route::get('/post/getPostCategoryTable-del/{id}', 'Admin\post\postCategoryController@del')->name('admin.getPostCategoryTable-del');
 
-/**
-* Images Gallery
-*/
-Route::get('/imageGallery-getList', 'Admin\imageGallery\imageGalleryController@getList')->name('admin.imageGallery-getList');
-//getAdd
-Route::get('/imageGallery-getAdd', 'Admin\imageGallery\imageGalleryController@getAdd')->name('admin.imageGallery-getAdd');
-//Add
-Route::post('/imageGallery-add', 'Admin\imageGallery\imageGalleryController@add')->name('admin.imageGallery-add');
-//getEdit
-Route::get('/imageGallery-getEdit/{id}','Admin\imageGallery\imageGalleryController@getEdit')->name('admin.imageGallery-getEdit');
-//Edit
-Route::post('/imageGallery-edit', 'Admin\imageGallery\imageGalleryController@edit')->name('admin.imageGallery-edit');
-//Edit
-Route::get('/imageGallery-read/{id}', 'Admin\imageGallery\imageGalleryController@read')->name('admin.imageGallery-read');
-//Delete
-Route::get('/imageGallery-del/{id}', 'Admin\imageGallery\imageGalleryController@del')->name('admin.imageGallery-del');
-
   /**
    * Navigation Bar
    */
@@ -255,9 +238,9 @@ Route::post('/login_submit', 'Auth\LoginController@login')->name('login.submit')
 //Admin Logout
 Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
 
+/**
+ * Upload function
+ */
 
-
-
-
-
-
+Route::get('upload/get.upload_box', 'FileUploadController@index')->name('upload.getbox');
+Route::post('file-upload/upload', 'FileUploadController@upload')->name('upload');

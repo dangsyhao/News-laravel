@@ -15,7 +15,13 @@
     <link href="{{asset('public/admin/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="{{asset('public/admin/css/sb-admin.css')}}" rel="stylesheet">
+    <link href="{{asset('public/admin/css/main.css')}}" rel="stylesheet">
+    <link href="{{asset('public/common/assets/main.css')}}" rel="stylesheet">
     <!-- Page level plugin CSS-->
     <link href="{{asset('public/admin/vendor/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
+    <!-- Page level plugin CSS-->
+    <link href="{{asset('public/author/image-dialog/image-dialog.css')}}" rel="stylesheet">
+    <!-- CKEY Editor Page-->
+    <script src="{{ asset('public/author/ckeditor/ckeditor.js') }}"></script>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">

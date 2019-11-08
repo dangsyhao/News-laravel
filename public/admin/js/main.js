@@ -7,5 +7,6 @@
                $(this).find('option:selected').attr('selected',true).next().attr('selected',false);
         });
 
-    })
+    });// End document event.
+
 })(jQuery); // End of use strict

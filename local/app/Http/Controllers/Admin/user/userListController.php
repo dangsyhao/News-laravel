@@ -45,13 +45,13 @@ class userListController extends Controller
             'address' => 'required|max:255',
             'password' => 'required|min:6|confirmed',
         ]);
-
+        //
         if ($validator->fails()) {
             return redirect()->route('admin.user.getAdd')
                         ->withErrors($validator)
                         ->withInput();
         }
-        
+        //
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -60,12 +60,11 @@ class userListController extends Controller
         $user->address = $request->address;
         $user->password = bcrypt($request->password);
         $user->save();
-
-        //Auto Create Directory 
-        Storage::disk('local')->makeDirectory($request->email);
+        //Auto Create Directory
+        Storage::disk('users')->makeDirectory($request->email,0775, true);
+        Storage::disk('users')->makeDirectory($request->email.'/images',0775, true);
 
         return redirect()->route('admin.user.getList');
-
     }
 
     public function getEdit($id)
@@ -114,8 +113,13 @@ class userListController extends Controller
         if($currentUserId == $id){
             return redirect()->route('admin.user.getList');
         }
-        //
+        //get $user data
         $user= User::find($id);
+        //Delete file storge for user
+            Storage::disk('users')->deleteDirectory($user->email.'/images');
+            Storage::disk('users')->deleteDirectory($user->email);
+
+        //delete user
         $user->delete();
         //
         return redirect()->route('admin.user.getList');

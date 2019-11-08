@@ -1,14 +1,6 @@
 @extends('admin.app')
 @section('content')
-<div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"> <a href="#">Dashboard</a></li>
-        <li class="breadcrumb-item active">Người viết bài</li>
-      </ol>
-      <!-- Example DataTables Card-->
-      <div class="card mb-3">
-        <div class="card-header"><i class="fa fa-table"></i> Danh mục Người viết bài</div>
+
         <div class="card-body">
           <div class="table-responsive">
             <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
@@ -28,7 +20,7 @@
                             <thead>
                                  <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" 
-                                            aria-label="Name: activate to sort column descending" style="width: 5px;">ID</th>
+                                            aria-label="Name: activate to sort column descending" style="width: 5px;">Num</th>
                             
                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
                                             aria-label="Position: activate to sort column ascending" style="width: 50px;">Name</th>
@@ -88,8 +80,5 @@
             </div>
         </div>
      </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-</div>
-
 
 @endsection 
