@@ -19,7 +19,7 @@ a, a:visited, a:active{
     background-color:rgb(255,255,255);
     font-family:Verdana, Arial, Helvetica, sans-serif;
     font-size:14px;
-    display:none;
+    display:block;
     position:fixed;
     z-index:99999;
     top:5%;

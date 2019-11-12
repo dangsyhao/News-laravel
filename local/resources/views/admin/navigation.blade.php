@@ -18,28 +18,14 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="Notification">
                     <li>
-                        <a href="{{route('admin.notifi-getAdd')}}">Create Notification</a>
-                    </li>
-                    <li>
                         <a href="{{route('admin.notifi-getNotifi')}}">Notifi List</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Date</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
-                        <a href="{{route('admin.date.getList')}}">Time-Date</a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Author" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">User</span>
+                    <span class="nav-link-text">Users</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="Author">
                     <li>
@@ -71,10 +57,21 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="Advertise">
                     <li>
-                        <a href="{{route('admin.advertise-getAdd')}}">Create Advertise</a>
+                        <a href="{{route('admin.advertise-getAdvertise')}}">Advertise List</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-sitemap"></i>
+                    <span class="nav-link-text">Menus</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseMulti">
+                    <li>
+                        <a href="{{route('admin.menu.category.index')}}">Menu Category</a>
                     </li>
                     <li>
-                        <a href="{{route('admin.advertise-getAdvertise')}}">Advertise List</a>
+                        <a href="{{route('admin.navBar-getNavBar')}}">List Menus</a>
                     </li>
                 </ul>
             </li>
@@ -82,26 +79,6 @@
                 <a class="nav-link" href="{{route('admin.photos-getList')}}">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Files Manager</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-sitemap"></i>
-                    <span class="nav-link-text">Menu Levels</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseMulti">
-                    <li>
-                        <a href="{{route('admin.navBar-getAdd')}}">Create Navigation Bar</a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.navBar-getNavBar')}}">Navigation Bar List</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">Link</span>
                 </a>
             </li>
         </ul>

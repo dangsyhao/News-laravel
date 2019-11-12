@@ -96,7 +96,7 @@
                             @if(isset($post_list))
                                 @foreach($post_list as $row)
                              <tr role="row" class="odd">
-                                 <td class="sorting_1">{{$counter++}}</td>
+                                 <td class="sorting_1">{{'1'}}</td>
                                  <td><strong>{{$row->title}}</strong></td>
                                <!-- <td>{{$row->getAuthorByUsersTable->name}}</td>!-->
                                 <td>{{$row->getPostCategoryTable->value}}</td>

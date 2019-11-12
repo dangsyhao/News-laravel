@@ -93,10 +93,9 @@ class authorPostController extends Controller
     {  
       
         $validator = Validator::make($request->all(), [
-            'title' => 'required|max:500',
-            'post_category_id' => 'required|max:200',
+            'title' => 'required|max:1000',
+            'post_category_id' => 'required|max:500',
             'image_avatar' => 'required|max:1000',
-            'quotes_content' => 'required|max:3000',
             'editor1' => 'required|max:15000',
         ]);
 
@@ -105,8 +104,7 @@ class authorPostController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-   
-        
+
         $post_list= new PostList;
         $post_list->title = $request->title;
         $post_list->post_category_id = $request->post_category_id;

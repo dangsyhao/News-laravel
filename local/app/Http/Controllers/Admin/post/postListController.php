@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Admin\post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
-
-use App\User;
 use App\PostList;
-use App\Date;
 
 class postListController extends Controller
 {
@@ -70,7 +67,7 @@ class postListController extends Controller
                     $getBreak = true;
                 }
             }
-            if(! $getBreak && $k > 0){
+            if(! $getBreak){
                 $post_arr_data['users'][$k-1] = ['user_id'=>$post_obj_filter_item->getAuthorByUsersTable->id,'name'=>$post_obj_filter_item->getAuthorByUsersTable->name];
             }
             //check Author Category

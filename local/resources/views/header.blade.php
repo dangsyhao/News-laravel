@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" cosntent="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>SB Admin - Start Bootstrap Template</title>
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('public/admin/vendor/jquery/jquery.min.js')}}"></script>

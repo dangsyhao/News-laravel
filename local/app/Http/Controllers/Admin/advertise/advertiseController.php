@@ -30,10 +30,8 @@ class advertiseController extends Controller
 
 
     public function getAdd()
-
     {   
-        $image_name = Storage::allFiles('public/', 'local');
-        return view('admin.advertise.advertise-add',['image_name'=>$image_name]);
+        return view('admin.advertise.advertise-add');
     }
 
 

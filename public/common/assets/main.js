@@ -1,63 +1,90 @@
 $(document).ready(function(){
-    //Get Image option Box.
-    $('button').each(function () {
-        //show image option box
-        if($(this).is('#btn-get-image-upload')){
-            $(this).click(function() {
-                $('#get_images_box').fadeIn();
-                // thêm phần tử id="over" vào sau body
-                $('body').append('<div id="over">');
-                $('#over').fadeIn();
-            });
-        }
-        //close image option box
-        if($(this).is('#btn-close-img-upload')){
-            $(this).click(function () {
-                $('#over, .login').fadeOut();
-                $('#over').remove();
-            });
-        }
-        //
-        if($(this).is('#btn-get-images-upload-url-items')){
-            $(this).click(function (event) {
-                event.preventDefault();
-                $('button#btn-get-images-upload-url-items').removeClass('btn-outline-danger selected').text('Seclect');
-                $(this).addClass('btn-outline-danger selected').text('Selected');
-                //
-                var url_data = $(this).data('image-upload-url');
-                $('img#img-img-ur-upload').attr('src',window.location.origin+'/local/storage/app/'+url_data).attr('style',false);;
-                $('input#input-img-ur-upload').attr('value',window.location.origin+'/local/storage/app/'+url_data);
-
-            })
-        }
+    /**
+     * Upload file
+     */
+    //AJAX Token Setup
+    $.ajaxSetup({
+        headers:
+            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
-
-    /*get Process bar into download function*/
-    $('form').ajaxForm({
-        beforeSend:function(){
-            $('#success').empty();
-        },
-        uploadProgress:function(event, position, total, percentComplete)
-        {
-            $('.progress-bar').text(percentComplete + '%');
-            $('.progress-bar').css('width', percentComplete + '%');
-        },
-        success:function(data)
-        {
-            if(data.errors)
-            {
-                $('.progress-bar').text('0%');
-                $('.progress-bar').css('width', '0%');
-                $('#success').html('<span class="text-danger"><b>'+data.errors+'</b></span>');
+    //Get image upload box.
+    function getImagesUploadBox(){
+        $.ajax({
+            url: "/upload/getbox",
+            method: "POST",
+            datatype: "xml",
+            success:function (result) {
+                $('body').append(result,'<div id="over">');
+                $('#get_images_box ,#over').fadeIn(1000);
+                $('form#upload_file_form').find('button[type*="submit"]').css('display','inherit');
             }
-            if(data.success)
-            {
-                $('.progress-bar').text('Uploaded');
-                $('.progress-bar').css('width', '100%');
-                $('#success').html('<span class="text-success"><b>'+data.success+'</b></span><br /><br />');
-                $('#success').append(data.image);
-            }
+        });
+    }
+    //Get Image option Box.
+        $('button#call-images-upload-box').click(function() {
+            getImagesUploadBox();
+        });
+    //
+    $(document).on('click','button',function (event) {
+        if($(this).is('#btn-get-images-upload-url-items')){
+            event.preventDefault();
+            $(this).removeClass('btn-outline-danger selected').text('Seclect');
+            $(this).addClass('btn-outline-danger selected').text('Selected');
+            //
+            var url_data = $(this).data('image-upload-url');
+            $('img#img-img-ur-upload').attr({'src':url_data,'style':false});
+            $('input#input-img-ur-upload').attr('value',url_data);
         }
+        if($(this).is('#btn-close-img-upload')){
+            //close image option box
+                $('#over, .login').fadeOut(1000).remove();
+        }
+
+    });
+    //upload function
+    $(document).on('submit','form#upload_file_form',function (event) {
+        event.preventDefault();
+        var file_data = $('#input_file').prop('files')[0];
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        //Load image manager box
+        $.ajax({
+            url: "/upload/upload",
+            method: "post",
+            data: form_data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                $('#success').empty();
+                $('.progress').css('display','inherit');
+                $('.progress-bar').css('width', '30%');
+
+            },
+            success: function (result) {
+                if(result.result === 'true'){
+                    $('.progress-bar').text('Uploaded').css('width', '100%');
+                    //
+                    setTimeout(function () {
+                        getImagesUploadBox();
+                        $('.progress').css('display','none');
+
+                    },1200);
+                }
+                if(result.errors){
+                    $('.progress').css('background-color','red');
+                    $('.progress-bar').css({'width':'100%','background-color':'inherit'}).text('File Errors !');
+                    //
+                    setTimeout(function () {
+                        getImagesUploadBox();
+                        $('.progress').css('display','none');
+
+                    },1200);
+                }
+                //
+
+            },
+        });
     });
 
 });

@@ -122,6 +122,20 @@ Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->na
   //Delete
   Route::get('/navBar-del/{id}', 'Admin\navBar\navBarController@del')->name('admin.navBar-del');
 
+  /** Menu Categories */
+
+  Route::get('/menu/category/index', 'Admin\navBar\categoryMenuController@index')->name('admin.menu.category.index');
+  //getAdd
+  Route::get('/menu/category/getAdd', 'Admin\navBar\categoryMenuController@getAdd')->name('admin.menu.category.getAdd');
+  //Add
+  Route::post('/menu/category/add', 'Admin\navBar\categoryMenuController@add')->name('admin.menu.category.add');
+  //getEdit
+  Route::get('/menu/category/getEdit/{id}','Admin\navBar\categoryMenuController@getEdit')->name('admin.menu.category.getEdit');
+  //Edit
+  Route::post('/menu/category/edit', 'Admin\navBar\categoryMenuController@edit')->name('admin.menu.category.edit');
+  //Delete
+  Route::get('/menu/category/delete/{id}', 'Admin\navBar\categoryMenuController@delete')->name('admin.menu.category.del');
+
 /**
 * Date
 */
@@ -136,16 +150,14 @@ Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->na
     Route::post('/date/set.edit', 'Admin\date\dateController@setEdit')->name('admin.date.setEdit');
     //Delete
     Route::get('/date/set.delete/{id}', 'Admin\date\dateController@setDelete');
-  });
 
-    /*
-    |->Photos
-    */
-   Route::get('/photos-getList', 'admin\photos\photoPublicController@getList')->name('admin.photos-getList');
-    /*******/
-   Route::post('/photos-upload', 'admin\photos\photoPublicController@upload')->name('admin.photos-upload');
-    /*******/
-   Route::get('/photos-del','admin\photos\photoPublicController@del')->name('admin.photos-del');
+  /** Files Manger */
+  Route::get('/photos-getList', 'admin\photos\photoPublicController@getList')->name('admin.photos-getList');
+  /*******/
+  Route::post('/photos-upload', 'admin\photos\photoPublicController@upload')->name('admin.photos-upload');
+  /*******/
+  Route::get('/photos-del','admin\photos\photoPublicController@del')->name('admin.photos-del');
+  });
 
 });
 
@@ -163,9 +175,9 @@ Route::middleware('dashboard_auth:web')->group(function() {
 
    //Author->Notification
    //***
-  Route::get('/notifi-read/{id}', 'author\authorNotificateController@read')->name('author.notifi-read');
+  Route::get('/notifi-read/{id}', 'Author\authorNotificateController@read')->name('author.notifi-read');
     //***
-  Route::get('/notifi-getList', 'author\authorNotificateController@getList')->name('author.notifi-getList');
+  Route::get('/notifi-getList', 'Author\authorNotificateController@getList')->name('author.notifi-getList');
 
 
   //Author->Post
@@ -217,7 +229,6 @@ Route::get('/{post_category}/{post_name}/{post_id}','Site\singlePageController@s
 //Access Category Page
 Route::get('/{category_name}/{category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
 
-
 /**
  * Site Authenticate
  */
@@ -226,21 +237,12 @@ Route::get('/{category_name}/{category_id}', 'Site\categoryPageController@catego
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('site.login');
 Route::post('/login_submit', 'Auth\LoginController@login')->name('login.submit');
 
-//Register
-//Route::get('/Register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.Register');
-//Route::post('/Register', 'Auth\AdminRegisterController@Register')->name('admin.Register.submit');
-//
-//// Password reset routes
-//Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-//Route::get('/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-//Route::post('/password/reset', 'Auth\AdminResetPasswordController@reset');
-//Route::get('/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 //Admin Logout
 Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
 
 /**
  * Upload function
  */
-
-Route::get('upload/get.upload_box', 'FileUploadController@index')->name('upload.getbox');
-Route::post('file-upload/upload', 'FileUploadController@upload')->name('upload');
+//Get upload form
+Route::post('upload/getbox', 'FileUploadController@index')->name('upload.getbox');
+Route::post('upload/upload', 'FileUploadController@upload')->name('upload.upload');

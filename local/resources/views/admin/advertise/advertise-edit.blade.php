@@ -32,7 +32,7 @@
                                                                 <img id="img-img-ur-upload" alt="{{'Images feature not selected'}}" src="{{$row->image_url}}"/>
                                                                 <input id="input-img-ur-upload" type="hidden" class="form-control" name="image_url" value="{{$row->image_url}}"  autofocus>
                                                             </div>
-                                                            <button type="button" id='btn-get-image-upload' class='btn btn-sm btn-outline-primary'>Chọn ảnh</button>
+                                                            <button type="button" id='call-images-upload-box' class='btn btn-sm btn-outline-primary'>Chọn ảnh</button>
                                                         </div>
                                                         @if ($errors->has('image_url'))
                                                             <span class="help-block">
@@ -80,5 +80,5 @@
                 </div>
             </div>
         </div>
-    @include('admin.common.getImagesBox')
+
 @endsection 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\navBar;
 
+use App\Menu_category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,9 @@ class navBarController extends Controller
     public function getAdd()
     {   
        $post_category=Post_Category::select('id','value')->get();
-        return view('admin.navBar.navBar-add',['post_category'=>$post_category]);
+        $Menu_cate = Menu_category::select('id','name')->get();
+
+        return view('admin.navBar.navBar-add',['post_category'=>$post_category,'Menu_cate'=>$Menu_cate]);
     }
 
 
@@ -42,10 +45,9 @@ class navBarController extends Controller
         
         $validator = Validator::make($request->all(),
         [
-            'post_category_id' => 'required|max:300',
-            'description' => 'required|max:300',
-            'url' => 'required|max:300',
-            'sort' => 'required|max:100',
+            'description' => 'required|max:1000',
+            'sort' => 'required|max:25',
+            'menu_cate' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -53,49 +55,63 @@ class navBarController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        
-        $nav_bar = new NavBar;
-       
-        $nav_bar->post_category_id = $request->post_category_id;
-        $nav_bar->description = $request->description;
-        $nav_bar->url = route('/')."/".str_slug($request->url)."/".$request->post_category_id;
-        $nav_bar->sort = $request->sort;
-        $nav_bar->save();
+        $Menus = new NavBar;
+        //
+        $Menus->menu_cat = $request->menu_cate;
+        if(!empty($request->post_category_id)){
+            $Menus->post_category_id = $request->post_category_id;
+            $Menus->url = "/?category=".$request->post_category_id;
+        }else{
+            $Menus->post_category_id = '';
+        }
+        if(isset($request->url)){
+            $Menus->url = $request->url;
+        }else{
+            $Menus->url = '';
+        }
+        $Menus->description = $request->description;
+        $Menus->sort = $request->sort;
+        $Menus->save();
+
         return redirect()->route('admin.navBar-getNavBar');
-
-
     }
 
     public function getEdit($id)
     {
-        $post_category=Post_Category::select('id','value')->get();
-        $nav_bar_edit=NavBar::where('id',$id)->paginate('12');
-
-        return view('admin.navBar.navBar-edit',['nav_bar_edit'=>$nav_bar_edit,'post_category'=>$post_category]);
+        $Nav_bar=NavBar::with(['getPostCategoryTable','getMenuCategoryTable'])
+                        ->where('id','=',$id)->paginate('12');
+        $Post_cate = Post_Category::select('id','value')->get();
+        $Menu_cate = Menu_category::select('id','name')->get();
+        return view('admin.navBar.navBar-edit',['Nav_bar'=>$Nav_bar[0],'Post_cate'=>$Post_cate,'Menu_cate'=>$Menu_cate]);
     }
 
     public function edit(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
-
-            'post_category_id' => 'required|max:300',
-            'description' => 'required|max:300',
-            'url' => 'required|max:300',
-            'sort' => 'required|max:100',
+            'description' => 'required|max:1000',
+            'sort' => 'required|max:225',
+            'menu_cate' => 'required'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->route('admin.navBar-getEdit')
+            return redirect()->route('admin.navBar-getEdit',['id'=>$request->id])
                         ->withErrors($validator)
                         ->withInput();
         }
-        $nav_bar_edit= NavBar::find($request->id);
-        $nav_bar_edit->post_category_id = $request->post_category_id;
-        $nav_bar_edit->description = $request->description;
-        $nav_bar_edit->url = route('/')."/".str_slug($request->url)."/".$request->post_category_id;
-        $nav_bar_edit->sort = $request->sort;
-        $nav_bar_edit->save();
+        $Nav_bar= NavBar::find($request->id);
+        //
+        if(isset($request->post_category_id)){
+            $Nav_bar->post_category_id = $request->post_category_id;
+            $Nav_bar->url = "/?category=".$request->post_category_id;
+        }
+        if(isset($request->url)){
+            $Nav_bar->url = $request->url;
+        }
+        $Nav_bar->description = $request->description;
+        $Nav_bar->sort = $request->sort;
+        $Nav_bar->menu_cat = $request->menu_cate;
+
+        $Nav_bar->save();
         return redirect()->route('admin.navBar-getNavBar');
 
     }

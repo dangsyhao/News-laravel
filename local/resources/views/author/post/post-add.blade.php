@@ -16,13 +16,14 @@
                 </div>
             </div>
             <div class="form-group{{ $errors->has('image_avatar') ? ' has-error' : '' }}">
-                <label for="image_avatar" class="col-md-4 control-label">Image Avatar URL</label>
+                <label for="image_avatar" class="col-md-4 control-label"></label>
                 <div class="col-md-6">
-                    <div class='d-flex flex-row'>
-                        <input id="image_avatar" type="text" class="form-control" name="image_avatar"
-                               value="{{ old('image_avatar') }}" required autofocus>
-                        <a role='button' id='login-window' class='btn btn-sm btn-outline-primary ml-2'
-                           href="#get_images_box">Chọn ảnh</a>
+                    <div>
+                        <div class="get-images-popup">
+                            <img id="img-img-ur-upload" alt="{{'Images feature not selected'}}" style="display: none"/>
+                            <input id="input-img-ur-upload" type="hidden" class="form-control" name="image_avatar" value="{{ old('image_avatar') }}" required autofocus>
+                        </div>
+                        <button type="button" id='call-images-upload-box' class='btn btn-sm btn-outline-primary'>Chọn ảnh</button>
                     </div>
                     @if ($errors->has('image_avatar'))
                         <span class="help-block">
@@ -62,14 +63,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <a role='button' id='login-window' class='btn btn-sm btn-outline-primary' href="#get_images_box">Chọn
-                    ảnh</a>
-                <textarea name="editor1" id="editor1" rows="10" cols="80">
-                    This is my textarea to be replaced with CKEditor.
+                <textarea name="editor1" id="editor1" rows="10" cols="80"
+                          placeholder="This is my textarea to be replaced with CKEditor.">
                 </textarea>
                 <script>
-                    // Replace the <textarea id="editor1"> with a CKEditor
-                    // instance, using default configuration.
                     CKEDITOR.replace('editor1');
                 </script>
             </div>

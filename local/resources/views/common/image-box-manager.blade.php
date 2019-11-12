@@ -1,7 +1,4 @@
-<!--include ajax library!-->
-<script src="http://malsup.github.com/jquery.form.js"></script>
-
-<div class="login" id="get_images_box">
+<div class="login get-image-upload-box" id="get_images_box">
     <div class="container">
             <div class='row images-box-head'>
                 <div class='text col-md-10'>
@@ -12,25 +9,20 @@
                 </div>
             </div>
             <div class="uploads-form">
-                <div class="row">
-                    <form method="post" action="{{ route('upload') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="file" name="file" id="file" />
-                            </div>
-                            <div class="col-md-3">
-                                <input type="submit" name="upload" value="Upload" class="btn btn-success" />
-                            </div>
+                <form role="form" enctype="multipart/form-data" id="upload_file_form">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input id="input_file" type="file" name="file" />
                         </div>
-                    </form>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow=""
-                             aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                            0%
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Upload</button>
                         </div>
                     </div>
-                    <div id="success"></div>
+                </form>
+                <div class="progress" style="display: none">
+                    <div class="progress-bar" role="progressbar" aria-valuenow=""aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    </div>
                 </div>
             </div>
             <div class="col-md-12 image-box-content">
@@ -46,16 +38,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if(isset($image_name))
-                        @foreach($image_name as $key=>$value)
+                    @if(isset($imgs_url))
+                        @foreach($imgs_url as $url)
                             <tr role="row" class="odd">
                                 <td>
                                     <div class="image-upload-item">
-                                        <img src="{{url('local/storage/app')}}/{{$value}}" alt="Smiley face">
+                                        <img src="{{$url}}" alt="Smiley face">
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" id="btn-get-images-upload-url-items" class="btn btn-sm btn-outline-primary btn-get-images-upload-url-items" data-image-upload-url="{{$value}}" >Select</button>
+                                    <button type="button" id="btn-get-images-upload-url-items" class="btn btn-sm btn-outline-primary btn-get-images-upload-url-items" data-image-upload-url="{{$url}}" >Select</button>
                                 </td>
                             </tr>
                         @endforeach

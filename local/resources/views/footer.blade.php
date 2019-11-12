@@ -35,6 +35,7 @@
         <script src="{{url('public/common/assets/main.js')}}"></script>
         <script src="{{url('public/admin/js/sb-admin.min.js')}}"></script>
         <script src="{{url('public/admin/js/main.js')}}"></script>
+        <script src="{{url('public/author/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
         <!-- Custom scripts for vendor pages-->
         <script src="{{url('public/admin/vendor/datatables/jquery.dataTables.js')}}"></script>
         <script src="{{url('public/admin/vendor/datatables/dataTables.bootstrap4.js')}}"></script>
