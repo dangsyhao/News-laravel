@@ -232,13 +232,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<span class="menu"></span>
 			<div class="menu-strip">
 				<ul>
-				@if(isset($nav_bar)) 
-				@foreach($nav_bar as $row)          
-					<li>
-						<a href="{{$row->url}}">{{$row->getPostCategoryTable->value}}</a>
-					</li>
-				@endforeach
-				@endif
+{{--				@if(isset($nav_bar)) --}}
+{{--				@foreach($nav_bar as $row)          --}}
+{{--					<li>--}}
+{{--						<a href="{{$row->url}}">{{$row->getPostCategoryTable->value}}</a>--}}
+{{--					</li>--}}
+{{--				@endforeach--}}
+{{--				@endif--}}
 					
 				</ul>
 			</div>

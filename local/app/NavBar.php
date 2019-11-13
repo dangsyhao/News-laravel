@@ -9,7 +9,7 @@ class NavBar extends Model
     //
     public function getPostCategoryTable()
     {
-        return $this->belongsTo('App\Post_Category','post_category_id');
+        return $this->belongsTo('App\Post_Category','post_cat_id');
     }
     //
     public function getMenuCategoryTable()

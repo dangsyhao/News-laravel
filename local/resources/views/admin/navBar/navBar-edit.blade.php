@@ -14,19 +14,28 @@
                                 <div class="form-group{{ $errors->has('menu_cate') ? ' has-error' : '' }}">
                                     <label for="menu_cate" class="col-md-4 control-label">Menu Categories</label>
                                     <div class="col-md-6">
-                                        <select id="menu_cate"  name="menu_cate" class="form-control" autofocus required>
+                                        <select id="menu_cate"  name="menu_cat" class="form-control" autofocus required>
                                             <option >-- Menus Register --</option>
                                             @foreach($Menu_cate as $value)
-                                                @if(isset($Nav_bar->getMenuCategoryTable->id) && $value->id = $Nav_bar->getMenuCategoryTable->id)
-                                                    <option value="{{$value->id}}" selected>{{$value->name}}</option>
-                                                @else
-                                                    <option value="{{$value->id}}">{{$value->name}}</option>
-                                                @endif
+                                                <option value="{{$value->id}}" @if($value->id == $Nav_bar->menu_cat){{ 'selected' }} @endif>
+                                                    {{$value->name}}
+                                                </option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('menu_cate'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('menu_cate') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('menu_name') ? ' has-error' : '' }}">
+                                    <label for="menu_name" class="col-md-4 control-label">Menu Name</label>
+                                    <div class="col-md-6">
+                                        <input id="menu_name" type="text" class="form-control" name="menu_name" value="{{ $Nav_bar->menu_name }}" autofocus required>
+                                        @if ($errors->has('menu_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('menu_name') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -41,22 +50,20 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="form-group{{ $errors->has('post_category_id') ? ' has-error' : '' }}" id="field_page_archive" style="display: none">
-                                        <label for="post_category_id" class="col-md-4 control-label">Page Archive</label>
+                                    <div class="form-group{{ $errors->has('post_cat_id') ? ' has-error' : '' }}" id="field_page_archive" style="display: none">
+                                        <label for="post_cat_id" class="col-md-4 control-label">Page Archive</label>
                                         <div class="col-md-6">
-                                            <select id="field_post_category_id_select_tag"  name="post_category_id" class="form-control" autofocus disabled>
+                                            <select id="field_post_category_id_select_tag"  name="post_cat_id" class="form-control" autofocus disabled>
                                                 <option >-- Categories Choose --</option>
                                                     @foreach($Post_cate as $value)
-                                                        @if(isset($Nav_bar->getPostCategoryTable->id) && $value->id = $Nav_bar->getPostCategoryTable->id)
-                                                        <option value="{{$value->id}}" selected>{{$value->value}}</option>
-                                                        @else
-                                                        <option value="{{$value->id}}">{{$value->value}}</option>
-                                                        @endif
+                                                        <option value="{{$value->id}}" @if(isset($Nav_bar->post_cat_id) && $value->id == $Nav_bar->post_cat_id){{ 'selected' }} @endif>
+                                                            {{$value->value}}
+                                                        </option>
                                                     @endforeach
                                             </select>
-                                            @if ($errors->has('post_category_id'))
+                                            @if ($errors->has('post_cat_id'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('post_category_id') }}</strong>
+                                                <strong>{{ $errors->first('post_cat_id') }}</strong>
                                             </span>
                                             @endif
                                         </div>
@@ -73,24 +80,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group{{ $errors->has('sort') ? ' has-error' : '' }}">
-                                    <label for="sort" class="col-md-4 control-label">Order</label>
+                                <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
+                                    <label for="order" class="col-md-4 control-label">Order</label>
                                     <div class="col-md-6">
-                                        <input id="sort" type="text" class="form-control" name="sort" value="{{ $Nav_bar->sort }}" required autofocus>
-                                        @if ($errors->has('sort'))
+                                        <input id="order" type="text" class="form-control" name="order" value="{{ $Nav_bar->order }}" required autofocus>
+                                        @if ($errors->has('order'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('sort') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                    <label for="description" class="col-md-4 control-label">Description</label>
-                                    <div class="col-md-6">
-                                        <textarea id="description" type="text" class="form-control" name="description" required autofocus>{{$Nav_bar->description}}</textarea>
-                                        @if ($errors->has('description'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('description') }}</strong>
+                                                <strong>{{ $errors->first('order') }}</strong>
                                             </span>
                                         @endif
                                     </div>

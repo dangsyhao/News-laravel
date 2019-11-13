@@ -10,18 +10,29 @@
                             <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.navBar-add') }}">
                                 {{ csrf_field() }}
 
-                                <div class="form-group{{ $errors->has('menu_cate') ? ' has-error' : '' }}">
-                                    <label for="menu_cate" class="col-md-4 control-label">Menu Categories</label>
+                                <div class="form-group{{ $errors->has('menu_cat') ? ' has-error' : '' }}">
+                                    <label for="menu_cat" class="col-md-4 control-label">Menu Categories</label>
                                     <div class="col-md-6">
-                                        <select id="menu_cate"  name="menu_cate" class="form-control" autofocus required>
-                                            <option selected>-- Menus Register --</option>
+                                        <select id="menu_cat"  name="menu_cat" class="form-control" autofocus required>
+                                            <option>-- Menus Register --</option>
                                             @foreach($Menu_cate as $value)
                                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('menu_cate'))
+                                        @if ($errors->has('menu_cat'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('menu_cate') }}</strong>
+                                                <strong>{{ $errors->first('menu_cat') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group{{ $errors->has('menu_name') ? ' has-error' : '' }}">
+                                    <label for="menu_name" class="col-md-4 control-label">Menu Name</label>
+                                    <div class="col-md-6">
+                                        <input id="menu_name" type="text" class="form-control" name="menu_name" value="{{ old('menu_name') }}" autofocus required>
+                                        @if ($errors->has('menu_name'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('menu_name') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -36,20 +47,20 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="form-group{{ $errors->has('post_category_id') ? ' has-error' : '' }}" id="field_page_archive" style="display: none">
-                                        <label for="post_category_id" class="col-md-4 control-label">Page Archive</label>
+                                    <div class="form-group{{ $errors->has('post_cat_id') ? ' has-error' : '' }}" id="field_page_archive" style="display: none">
+                                        <label for="post_cat_id" class="col-md-4 control-label">Page Archive</label>
                                         <div class="col-md-6">
-                                            <select id="field_post_category_id_select_tag"  name="post_category_id" class="form-control" autofocus disabled>
-                                                <option selected>-- Categories Choose --</option>
+                                            <select id="field_post_category_id_select_tag"  name="post_cat_id" class="form-control" autofocus disabled>
+                                                <option>-- Categories Choose --</option>
                                                 @if(isset($post_category))
                                                     @foreach($post_category as $row)
                                                         <option value="{{$row->id}}">{{$row->value}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
-                                            @if ($errors->has('post_category_id'))
+                                            @if ($errors->has('post_cat_id'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('post_category_id') }}</strong>
+                                                <strong>{{ $errors->first('post_cat_id') }}</strong>
                                             </span>
                                             @endif
                                         </div>
@@ -64,28 +75,6 @@
                                             </span>
                                             @endif
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group{{ $errors->has('sort') ? ' has-error' : '' }}">
-                                    <label for="sort" class="col-md-4 control-label">Order</label>
-                                    <div class="col-md-6">
-                                        <input id="sort" type="text" class="form-control" name="sort" value="{{ old('sort') }}" required autofocus>
-                                        @if ($errors->has('sort'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('sort') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                                    <label for="description" class="col-md-4 control-label">Description</label>
-                                    <div class="col-md-6">
-                                        <textarea id="description" type="text" class="form-control" name="description" value="{{ old('description') }}" required autofocus></textarea>
-                                        @if ($errors->has('description'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('description') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group">

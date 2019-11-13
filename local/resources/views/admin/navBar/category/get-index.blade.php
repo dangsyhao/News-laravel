@@ -19,8 +19,6 @@
                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Position: activate to sort column ascending" style="width: 120px;">Name</th>
                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Position: activate to sort column ascending" style="width: 120px;">Description</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Age: activate to sort column ascending" style="width: 100px;">Updated at</th>
                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Start date: activate to sort column ascending" style="width:50px;">Action</th>
@@ -32,7 +30,6 @@
                              <tr role="row" class="odd">
                                 <td class="sorting_1">{{$row->id}}</td>
                                 <td>{{$row->name}}</td>
-                                <td>{{$row->description}}</td>
                                 <td>{{$row->updated_at}}</td>
                                 <td class='d-flex flex-row'>
                                     <a role="button" class="btn btn-sm btn-outline-primary mr-1" href="{{route('admin.menu.category.getEdit',['id'=>$row->id])}}">Edit</a>

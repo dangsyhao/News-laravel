@@ -22,14 +22,19 @@ class navBarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getNavBar()
-    {  
-        $nav_bar_list=NavBar::paginate(12);
- 
-        return view('admin.navBar.navBar-getNavBar',['nav_bar_list'=>$nav_bar_list]);
-    
-    }
+    public function getNavBar(Request $request )
+    {
+        $Nav_bar = NavBar::with('getMenuCategoryTable')->paginate('10');
+        $Menu_cat = Menu_category::select('id','name')->get();
 
+        if(isset($request->menu_cat_id)){
+            $Nav_bar = $Nav_bar->where('menu_cat','=',$request->menu_cat_id);
+        }else{
+            $Nav_bar = $Nav_bar->groupBy('menu_cat')->first();
+        }
+
+        return view('admin.navBar.navBar-getNavBar',['Nav_bar'=>$Nav_bar,'Menu_cat'=>$Menu_cat]);
+    }
 
     public function getAdd()
     {   
@@ -42,12 +47,10 @@ class navBarController extends Controller
 
     public function add(Request $request)
     {
-        
         $validator = Validator::make($request->all(),
         [
-            'description' => 'required|max:1000',
-            'sort' => 'required|max:25',
-            'menu_cate' => 'required'
+            'menu_cat' => 'required|max:225',
+            'menu_name' => 'required|max:225',
         ]);
 
         if ($validator->fails()) {
@@ -57,20 +60,24 @@ class navBarController extends Controller
         }
         $Menus = new NavBar;
         //
-        $Menus->menu_cat = $request->menu_cate;
-        if(!empty($request->post_category_id)){
-            $Menus->post_category_id = $request->post_category_id;
-            $Menus->url = "/?category=".$request->post_category_id;
-        }else{
-            $Menus->post_category_id = '';
-        }
-        if(isset($request->url)){
+        $Menus->menu_cat = $request->menu_cat;
+        $Menus->menu_name = $request->menu_name;
+
+        if(!empty($request->url)){
             $Menus->url = $request->url;
+            $Menus->post_cat_id = '';
+        }elseif(!empty($request->post_cat_id)){
+            $Menus->post_cat_id = $request->post_cat_id;
+            $post_cat_name = $Menus->getPostCategoryTable()->select('value')->where('id','=',$request->post_cat_id)->get();
+            $post_cat_slug = str_slug($post_cat_name[0]->value);
+            $Menus->url = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
         }else{
             $Menus->url = '';
+            $Menus->post_cat_id = '';
         }
-        $Menus->description = $request->description;
-        $Menus->sort = $request->sort;
+
+        $order = $Menus->select('order')->get();
+        $Menus->order = !empty($order[0]->order) ? max($order->toArray())['order'] + 1 : 1;
         $Menus->save();
 
         return redirect()->route('admin.navBar-getNavBar');
@@ -88,9 +95,9 @@ class navBarController extends Controller
     public function edit(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description' => 'required|max:1000',
-            'sort' => 'required|max:225',
-            'menu_cate' => 'required'
+            'order' => 'required|max:225',
+            'menu_cat' => 'required|max:225',
+            'menu_name' => 'required|max:225'
         ]);
 
         if ($validator->fails()) {
@@ -98,22 +105,27 @@ class navBarController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        $Nav_bar= NavBar::find($request->id);
+        $Menus= NavBar::find($request->id);
         //
-        if(isset($request->post_category_id)){
-            $Nav_bar->post_category_id = $request->post_category_id;
-            $Nav_bar->url = "/?category=".$request->post_category_id;
-        }
-        if(isset($request->url)){
-            $Nav_bar->url = $request->url;
-        }
-        $Nav_bar->description = $request->description;
-        $Nav_bar->sort = $request->sort;
-        $Nav_bar->menu_cat = $request->menu_cate;
+        $Menus->menu_cat = $request->menu_cat;
+        $Menus->menu_name = $request->menu_name;
 
-        $Nav_bar->save();
+        if(!empty($request->url)){
+            $Menus->url = $request->url;
+            $Menus->post_cat_id = '';
+        }elseif(!empty($request->post_cat_id)){
+            $Menus->post_cat_id = $request->post_cat_id;
+            $post_cat_name = $Menus->getPostCategoryTable()->select('value')->where('id','=',$request->post_cat_id)->get();
+            $post_cat_slug = str_slug($post_cat_name[0]->value);
+            $Menus->url = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
+        }else{
+            $Menus->url = '';
+            $Menus->post_cat_id = '';
+        }
+        $Menus->order = $request->order;
+        $Menus->save();
+
         return redirect()->route('admin.navBar-getNavBar');
-
     }
 
     public function del($id)

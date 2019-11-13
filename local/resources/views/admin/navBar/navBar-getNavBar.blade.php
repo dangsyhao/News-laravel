@@ -5,6 +5,36 @@
             <div class="row mb-2">
                 <div class="col-sm-12 col-md-12">
                     <div id="dataTable_filter" class="dataTables_filter">
+                        <form class='form-inline' method='GET' role="form" action="{{route('admin.navBar-getNavBar')}}">
+                            {{ csrf_field() }}
+                            <input type="hidden" name='get_post' value="get_post_action">
+                            <div class="form-group">
+                                <select name="menu_cat_id" class="form-control">
+                                    <option value='none'>-- Menu options --</option>
+                                    @foreach($Menu_cat as $items)
+                                        <option value="{{$items->id}}"
+                                            @if(isset($_REQUEST['menu_cat_id']) && $_REQUEST['menu_cat_id'] == $items->id)
+                                            {{'selected'}}
+                                            @else
+                                                @if(isset($Nav_bar[0]->menu_cat) && $Nav_bar[0]->menu_cat == $items->id)
+                                                    {{'selected'}}
+                                                @endif
+                                            @endif
+                                        >
+                                            {{$items->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-outline-primary ml-2">Get</button>
+                            </div>
+                            <div class="form-group">
+                                <a href="{{route('admin.navBar-getNavBar')}}">
+                                    <button type="button" class="btn btn-sm btn-outline-primary ml-2">Reset</button>
+                                </a>
+                            </div>
+                        </form>
                         <a role="button" class="btn btn-outline-primary" href="{{route('admin.navBar-getAdd')}}">Add</a>
                     </div>
                 </div>
@@ -29,13 +59,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($nav_bar_list))
-                                @foreach($nav_bar_list as $row)
+                            @if(isset($Nav_bar))
+                                @foreach($Nav_bar as $row)
                              <tr role="row" class="odd">
                                 <td class="sorting_1">{{$row->id}}</td>
-                                <td>{{! empty($row->getPostCategoryTable->value) ? $row->getPostCategoryTable->value : ''}}</td>
+                                <td>{{$row->menu_name}}</td>
                                 <td>{{! empty($row->getMenuCategoryTable->name) ? $row->getMenuCategoryTable->name : ''}}</td>
-                                <td>{{$row->sort}}</td>
+                                <td>{{$row->order}}</td>
                                 <td>{{$row->updated_at}}</td>
                                 <td class='d-flex flex-row'>
                                     <a role="button" class="btn btn-sm btn-outline-primary mr-1" href="{{route('admin.navBar-getEdit',['id'=>$row->id])}}">Edit</a>
@@ -55,8 +85,8 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                         <ul class="pagination">
-                    @if(isset($nav_bar_list))
-                        {{$nav_bar_list->links()}}
+                    @if($Nav_bar->count() > 10 )
+                        {{$Nav_bar->links()}}
                     @endif
                         </ul>
                     </div>
