@@ -65,13 +65,13 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}" id="field_link" style="display: none">
-                                        <label for="url" class="col-md-4 control-label">Link</label>
+                                    <div class="form-group{{ $errors->has('link') ? ' has-error' : '' }}" id="field_link" style="display: none">
+                                        <label for="link" class="col-md-4 control-label">Link</label>
                                         <div class="col-md-6">
-                                            <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}" autofocus disabled>
-                                            @if ($errors->has('url'))
+                                            <input id="link" type="text" class="form-control" name="link" value="{{ old('link') }}" autofocus disabled>
+                                            @if ($errors->has('link'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('url') }}</strong>
+                                                <strong>{{ $errors->first('link') }}</strong>
                                             </span>
                                             @endif
                                         </div>

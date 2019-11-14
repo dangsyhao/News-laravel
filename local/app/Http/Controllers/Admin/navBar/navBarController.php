@@ -10,6 +10,7 @@ use Validator;
 use App\NavBar;
 use App\Post_Category;
 
+
 class navBarController extends Controller
 {
     public function __construct()
@@ -24,7 +25,7 @@ class navBarController extends Controller
      */
     public function getNavBar(Request $request )
     {
-        $Nav_bar = NavBar::with('getMenuCategoryTable')->paginate('10');
+        $Nav_bar = NavBar::with('getMenuCategoryTable')->orderBy('order','asc')->paginate('10');
         $Menu_cat = Menu_category::select('id','name')->get();
 
         if(isset($request->menu_cat_id)){
@@ -63,17 +64,16 @@ class navBarController extends Controller
         $Menus->menu_cat = $request->menu_cat;
         $Menus->menu_name = $request->menu_name;
 
-        if(!empty($request->url)){
-            $Menus->url = $request->url;
+        if(!empty($request->link)){
+            $Menus->link = $request->link;
+            $Menus->page_link = $request->link;
             $Menus->post_cat_id = '';
-        }elseif(!empty($request->post_cat_id)){
+        }else{
             $Menus->post_cat_id = $request->post_cat_id;
             $post_cat_name = $Menus->getPostCategoryTable()->select('value')->where('id','=',$request->post_cat_id)->get();
             $post_cat_slug = str_slug($post_cat_name[0]->value);
-            $Menus->url = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
-        }else{
-            $Menus->url = '';
-            $Menus->post_cat_id = '';
+            $Menus->page_link = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
+            $Menus->link = '';
         }
 
         $order = $Menus->select('order')->get();
@@ -87,9 +87,10 @@ class navBarController extends Controller
     {
         $Nav_bar=NavBar::with(['getPostCategoryTable','getMenuCategoryTable'])
                         ->where('id','=',$id)->paginate('12');
+        $orders= NavBar::select('order')->orderBy('order','asc')->get();
         $Post_cate = Post_Category::select('id','value')->get();
         $Menu_cate = Menu_category::select('id','name')->get();
-        return view('admin.navBar.navBar-edit',['Nav_bar'=>$Nav_bar[0],'Post_cate'=>$Post_cate,'Menu_cate'=>$Menu_cate]);
+        return view('admin.navBar.navBar-edit',['Nav_bar'=>$Nav_bar[0],'Post_cate'=>$Post_cate,'Menu_cate'=>$Menu_cate,'orders'=>$orders]);
     }
 
     public function edit(Request $request)
@@ -110,21 +111,48 @@ class navBarController extends Controller
         $Menus->menu_cat = $request->menu_cat;
         $Menus->menu_name = $request->menu_name;
 
-        if(!empty($request->url)){
-            $Menus->url = $request->url;
+        if(!empty($request->link)){
+            $Menus->link = $request->link;
+            $Menus->page_link = $request->link;
             $Menus->post_cat_id = '';
-        }elseif(!empty($request->post_cat_id)){
+        }else{
             $Menus->post_cat_id = $request->post_cat_id;
             $post_cat_name = $Menus->getPostCategoryTable()->select('value')->where('id','=',$request->post_cat_id)->get();
             $post_cat_slug = str_slug($post_cat_name[0]->value);
-            $Menus->url = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
-        }else{
-            $Menus->url = '';
-            $Menus->post_cat_id = '';
+            $Menus->page_link = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
+            $Menus->link = '';
         }
-        $Menus->order = $request->order;
-        $Menus->save();
 
+        $current_order = $Menus->order;
+        $request_order = $request->order;
+
+        if($request_order == $current_order){
+            $Menus->order = $request_order;
+        }else {
+            //Mặc định order value tuân theo dãy số tự nhiên liên tục từ 1 ->n
+            if ($request_order > $current_order) {
+                $new_menu = NavBar::where('order','<=',$request_order)->orderBy('order','asc');
+                $ids =$new_menu->pluck('id')->toArray();
+                for ($i = $request_order; $i > $current_order ; $i--) {
+                    $k = $request_order - ($request_order - $i) - 1;
+                    NavBar::where('id','=',$ids[$i-1])->update(['order'=>$k]);
+                }
+                $Menus->order = $request_order;
+            }
+            //
+            if ($request_order < $current_order) {
+                $new_menu = NavBar::orderBy('order','asc');
+                $ids =$new_menu->pluck('id')->toArray();
+                $m = 0;
+                for ($i = $request_order; $i < $current_order  ; $i++) {
+                    $m++;
+                    $k = $request_order + $m;
+                    NavBar::where('id','=',$ids[$i-1])->update(['order'=>$k]);
+                }
+                $Menus->order = $request_order;
+            }
+        }
+        $Menus->save();
         return redirect()->route('admin.navBar-getNavBar');
     }
 

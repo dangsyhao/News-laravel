@@ -68,13 +68,13 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="form-group{{ $errors->has('url') ? ' has-error' : '' }}" id="field_link" style="display: none">
-                                        <label for="url" class="col-md-4 control-label">Link</label>
+                                    <div class="form-group{{ $errors->has('link') ? ' has-error' : '' }}" id="field_link" style="display: none">
+                                        <label for="link" class="col-md-4 control-label">Link</label>
                                         <div class="col-md-6">
-                                            <input id="url" type="text" class="form-control" name="url" value="{{ $Nav_bar->url }}" autofocus disabled>
-                                            @if ($errors->has('url'))
+                                            <input id="link" type="text" class="form-control" name="link" value="{{ $Nav_bar->link }}" autofocus disabled>
+                                            @if ($errors->has('link'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('url') }}</strong>
+                                                <strong>{{ $errors->first('link') }}</strong>
                                             </span>
                                             @endif
                                         </div>
@@ -83,7 +83,14 @@
                                 <div class="form-group{{ $errors->has('order') ? ' has-error' : '' }}">
                                     <label for="order" class="col-md-4 control-label">Order</label>
                                     <div class="col-md-6">
-                                        <input id="order" type="text" class="form-control" name="order" value="{{ $Nav_bar->order }}" required autofocus>
+                                        <select id="order"  name="order" class="form-control" autofocus required>
+                                            <option >-- Order Option --</option>
+                                            @foreach($orders as $value)
+                                                <option value="{{$value->order}}" @if($value->order == $Nav_bar->order){{ 'selected' }} @endif>
+                                                    {{$value->order}}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                         @if ($errors->has('order'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('order') }}</strong>
@@ -93,8 +100,8 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary ">Submit</button>
-                                        <a role="button" class="btn btn-primary " href="{{route('admin.navBar-getNavBar')}}">Cancel</a>
+                                        <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                        <a role="button" class="btn btn-outline-primary" href="{{route('admin.navBar-getNavBar')}}">Cancel</a>
                                     </div>
                                 </div>
                             </form>

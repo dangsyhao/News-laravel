@@ -85,7 +85,7 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                         <ul class="pagination">
-                    @if($Nav_bar->count() > 10 )
+                    @if(isset($Nav_bar) && $Nav_bar->count() > 10 )
                         {{$Nav_bar->links()}}
                     @endif
                         </ul>
