@@ -151,17 +151,9 @@ Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->na
     //Delete
     Route::get('/date/set.delete/{id}', 'Admin\date\dateController@setDelete');
 
-  /** Files Manger */
-  Route::get('/photos-getList', 'admin\photos\photoPublicController@getList')->name('admin.photos-getList');
-  /*******/
-  Route::post('/photos-upload', 'admin\photos\photoPublicController@upload')->name('admin.photos-upload');
-  /*******/
-  Route::get('/photos-del','admin\photos\photoPublicController@del')->name('admin.photos-del');
   });
 
 });
-
-
 /*
   |->AUTHOR Page
 */
@@ -195,7 +187,6 @@ Route::middleware('dashboard_auth:web')->group(function() {
   /*******/
   Route::get('/post-filter', 'Author\authorPostController@filter')->name('author.post-filter');
 
- 
   //Author->Post Temp
   Route::get('/postTemp-getTemp', 'Author\authorPostTempController@getTemp')->name('author.postTemp-getTemp');
   //***
@@ -217,11 +208,27 @@ Route::middleware('dashboard_auth:web')->group(function() {
   Route::get('/imageEditor-del','Author\imageEditorController@del')->name('author.imageEditor-del');
   }); 
 
-}); 
+});
 
-/*
-|-> Site Page
-*/
+/**
+ * Files Manager
+ */
+Route::middleware('dashboard_auth:web')->group(function() {
+    //Files manager
+    Route::get('/files/get.index', 'fileManagerController@getFilesManagerIndex')->name('files.index');
+    Route::get('/files/get.ajax', 'fileManagerController@getResultFilesManagerByAjax')->name('files.getResultByAjax');
+    //get Upload Box
+    Route::get('/upload/getbox', 'fileManagerController@getUploadFilesBoxIndex')->name('upload.getbox');
+    Route::post('/upload/upload', 'fileManagerController@upload')->name('upload.upload');
+});
+/**
+ * Account Functions.
+ */
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('site.login');
+Route::post('/login_submit', 'Auth\LoginController@login')->name('login.submit');
+Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
+
+/** Sites Public */
 
 Route::get('/', 'Site\homePageController@index')->name('/');
 //Access single Page
@@ -229,20 +236,5 @@ Route::get('/{post_category}/{post_name}/{post_id}','Site\singlePageController@s
 //Access Category Page
 Route::get('/{category_name}/{category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
 
-/**
- * Site Authenticate
- */
 
-//
-Route::get('/login', 'Auth\LoginController@showLoginForm')->name('site.login');
-Route::post('/login_submit', 'Auth\LoginController@login')->name('login.submit');
 
-//Admin Logout
-Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
-
-/**
- * Upload function
- */
-//Get upload form
-Route::post('upload/getbox', 'FileUploadController@index')->name('upload.getbox');
-Route::post('upload/upload', 'FileUploadController@upload')->name('upload.upload');

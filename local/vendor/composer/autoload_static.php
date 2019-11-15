@@ -366,7 +366,7 @@ class ComposerStaticInitb28104078f722fd61b237c59ea8a6af3
         'App\\Http\\Controllers\\Author\\authorDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/authorDashboardController.php',
         'App\\Http\\Controllers\\Author\\authorPostTempController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/authorPostTempController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\FileUploadController' => __DIR__ . '/../..' . '/app/Http/Controllers/FileUploadController.php',
+        'App\\Http\\Controllers\\uploadBoxManagerController' => __DIR__ . '/../..' . '/app/Http/Controllers/uploadBoxManagerController.php',
         'App\\Http\\Controllers\\admin\\photos\\photoPublicController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/photos/photoPublicController.php',
         'App\\Http\\Controllers\\admin\\post\\postCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/post/postCategoryController.php',
         'App\\Http\\Controllers\\admin\\user\\userRoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/user/userRoleController.php',

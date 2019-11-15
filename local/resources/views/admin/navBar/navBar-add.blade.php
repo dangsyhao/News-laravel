@@ -14,7 +14,7 @@
                                     <label for="menu_cat" class="col-md-4 control-label">Menu Categories</label>
                                     <div class="col-md-6">
                                         <select id="menu_cat"  name="menu_cat" class="form-control" autofocus required>
-                                            <option>-- Menus Register --</option>
+                                            <option value="">-- Menus Register --</option>
                                             @foreach($Menu_cate as $value)
                                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                             @endforeach

@@ -38,17 +38,25 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if(isset($imgs_url))
-                        @foreach($imgs_url as $url)
+                    @if(isset($Files))
+                        @foreach($Files as $rowItems)
                             <tr role="row" class="odd">
+                                @foreach($rowItems as $Items)
                                 <td>
                                     <div class="image-upload-item">
-                                        <img src="{{$url}}" alt="Smiley face">
+                                        <img src="
+                                                  @if($Items['ext'] !== 'pdf')
+                                                    {{$Items['url']}}
+                                                  @else
+                                                    {{url('local/storage/app/public/uploads/images/4GpxTgmKHNBBJwOiq7XYoAYsnySqB0cRK221f4Zw.png')}}
+                                                  @endif
+                                                " alt="Smiley face">
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" id="btn-get-images-upload-url-items" class="btn btn-sm btn-outline-primary btn-get-images-upload-url-items" data-image-upload-url="{{$url}}" >Select</button>
+                                    <button type="button" id="btn-get-images-upload-url-items" class="btn btn-sm btn-outline-primary btn-get-images-upload-url-items" data-image-upload-url="{{$Items['url']}}" >Select</button>
                                 </td>
+                                @endforeach
                             </tr>
                         @endforeach
                     @endif
@@ -56,6 +64,5 @@
                 </table>
             </div>`
     </div>
-
 
 </div><!--./End Show Images Box.!-->

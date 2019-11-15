@@ -76,7 +76,7 @@
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="{{route('admin.photos-getList')}}">
+                <a class="nav-link" href="{{route('files.index')}}">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Files Manager</span>
                 </a>

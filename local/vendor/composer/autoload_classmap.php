@@ -28,7 +28,7 @@ return array(
     'App\\Http\\Controllers\\Author\\authorDashboardController' => $baseDir . '/app/Http/Controllers/Author/authorDashboardController.php',
     'App\\Http\\Controllers\\Author\\authorPostTempController' => $baseDir . '/app/Http/Controllers/Author/authorPostTempController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
-    'App\\Http\\Controllers\\FileUploadController' => $baseDir . '/app/Http/Controllers/FileUploadController.php',
+    'App\\Http\\Controllers\\uploadBoxManagerController' => $baseDir . '/app/Http/Controllers/uploadBoxManagerController.php',
     'App\\Http\\Controllers\\admin\\photos\\photoPublicController' => $baseDir . '/app/Http/Controllers/Admin/photos/photoPublicController.php',
     'App\\Http\\Controllers\\admin\\post\\postCategoryController' => $baseDir . '/app/Http/Controllers/Admin/post/postCategoryController.php',
     'App\\Http\\Controllers\\admin\\user\\userRoleController' => $baseDir . '/app/Http/Controllers/Admin/user/userRoleController.php',

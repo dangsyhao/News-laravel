@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\navBar;
 use App\Menu_category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\NavBar;
 use App\Post_Category;
@@ -33,7 +32,6 @@ class navBarController extends Controller
         }else{
             $Nav_bar = $Nav_bar->groupBy('menu_cat')->first();
         }
-
         return view('admin.navBar.navBar-getNavBar',['Nav_bar'=>$Nav_bar,'Menu_cat'=>$Menu_cat]);
     }
 
@@ -44,7 +42,6 @@ class navBarController extends Controller
 
         return view('admin.navBar.navBar-add',['post_category'=>$post_category,'Menu_cate'=>$Menu_cate]);
     }
-
 
     public function add(Request $request)
     {
@@ -146,8 +143,7 @@ class navBarController extends Controller
                 $m = 0;
                 for ($i = $request_order; $i < $current_order  ; $i++) {
                     $m++;
-                    $k = $request_order + $m;
-                    NavBar::where('id','=',$ids[$i-1])->update(['order'=>$k]);
+                    NavBar::where('id','=',$ids[$i-1])->update(['order'=>$request_order + $m]);
                 }
                 $Menus->order = $request_order;
             }
@@ -158,10 +154,35 @@ class navBarController extends Controller
 
     public function del($id)
     {
-        $nav_bar= NavBar::find($id);
-        $nav_bar->delete();        
+        $menu= NavBar::find($id);
+
+        if(!empty($menu)){
+            $menu->delete();
+        }else{
+            return redirect()->route('admin.navBar-getNavBar');
+        }
+        //Thiết lập lại số thứ tự .
+        $Menus = NavBar::select('id','order')->orderBy('order','asc')->get();
+        $order_arr = $Menus->pluck('order')->toArray();
+        $ids =  $Menus->pluck('id')->toArray();
+        $max_order = count($order_arr) > 0 ? max($order_arr) : 0;
+        $key = 0;
+        //
+        if($max_order > 0){
+            for($i = 1; $i<= $max_order; $i++){
+                if( isset($order_arr[$key]) && $order_arr[$key] == $i){
+                    $key ++;
+                    continue;
+                }else{
+                    if( isset($order_arr[$key])){
+                        NavBar::where('id','=',$ids[$key])->update(['order'=>$i]);
+                        $key ++;
+                    }else{
+                        break;
+                    }
+                }
+            }
+        }
         return redirect()->route('admin.navBar-getNavBar');
     }
-
-
 }

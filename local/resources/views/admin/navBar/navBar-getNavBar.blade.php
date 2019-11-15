@@ -44,17 +44,15 @@
                     <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                         <thead>
                              <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 5px;">Num</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                 <th class="" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                     aria-label="Office: activate to sort column ascending" style="width: 20px;">Order</th>
+                                <th class="" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Position: activate to sort column ascending" style="width: 120px;">Menu Name</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                <th class="" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Position: activate to sort column ascending" style="width: 120px;">Menu Category</th>
-                                 <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Office: activate to sort column ascending" style="width: 150px;">Order</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                <th class="" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Age: activate to sort column ascending" style="width: 100px;">Updated at</th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                <th class="" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Start date: activate to sort column ascending" style="width:50px;">Action</th>
                             </tr>
                         </thead>
@@ -62,10 +60,9 @@
                             @if(isset($Nav_bar))
                                 @foreach($Nav_bar as $row)
                              <tr role="row" class="odd">
-                                <td class="sorting_1">{{$row->id}}</td>
+                                 <td>{{$row->order}}</td>
                                 <td>{{$row->menu_name}}</td>
                                 <td>{{! empty($row->getMenuCategoryTable->name) ? $row->getMenuCategoryTable->name : ''}}</td>
-                                <td>{{$row->order}}</td>
                                 <td>{{$row->updated_at}}</td>
                                 <td class='d-flex flex-row'>
                                     <a role="button" class="btn btn-sm btn-outline-primary mr-1" href="{{route('admin.navBar-getEdit',['id'=>$row->id])}}">Edit</a>

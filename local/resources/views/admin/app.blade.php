@@ -10,7 +10,10 @@
         </ol>
         <!-- Example DataTables Card-->
         <div class="card mb-3">
-            <div class="card-header"><i class="fa fa-table"></i> Quảng Cáo</div>
+            <div class="card-header">
+                <i class="fa fa-table"></i>
+                Quảng Cáo
+            </div>
             <div class="card-body">
                 <!--content-->
             @yield('content')
