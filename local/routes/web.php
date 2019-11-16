@@ -220,6 +220,9 @@ Route::middleware('dashboard_auth:web')->group(function() {
     //get Upload Box
     Route::get('/upload/getbox', 'fileManagerController@getUploadFilesBoxIndex')->name('upload.getbox');
     Route::post('/upload/upload', 'fileManagerController@upload')->name('upload.upload');
+    //Delete by Items
+    Route::post('/files/delete', 'fileManagerController@delete')->name('files.delete');
+
 });
 /**
  * Account Functions.

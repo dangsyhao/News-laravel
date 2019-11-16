@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -19,49 +20,36 @@ class fileManagerController extends Controller
     {
         $User = Auth::user();
         //
-        if($User->value == 'admin'){
-            $Files = Storage::disk('uploads')->files();
-            $first_key = 0;
-            $sub_key = 0;
-            for($i = 0;$i< count($Files);$i++){
-                $extension =  pathinfo($Files[$i], PATHINFO_EXTENSION);
-                $files_url[$first_key][$sub_key] = ['url'=>url('local/storage/app/public/uploads/images/'.$Files[$i]),
-                    'ext'=> $extension
-                ];
-                $sub_key++;
-                //reset
-                if($sub_key === $column){
-                    $sub_key = 0;
-                    $first_key +=1;
-                }
+        $files_url =array();
+        $users_id = $User::where('value',$User->value)->get();
+        $Files = File::whereIn('user_id',$users_id->toArray())->orderBy('updated_at','desc')->get();
+        $Files_arr = $Files->toArray();
+        //
+        $first_key = 0;
+        $sub_key = 0;
+        for($i = 0;$i< count($Files_arr);$i++){
+            $files_url[$first_key][$sub_key] = $Files_arr[$i];
+            $sub_key++;
+            //reset
+            if($sub_key == $column){
+                $sub_key = 0;
+                $first_key +=1;
             }
-
-        }elseif($User->value == 'Author'){
-            $Files = Storage::disk('users')->files($User->email.'/images/');
-            $first_key = 0;
-            $sub_key = 0;
-            for($i = 0;$i< count($Files);$i++){
-                $extension =  pathinfo($Files[$i], PATHINFO_EXTENSION);
-                $files_url[$first_key][$sub_key] = ['url'=>url('local/storage/app/public/users/'.$Files[$i]),
-                    'ext'=> $extension
-                ];
-                $sub_key++;
-                //reset
-                if($sub_key === 4){
-                    $sub_key = 0;
-                    $first_key +=1;
-                }
-            }
-        }else{
-            $files_url[] = '';
         }
+
         return $files_url;
     }
 
     public function getFilesManagerIndex()
     {
         $files_url = $this->getFilesData( 4);
-        return view('common.file-index',['Files'=>$files_url]);
+        return view('common.file-manager.file-index',['Files'=>$files_url]);
+    }
+    //
+    public function getResultFilesManagerByAjax()
+    {
+        $files_url = $this->getFilesData(4);
+        return view('common.file-manager.files-result-ajax',['Files'=>$files_url]);
     }
     //
     function getUploadFilesBoxIndex()
@@ -71,41 +59,10 @@ class fileManagerController extends Controller
         echo $view;
     }
 
-    public function getResultFilesManagerByAjax()
-    {
-        $files_url = $this->getFilesData(4);
-        $html ='';
-        foreach($files_url as $key) {
-            $html .= '<tr role="row" >';
-            foreach ($key as $value) {
-                $html .= '<td class="file-upload-items" id="file-upload-items">';
-                if ($value['ext'] !== 'pdf') {
-                    $html .= '<a href="' . $value['ext'] . '" target="_blank">';
-                    $html .= '<img src="' . $value['url'] . '" alt="images" title="Click-to-view-image" height="90px" width="125px">';
-                    $html .= '</a>';
-                    $html .= '<a class="remImage" href="#" id="delete" >';
-                    $html .= '<img src="https://image.flaticon.com/icons/svg/261/261935.svg" style="width:40px;height:40px;">';
-                    $html .= '</a>';
-
-                } else {
-                    $html .= '<a href="' . $value['ext'] . '" target="_blank">';
-                    $html .= '<img src="' . url('local/storage/app/public/uploads/images/4GpxTgmKHNBBJwOiq7XYoAYsnySqB0cRK221f4Zw.png') . '" alt="pdf-file" title="Click-PDF-file"  height="90px" width="125px">';
-                    $html .= '</a>';
-                    $html .= '<a class="remImage" href="#" id="delete">';
-                    $html .= '<img src="https://image.flaticon.com/icons/svg/261/261935.svg" style="width:40px;height:40px;">';
-                    $html .= '</a>';
-                }
-                $html .= '</td>';
-            }
-            $html .= '</tr>';
-        }
-        echo $html;
-    }
-
     function upload(Request $request)
     {
         $User = Auth::user();
-
+        //
         $rules = array(
             'file'  => 'required|mimes:jpeg,bmp,png,pdf,doc|max:5140',
         );
@@ -115,17 +72,76 @@ class fileManagerController extends Controller
         {
             return response()->json(['errors' => $error->errors()->all()]);
         }
+        //Store Files
+        $Files = new File;
+        $file_request = $request->file('file');
+        //
         if($User->value == 'admin'){
-            $request->file('file')->store('/','uploads' );
+            //
+            $CheckFile = Storage::disk('uploads');
+            $file_request->store('/','uploads' );
+            $file_hashName = $file_request->hashName();
+            $exists = $CheckFile->url($file_hashName);
+            if($exists){
+                $Files->file_url = Storage::disk('uploads')->url($file_hashName);
+                $Files->file_name = $file_hashName;
+                $Files->file_extension = $file_request->getClientMimeType();
+                $Files->file_size = $file_request->getClientSize();
+                $Files->user_id =   $User->id;
+                $Files->save();
+            }
 
         }elseif ($User->value == 'Author'){
+            //
+            $CheckFile = Storage::disk('users');
             $request->file('file')->store($User->email.'/images/','users' );
+            $file_hashName = $file_request->hashName();
+            $exists = $CheckFile->url($file_hashName);
+            if($exists){
+                $Files->file_url = Storage::disk('users')->url($User->email.'/'.$file_hashName);
+                $Files->file_name = $file_hashName;
+                $Files->file_extension = $file_request->getClientMimeType();
+                $Files->file_size = $file_request->getClientSize();
+                $Files->user_id = $User->id;
+                $Files->save();
+            }
         }else{
             return false;
         }
+        //
         $output = array(
             'result' => 'true'
         );
+        return response()->json($output);
+    }
+
+    function delete(Request $request){
+
+        $User = Auth::user();
+        $file_id = isset($request->id) ? $request->id :'';
+        //
+        if(! isset($request->id)){
+            $output = array(
+                'result' => 'fail'
+            );
+
+        }
+        $Files = File::find($file_id);
+
+        if(isset($Files)){
+            $file_url = $Files->file_url;
+
+            Storage::delete($file_url);
+
+            if( ! Storage::exists($file_url)){
+                $Files->delete();
+            }
+        }
+        //
+        $output = array(
+            'result' => 'success'
+        );
+
         return response()->json($output);
     }
 

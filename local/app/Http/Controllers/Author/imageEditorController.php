@@ -38,7 +38,7 @@ class imageEditorController extends Controller
 
     public function del(Request $request)
     {  
-      Storage::disk('local')->delete($request->input('image_path'));
+      Storage::disk('users')->delete($request->input('image_path'));
       
     return redirect()->route('author.imageEditor');
         

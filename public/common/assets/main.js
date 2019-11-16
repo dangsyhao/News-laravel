@@ -9,23 +9,31 @@ $(document).ready(function(){
     });
     //Get image upload box.
     function getImagesUploadBox(){
+
         $.ajax({
             url: "/upload/getbox",
-            method: "POST",
-            datatype: "xml",
+            method: "GET",
+            datatype: "text",
+            cache: false,
+            beforeSend:function(){
+                $('button#call-images-upload-box').removeClass('file-uploaded');
+            },
             success:function (result) {
                 $('body').append(result,'<div id="over">');
+                $('button#call-images-upload-box').addClass('file-uploaded');
                 $('#get_images_box ,#over').fadeIn(1000);
                 $('form#upload_file_form').find('button[type*="submit"]').css('display','inherit');
             }
         });
+
     }
-    //Get Image option Box.
-        $('button#call-images-upload-box').click(function() {
-            getImagesUploadBox();
-        });
     //
     $(document).on('click','button',function (event) {
+        //Get Image option Box.
+        if($(this).is('#call-images-upload-box')){
+            getImagesUploadBox();
+        }
+        //
         if($(this).is('#btn-get-images-upload-url-items')){
             event.preventDefault();
             $(this).removeClass('btn-outline-danger selected').text('Seclect');
@@ -59,7 +67,6 @@ $(document).ready(function(){
                 $('#success').empty();
                 $('.progress').css('display','inherit');
                 $('.progress-bar').css('width', '30%');
-
             },
             success: function (result) {
                 if(result.result === 'true'){
@@ -70,6 +77,12 @@ $(document).ready(function(){
                         $('.progress').css('display','none');
 
                     },1200);
+
+                    //Reload file items after upload
+                    if($('div.table-responsive').is('#Is-Files-Manager-page'))
+                    {
+                        loadFilesManagerPage();
+                    }
                 }
                 if(result.errors){
                     $('.progress').css('background-color','red');
@@ -86,5 +99,63 @@ $(document).ready(function(){
             },
         });
     });
+
+    /**
+     * Files Manager.
+     */
+    //Get image upload box.
+    function loadFilesManagerPage(){
+        $.ajax({
+            url: "/files/get.ajax",
+            method: "GET",
+            datatype: "xml",
+            cache: false,
+            beforeSend:function(){
+                //
+            },
+            success:function (result) {
+                $('#load-files-items-by-ajax').html(result);
+            }
+        });
+    }
+    //Delete items by ID
+    function deleteItemById(id){
+        var _token = $('[name*="csrf-token"]').attr('content');
+        $.ajax({
+            url: "/files/delete",
+            method: "POST",
+            data:{
+                id:id
+            },
+            datatype:'json',
+            cache: false,
+            beforeSend:function(){
+                //
+            },
+            success:function (result) {
+                if (result.result === 'success'){
+                    loadFilesManagerPage();
+
+                }else{
+                    alert('fail');
+                }
+
+            }
+        });
+    }
+    //
+    $(document).on('click','button,a',function () {
+        if($('div.table-responsive').is('#Is-Files-Manager-page'))
+        {
+            if($(this).is('.delete-file-items')){
+                var id = $(this).parent().data('img-id');
+                deleteItemById(id);
+            }
+
+        }
+
+    });
+
+
 
 });
