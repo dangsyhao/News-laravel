@@ -12,8 +12,8 @@ class AdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        $value = isset(Auth::user()->value) ? Auth::user()->value : '';
-        if( $value !== 'admin'){
+        $user_role = isset(Auth::user()->User_category->user_role) ? Auth::user()->User_category->user_role : '';
+        if( $user_role !== 'admin'){
             return redirect()->back();
         }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\post;
 
+use App\Post_Category;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -19,7 +21,6 @@ class postListController extends Controller
         $post_content= PostList::where('id','=',$id)->select('id','content','status')->get();
         return view('admin.post.list.postList-show',['post_content'=>$post_content]);
     }
-
     //
     public function accept($id)
     {
@@ -50,43 +51,19 @@ class postListController extends Controller
         //get Filter data for filter function
         $post_obj_filter_data = PostList::with(['getAuthorByUsersTable', 'getPostCategoryTable'])
             ->where('status', '>', '0')
-            ->paginate('10');
+            ->get();
         //
-        $post_arr_data = array();
-        $k=0;
-        foreach ($post_obj_filter_data as $post_obj_filter_item){
-            /* get $k */
-            $k++;
-            $post_arr_data['post_id'][] = $post_obj_filter_item->id;
-            $post_arr_data['post_id'] = array_unique($post_arr_data['post_id']);
-            //check User
-            $getBreak = false;
-            for($i=0;$i<$k;$i++){
-                if(isset($post_arr_data['users'][$i]['user_id']) && $post_obj_filter_item->getAuthorByUsersTable->id == $post_arr_data['users'][$i]['user_id'])
-                {
-                    $getBreak = true;
-                }
-            }
-            if(! $getBreak){
-                $post_arr_data['users'][$k-1] = ['user_id'=>$post_obj_filter_item->getAuthorByUsersTable->id,'name'=>$post_obj_filter_item->getAuthorByUsersTable->name];
-            }
-            //check Author Category
-            $getBreak = false;
-            for($i=0;$i<$k;$i++){
-                if(!empty($post_arr_data['post_category_arr'][$i]['post_category_id']) && $post_obj_filter_item->post_category_id == $post_arr_data['post_category_arr'][$i]['post_category_id'])
-                {
-                    $getBreak = true;
-                }
-            }
-            if(! $getBreak){
-                $post_arr_data['post_category_arr'][$k-1] = ['post_category_id'=>$post_obj_filter_item->post_category_id,'post_category_value'=>$post_obj_filter_item->getPostCategoryTable->value];
-            }
+        $Authors = User::select('id','name')->get();
+        $Post_cats = Post_Category::select('id','post_cat_name')->get();
+        $post_info = array();
+        foreach ($post_obj_filter_data as $items){
             //
-            $post_arr_data['status'][] = $post_obj_filter_item->status;
-            $post_arr_data['status'] = array_unique($post_arr_data['status']);
-            $date = $post_obj_filter_item->updated_at->toArray();
-            $post_arr_data['updated_at'][] = date('Y-m-d',$date['timestamp']);
-            $post_arr_data['updated_at'] = array_unique($post_arr_data['updated_at']);
+            $post_info['status'][] = $items->status;
+            $post_info['status'] = array_unique($post_info['status']);
+            //
+            $date = $items->updated_at->toArray();
+            $post_info['updated_at'][] = date('Y-m-d',$date['timestamp']);
+            $post_info['updated_at'] = array_unique($post_info['updated_at']);
         }
         //Put $this Validation >>> If Validation not Use , fill values='none' ! .
         $filter_1='none';
@@ -303,12 +280,14 @@ class postListController extends Controller
                                                                         :false;
         //end Filter
         return view('admin.post.list.postList-getList',
-                                                            [   'post_arr_data'=>$post_arr_data,
+                                                            [   'post_info'=>$post_info,
+                                                                'Authors'=>$Authors,
+                                                                'Post_cats'=>$Post_cats,
                                                                 'posts'=>$posts
                                                             ]
                     );
-        //endFilter Function.
 
+        /** endFilter Function.** */
     }
 
 }

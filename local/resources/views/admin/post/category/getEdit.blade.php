@@ -13,9 +13,9 @@
                             @foreach($getPostCategoryTable_edit as $row)
                                 <input  type="hidden" name="id" value="{{$row->id}}">
                                 <div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
-                                    <label for="value" class="col-md-4 control-label">Value</label>
+                                    <label for="post_cat_name" class="col-md-4 control-label">Category Name</label>
                                     <div class="col-md-6">
-                                        <input id="value" type="text" class="form-control" name="value" value="{{$row->value}}">
+                                        <input id="post_cat_name" type="text" class="form-control" name="post_cat_name" value="{{$row->post_cat_name}}">
                                         @if ($errors->has('value'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('value') }}</strong>
@@ -23,21 +23,21 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                <div class="form-group{{ $errors->has('post_cat_desc') ? ' has-error' : '' }}">
                                     <label for="desciption" class="col-md-4 control-label">Description</label>
                                     <div class="col-md-6">
-                                        <textarea id="description" type="text" class="form-control" name="description" value="">{{$row->description}}</textarea>
-                                        @if ($errors->has('description'))
+                                        <textarea id="post_cat_desc" type="text" class="form-control" name="post_cat_desc" required>{{$row->post_cat_desc}}</textarea>
+                                        @if ($errors->has('post_cat_desc'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('description') }}</strong>
+                                                <strong>{{ $errors->first('post_cat_desc') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary ">Submit</button>
-                                        <a role="button" class="btn btn-primary " href="{{route('admin.getPostCategoryTable-post')}}">Cancel</a>
+                                        <button type="submit"  class="btn btn-outline-primary btn-sm">Submit</button>
+                                        <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('admin.getPostCategoryTable-post')}}">Cancel</a>
                                     </div>
                                 </div>
                             @endforeach

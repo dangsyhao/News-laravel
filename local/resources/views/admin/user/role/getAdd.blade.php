@@ -13,29 +13,29 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.user.role.setAdd') }}">
                         {{ csrf_field() }}
 
-                         <div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
-                            <label for="value" class="col-md-4 control-label">Value</label>
+                         <div class="form-group{{ $errors->has('user_role') ? ' has-error' : '' }}">
+                            <label for="user_role" class="col-md-4 control-label">Value</label>
 
                             <div class="col-md-6">
-                                <input id="value" type="text" class="form-control" name="value" value="{{ old('value') }}" required autofocus>
+                                <input id="user_role" type="text" class="form-control" name="user_role" value="{{ old('user_role') }}" required autofocus>
 
-                                @if ($errors->has('value'))
+                                @if ($errors->has('user_role'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('value') }}</strong>
+                                        <strong>{{ $errors->first('user_role') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label for="description" class="col-md-4 control-label">Description</label>
+                        <div class="form-group{{ $errors->has('user_desc') ? ' has-error' : '' }}">
+                            <label for="user_desc" class="col-md-4 control-label">Description</label>
 
                             <div class="col-md-6">
                                
-                                <textarea id="description" class="form-control" name="description" value="{{ old('description') }}" required autofocus></textarea>
-                                @if ($errors->has('description'))
+                                <textarea id="user_desc" class="form-control" name="user_desc" value="{{ old('user_desc') }}" required autofocus></textarea>
+                                @if ($errors->has('user_desc'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('description') }}</strong>
+                                        <strong>{{ $errors->first('user_desc') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -44,8 +44,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary ">Submit</button>
-                                <a role="button" class="btn btn-primary " href="{{route('admin.user.role.getList')}}">Cancel</a>
+                                <button type="submit"  class="btn btn-outline-primary btn-sm">Submit</button>
+                                <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('admin.user.role.getList')}}">Cancel</a>
                             </div>
                     
                         </div>

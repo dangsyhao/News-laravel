@@ -9,7 +9,7 @@
                             <div class="panel-body">
                                 <form class="form-horizontal" role="form" method="POST"
                                       action="{{ route('admin.user.setAdd') }}">
-                                    {{ csrf_field() }}
+                                        {{ csrf_field() }}
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label for="name" class="col-md-4 control-label">Name</label>
                                         <div class="col-md-6">
@@ -47,20 +47,20 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
-                                        <label for="user_id" class="col-md-4 control-label">Values</label>
+                                    <div class="form-group{{ $errors->has('user_cat_id') ? ' has-error' : '' }}">
+                                        <label for="user_id" class="col-md-4 control-label">User Role</label>
                                         <div class="col-md-6">
-                                            <select id="user_id" name="value" class="form-control" required autofocus>
-                                                <option selected value="{{ old('user_id') }}">-Chọn Values-</option>
+                                            <select id="user_cat_id" name="user_cat_id" class="form-control" required autofocus>
+                                                <option selected value="{{ old('user_cat_id') }}">--User Role Options --</option>
                                                 @if(isset($author_value))
                                                     @foreach($author_value as $row)
-                                                        <option value="{{$row->value}}">{{$row->value}}</option>
+                                                        <option value="{{$row->id}}">{{$row->user_role}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
-                                            @if ($errors->has('user_id'))
+                                            @if ($errors->has('user_cat_id'))
                                                 <span class="help-block">
-                                                    <strong>{{ $errors->first('user_id') }}</strong>
+                                                    <strong>{{ $errors->first('user_cat_id') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
@@ -99,8 +99,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-6">
-                                            <button type="submit" class="btn btn-primary ">Submit</button>
-                                            <a role="button" class="btn btn-primary "
+                                            <button type="submit"  class="btn btn-outline-primary btn-sm">Submit</button>
+                                            <a role="button"  class="btn btn-outline-primary btn-sm"
                                                href="{{route('admin.user.getList')}}">Cancel</a>
                                         </div>
                                     </div>

@@ -5,7 +5,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-12 col-md-12">
                         <div id="dataTable_filter" class="dataTables_filter">
-                            <a role="button" class="btn btn-outline-primary" href="{{route('author.post-getAdd')}}">Tạo bài viết</a>
+                            <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('author.post-getAdd')}}">Tạo bài viết</a>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                                             aria-label="Office: activate to sort column ascending" style="width: 120px;">Post Category</th>
                                            
                                     <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
-                                            aria-label="Age: activate to sort column ascending" style="width: 50px;">Updated</th>
+                                            aria-label="Age: activate to sort column ascending" style="width: 50px;">Updated at</th>
                                     <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
                                             aria-label="Start date: activate to sort column ascending" style="width:65px;">Action</th>
                                 </tr>

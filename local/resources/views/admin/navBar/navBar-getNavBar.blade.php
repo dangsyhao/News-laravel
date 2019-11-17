@@ -35,7 +35,7 @@
                                 </a>
                             </div>
                         </form>
-                        <a role="button" class="btn btn-outline-primary" href="{{route('admin.navBar-getAdd')}}">Add</a>
+                        <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('admin.navBar-getAdd')}}">Add</a>
                     </div>
                 </div>
             </div>

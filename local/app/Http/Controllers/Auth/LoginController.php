@@ -31,15 +31,16 @@ class LoginController extends Controller
       ]);
 
       // Login to Admin Dashboard
-      if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'value' => 'admin'], $request->remember)) {
+      if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location
-        return redirect()->route('admin.dashboard');
+          if(Auth::user()->User_Category->user_role == 'admin'){
+              return redirect()->route('admin.dashboard');
+          }elseif(Auth::user()->User_Category->user_role == 'author'){
+              return redirect()->route('author.dashboard');
+          }else{
+              return redirect()->route('site.login');
+          }
       }
-    // Login to Author Dashboard
-    if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password, 'value' => 'author'], $request->remember)) {
-        // if successful, then redirect to their intended location
-        return redirect()->route('author.dashboard');
-    }
 
       // if unsuccessful, then redirect back to the login with the form data
       return redirect()->back()->withInput($request->only('email', 'remember'));

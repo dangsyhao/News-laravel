@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="col-md-12 image-box-content">
-                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                <table class="table table-bordered dataTable" id="dataTable"  role="table" >
                     <thead>
                     <tr role="row">
                         <th class=" col-md-7 col-sm-7 " tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
@@ -39,16 +39,26 @@
                     </thead>
                     <tbody>
                     @if(isset($Files))
-                        @foreach($Files as $rowItems)
-                            <tr role="row" class="odd">
-                                @foreach($rowItems as $items)
-                                <td>
-                                    <div class="image-upload-item">
-                                        <img src="{{$items['file_url']}}" alt="Smiley face">
-                                    </div>
+                        @foreach($Files as $items)
+                            <tr role="row">
+                                @foreach($items as $value)
+                                <td class="file-upload-items" data-img-id="{{$value['id']}}">
+                                    @if(strpos($value['file_extension'],'image') > -1)
+                                        <img src="{{$value['file_url']}}" alt="images" title="Click to View Image ">
+                                    @elseif(strpos($value['file_extension'],'pdf') > -1)
+                                        <img src="{{url('public/common/assets/images/pdf-icon.png')}}" alt="pdf-file" title="Click-PDF-file">
+                                    @elseif(strpos($value['file_extension'],'msword') > -1)
+                                        <img src="{{url('public/common/assets/images/microsoft-word-icon.png')}}" alt="ms-world-file" title="Click-PDF-file">
+                                    @else
+                                        <img src="#2" alt="file-not-found" title="file-not-found">
+                                    @endif
                                 </td>
                                 <td>
-                                    <button type="button" id="btn-get-images-upload-url-items" class="btn btn-sm btn-outline-primary btn-get-images-upload-url-items" data-image-upload-url="{{$items['file_url']}}" >Select</button>
+                                    <button type="button" id="btn-get-images-upload-url-items"
+                                            class="btn btn-sm btn-outline-primary btn-get-images-upload-url-items"
+                                            data-image-upload-url="{{$value['file_url']}}" >
+                                        Select
+                                    </button>
                                 </td>
                                 @endforeach
                             </tr>

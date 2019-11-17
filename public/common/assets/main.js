@@ -135,11 +135,7 @@ $(document).ready(function(){
             success:function (result) {
                 if (result.result === 'success'){
                     loadFilesManagerPage();
-
-                }else{
-                    alert('fail');
                 }
-
             }
         });
     }

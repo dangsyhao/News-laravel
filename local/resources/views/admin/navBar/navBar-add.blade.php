@@ -79,8 +79,8 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary ">Submit</button>
-                                        <a role="button" class="btn btn-primary " href="{{route('admin.navBar-getNavBar')}}">Cancel</a>
+                                        <button type="submit"  class="btn btn-outline-primary btn-sm">Submit</button>
+                                        <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('admin.navBar-getNavBar')}}">Cancel</a>
                                     </div>
                                 </div>
                             </form>

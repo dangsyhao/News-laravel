@@ -14,31 +14,22 @@ class postCategoryController extends Controller
         //
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function post()
     {  
-        $post_category=Post_Category::paginate(5);
+        $post_category=Post_Category::paginate(10);
         return view('admin.post.category.getList',['post_category'=>$post_category]);
-    
     }
-
 
     public function getAdd()
     {
         return view('admin.post.category.getAdd');
     }
 
-
     public function add(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
-            'value' => 'required|max:255|unique:post_categories',
-            'description' => 'required|max:255',
+            'post_cat_name' => 'required|max:255|unique:post_categories',
+            'post_cat_desc' => 'required|max:1000',
         ]);
 
         if ($validator->fails()) {
@@ -46,15 +37,13 @@ class postCategoryController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        
         $post_category= new Post_Category;
-        $post_category->value = $request->value;
-        $post_category->description = $request->description;
+        $post_category->post_cat_name = $request->post_cat_name;
+        $post_category->post_cat_desc = $request->post_cat_desc;
         $post_category->save();
+
         return redirect()->route('admin.getPostCategoryTable-post');
-
     }
-
 
     public function getEdit($id)
     {
@@ -62,14 +51,11 @@ class postCategoryController extends Controller
        return view('admin.post.category.getEdit',['getPostCategoryTable_edit'=>$getPostCategoryTable_edit]);
     }
 
-
     public function edit(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
-
-            'value' => 'required|max:255',
-            'description' => 'required|max:255',
+            'post_cat_name' => 'required|max:255',
+            'post_cat_desc' => 'required|max:1000',
         ]);
 
         if ($validator->fails()) {
@@ -79,17 +65,23 @@ class postCategoryController extends Controller
         }
         
         $post_category =Post_Category::find($request->id);
-        $post_category->value = $request->value;
-        $post_category->description = $request->description;
-        $post_category->save();
-        return redirect()->route('admin.getPostCategoryTable-post');
 
+        if(! empty($post_category)){
+            $post_category->post_cat_name = $request->post_cat_name;
+            $post_category->post_cat_desc = $request->post_cat_desc;
+            $post_category->save();
+        }
+
+        return redirect()->route('admin.getPostCategoryTable-post');
     }
 
     public function del($id)
     {
-        $post_category= Post_Category::find($id);
-        $post_category->delete();        
+        $post_category= Post_Category::with('PostListTable')->find($id);
+        if(! empty($post_category) && count($post_category->PostListTable->pluck('id')) === 0){
+            $post_category->delete();
+        }
+
         return redirect()->route('admin.getPostCategoryTable-post');
     }
 }

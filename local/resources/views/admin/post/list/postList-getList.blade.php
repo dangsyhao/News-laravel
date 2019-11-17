@@ -11,23 +11,23 @@
                             <div class="form-group">
                                 <select name="user_id" class="form-control">
                                     <option value='none'>-- Sellect Authors --</option>
-                                    @foreach($post_arr_data['users'] as $items)
-                                        <option @if(isset($_REQUEST['user_id']) && $_REQUEST['user_id'] == $items['user_id']) {{'selected'}} @endif value="{{$items['user_id']}}">{{$items['name']}}</option>
+                                    @foreach($Authors as $items)
+                                        <option @if(isset($_REQUEST['user_id']) && $_REQUEST['user_id'] == $items['id']) {{'selected'}} @endif value="{{$items['id']}}">{{$items['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select name="post_category_id" class="form-control ml-2">
                                     <option value='none'>-- Sellect Categories --</option>
-                                    @foreach($post_arr_data['post_category_arr'] as $items)
-                                        <option @if(isset($_REQUEST['post_category_id']) && $_REQUEST['post_category_id'] == $items['post_category_id']){{'selected'}}@endif value="{{$items['post_category_id']}}">{{$items['post_category_value']}}</option>
+                                    @foreach($Post_cats as $items)
+                                        <option @if(isset($_REQUEST['post_category_id']) && $_REQUEST['post_category_id'] == $items['id']){{'selected'}}@endif value="{{$items['id']}}">{{$items['post_cat_name']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select name="status" class="form-control ml-2">
                                     <option value='none'>-- Sellect Status --</option>
-                                    @foreach($post_arr_data['status'] as $items)
+                                    @foreach($post_info['status'] as $items)
                                         @if($items == '1')
                                             {{ $value = 'Chưa duyệt' }}
                                         @elseif($items == '2')
@@ -41,11 +41,11 @@
                                     @endforeach
                                 </select>
                             </div>
-                            @if(isset($post_arr_data))
+                            @if(isset($post_info))
                                 <div class="form-group">
                                     <select name="updated_at" class="form-control ml-2">
                                         <option selected value='none' selected>-- Select Date --</option>
-                                        @foreach($post_arr_data['updated_at'] as $update_at_value)
+                                        @foreach($post_info['updated_at'] as $update_at_value)
                                             <option value="{{$update_at_value}}" @if(isset($_REQUEST['updated_at']) && $_REQUEST['updated_at'] == $update_at_value) {{'selected'}}@endif>
                                                 {{$update_at_value}}
                                             </option>
@@ -71,31 +71,26 @@
                            role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                         <thead>
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                aria-sort="ascending"
-                                aria-label="Name: activate to sort column descending" style="width: 3px;">Num
-                            </th>
-
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                 aria-label="Position: activate to sort column ascending" style="width: 150px;">Tiêu đề
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                 aria-label="Position: activate to sort column ascending" style="width: 50px;">Tác giả
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                 aria-label="Position: activate to sort column ascending" style="width: 42px;">Chủ đề
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                 aria-label="Office: activate to sort column ascending" style="width: 3px;">Lượt xem
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                 aria-label="Office: activate to sort column ascending" style="width: 3px;">Trạng thái
                             </th>
 
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                 aria-label="Age: activate to sort column ascending" style="width: 25px;">Updated
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                 aria-label="Start date: activate to sort column ascending" style="width:42px;">Action
                             </th>
                         </tr>
@@ -104,14 +99,16 @@
                         @if($posts)
                             @foreach($posts as $row)
                                 <tr role="row" class="odd">
-                                    <td class="sorting_1">{{$row->id}}</td>
                                     <td><strong>{{$row->title}}</strong></td>
                                     <td>
                                         @if(isset($row->getAuthorByUsersTable))
                                             {{$row->getAuthorByUsersTable->name}}
                                         @endif
                                     </td>
-                                    <td>{{$row->getPostCategoryTable->value}}</td>
+                                    <td>@if(isset($row->getPostCategoryTable->post_cat_name))
+                                            {{$row->getPostCategoryTable->post_cat_name}}
+                                        @endif
+                                    </td>
                                     <td>{{$row->view}}</td>
                                     <td>
                                         @if($row->status =='1')
@@ -124,7 +121,7 @@
                                             <span class='text-success'>Trang Nhất</span>
                                         @endif
                                     </td>
-                                    <td>{{$update_at_value}}</td>
+                                    <td>@if(isset($update_at_value)){{$update_at_value}} @endif</td>
                                     <td class='d-flex flex-row'>
                                         <a role="button" class="btn btn-sm btn-outline-primary mr-1"
                                            href="{{route('admin.postList-show',['post_id'=>$row->id])}}">show</a>
@@ -144,7 +141,7 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                         <ul class="pagination">
-                            @if(isset($posts))
+                            @if(! empty($posts) && $posts->count() > 10)
                                 {{$posts->links()}}
                             @endif
                         </ul>

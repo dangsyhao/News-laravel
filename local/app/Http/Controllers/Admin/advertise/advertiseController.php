@@ -15,25 +15,16 @@ class advertiseController extends Controller
         //
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function getAdvertise()
     {  
-        $advertise_list=Advertise::paginate(12);
- 
+        $advertise_list=Advertise::paginate(10);
         return view('admin.advertise.advertise-getAdvertise',['advertise_list'=>$advertise_list]);
-    
     }
-
 
     public function getAdd()
     {   
         return view('admin.advertise.advertise-add');
     }
-
 
     public function add(Request $request)
     {
@@ -102,6 +93,5 @@ class advertiseController extends Controller
         $advertise->delete();        
         return redirect()->route('admin.advertise-getAdvertise');
     }
-
 
 }

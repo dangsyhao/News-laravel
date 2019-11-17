@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 use App\User;
-use App\Author_category;
-use Illuminate\Support\Facades\DB;
+use App\User_category;
 
 
 class userListController extends Controller
@@ -21,27 +20,26 @@ class userListController extends Controller
 
     public function getList()
     {  
-        $author_list=User::paginate('10');
+       $author_list=User::with('User_category')->paginate('10');
        return view('admin.user.list.getList',['author_list'=>$author_list]);
-    
     }
 
 
     public function getAdd()
     {
-        $author_value=Author_category::select('value','id')->get();
+        $author_value=User_category::select('user_role','id')->groupBy('id')->get();
         return view('admin.user.list.getAdd',['author_value'=>$author_value]);
     }
 
 
     public function setAdd(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'phone_number' => 'required|max:255',
-            'value' => 'required|max:255',
+            'user_cat_id' => 'required|max:255',
             'address' => 'required|max:255',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -56,7 +54,7 @@ class userListController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
-        $user->value = $request->value;
+        $user->user_cat_id = $request->user_cat_id;
         $user->address = $request->address;
         $user->password = bcrypt($request->password);
         $user->save();
@@ -69,19 +67,18 @@ class userListController extends Controller
 
     public function getEdit($id)
     {
-        $getAuthorByUsersTable_edit=User::where('id',$id)->get();
-        $user_role = Author_category::select('value')->get();
-
-        return view('admin.user.list.getEdit',['getAuthorByUsersTable_edit'=>$getAuthorByUsersTable_edit,'user_role'=>$user_role]);
+        $currentUserId = Auth::id();
+        //if $id is current user then stop delete this user
+        if($currentUserId == $id){
+            return redirect()->back();
+        }
+        $user_cat_id = User_category::select('user_role','id')->groupBy('id')->get();
+        $User = User::find($id);
+        return view('admin.user.list.getEdit',['user_cat_id'=>$user_cat_id,'User'=>$User]);
     }
 
     public function setEdit(Request $request)
     {
-        $currentUserId = Auth::user()->id;
-        //if $id is current user then stop delete this user
-        if($currentUserId == $request->id){
-            return redirect()->route('admin.user.getList');
-        }
         //
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
@@ -95,11 +92,11 @@ class userListController extends Controller
                         ->withInput();
         }
 
-        $user =User::find($request->id);
+        $user = User::find($request->id);
         $user->name         = $request->name;
         $user->email        = $request->email;
         $user->phone_number = $request->phone_number;
-        $user->value        = $request->value;
+        $user->user_cat_id    = $request->user_cat_id;
         $user->address      = $request->address;
         $user->save();
         return redirect()->route('admin.user.getList');
@@ -108,19 +105,21 @@ class userListController extends Controller
 
      function setDelete($id)
     {
-        $currentUserId = Auth::user()->id;
+        $currentUserId = Auth::id();
         //if $id is current user then stop delete this user
         if($currentUserId == $id){
-            return redirect()->route('admin.user.getList');
+            return redirect()->back();
         }
         //get $user data
-        $user= User::find($id);
-        //Delete file storge for user
-            Storage::disk('users')->deleteDirectory($user->email.'/images');
-            Storage::disk('users')->deleteDirectory($user->email);
-
-        //delete user
-        $user->delete();
+        $User= User::with('PostsTable')->find($id);
+        //Check Post exits ?
+        if( ! empty($User) && count($User->PostsTable->pluck('id')) === 0){
+            //Delete file storge for user
+            Storage::disk('users')->deleteDirectory($User->email.'/images');
+            Storage::disk('users')->deleteDirectory($User->email);
+            //
+            $User->delete();
+        }
         //
         return redirect()->route('admin.user.getList');
     }

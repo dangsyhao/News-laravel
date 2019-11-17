@@ -27,23 +27,20 @@
                         <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                             <thead>
                                  <tr role="row">
-                                 <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" 
-                                            aria-label="Name: activate to sort column descending" style="width: 3px;">Num</th>
-                            
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Position: activate to sort column ascending" style="width: 150px;">Tiêu đề</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Position: activate to sort column ascending" style="width: 50px;">Tác giả</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Position: activate to sort column ascending" style="width: 42px;">Chủ đề</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Office: activate to sort column ascending" style="width: 3px;">Lượt xem</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Office: activate to sort column ascending" style="width: 3px;">Trạng thái</th>
                                            
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
-                                            aria-label="Age: activate to sort column ascending" style="width: 25px;">Updated</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                            aria-label="Age: activate to sort column ascending" style="width: 25px;">Updated at</th>
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Start date: activate to sort column ascending" style="width:42px;">Action</th>
                                    
                                 </tr>
@@ -52,9 +49,7 @@
                             
                                 @if(isset($post_list))
                                     @foreach($post_list as $row)
-                                        
                                             <tr role="row" class="odd">
-                                                <td class="sorting_1">{{$row->id}}</td>
                                                 <td>{{$row->title}}</td>
                                                 <td>{{$row->getAuthorByUsersTable->name}}</td>
                                                 <td>{{$row->getPostCategoryTable->value}}</td>
@@ -71,7 +66,6 @@
                                                     @if($row->status=='0')
                                                         <span class='text-danger'>{{"Lưu nháp"}}</span>
                                                     @endif
-                                                
                                                 </td>
                                                 <td>{{$row->updated_at}}</td>
                                                 <td class='d-flex flex-row'>

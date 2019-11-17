@@ -65,7 +65,7 @@ Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->na
   Route::get('/user/set.delete/{id}','Admin\user\userListController@setDelete');
 
   /**
-   * AuthorCategory
+   * Users-Category
    */
   Route::get('/user_role/get.list', 'Admin\user\userRoleController@getList')->name('admin.user.role.getList');
   //getAdd

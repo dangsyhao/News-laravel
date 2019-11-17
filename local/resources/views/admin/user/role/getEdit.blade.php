@@ -9,35 +9,35 @@
                         <div class="panel-body">
                             <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.user.role.setEdit') }}">
                                 {{ csrf_field() }}
-                            @if(isset($authorCategory_edit))
-                                @foreach($authorCategory_edit as $row)
+                            @if(isset($User_category))
+                                @foreach($User_category as $row)
                                 <input  type="hidden" name="id" value="{{$row->id}}">
-                                <div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
-                                    <label for="value" class="col-md-4 control-label">Value</label>
+                                <div class="form-group{{ $errors->has('user_role') ? ' has-error' : '' }}">
+                                    <label for="user_role" class="col-md-4 control-label">Value</label>
                                     <div class="col-md-6">
-                                        <input id="value" type="text" class="form-control" name="value" value="{{$row->value}}">
-                                        @if ($errors->has('value'))
+                                        <input id="user_role" type="text" class="form-control" name="user_role" value="{{$row->user_role}}">
+                                        @if ($errors->has('user_role'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('value') }}</strong>
+                                                <strong>{{ $errors->first('user_role') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                                <div class="form-group{{ $errors->has('user_desc') ? ' has-error' : '' }}">
                                     <label for="desciption" class="col-md-4 control-label">Description</label>
                                     <div class="col-md-6">
-                                        <textarea id="description" type="text" class="form-control" name="description" value="">{{$row->description}}</textarea>
-                                        @if ($errors->has('description'))
+                                        <textarea id="user_desc" type="text" class="form-control" name="user_desc" value="">{{$row->user_desc}}</textarea>
+                                        @if ($errors->has('user_desc'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('description') }}</strong>
+                                                <strong>{{ $errors->first('user_desc') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary ">Submit</button>
-                                        <a role="button" class="btn btn-primary " href="{{route('admin.user.role.getList')}}">Cancel</a>
+                                        <button type="submit"  class="btn btn-outline-primary btn-sm">Submit</button>
+                                        <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('admin.user.role.getList')}}">Cancel</a>
                                     </div>
                                 </div>
                                     @endforeach

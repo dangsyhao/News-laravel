@@ -7,7 +7,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-12 col-md-12">
                         <div id="dataTable_filter" class="dataTables_filter">
-                            <a role="button" class="btn btn-outline-primary" href="{{route('admin.advertise-getAdd')}}">Add</a>
+                            <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('admin.advertise-getAdd')}}">Add</a>
                         </div>
                     </div>
                 </div>
@@ -16,24 +16,20 @@
                         <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                             <thead>
                                  <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" 
-                                            aria-label="Name: activate to sort column descending" style="width: 5px;">Num</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Position: activate to sort column ascending" style="width: 120px;">Customer Name</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Office: activate to sort column ascending" style="width: 120px;">Image Feature</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Age: activate to sort column ascending" style="width: 100px;">Updatet at</th>
-                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" 
+                                    <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Start date: activate to sort column ascending" style="width:50px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($advertise_list))
-                                    @php $counter = 1;@endphp
                                     @foreach($advertise_list as $row)
                                  <tr role="row" class="odd">
-                                    <td class="sorting_1">{{$counter++}}</td>
                                     <td>{{$row->customer}}</td>
                                     <td><img src=" {{$row->image_url}}" class="rounded" alt="Cinque Terre" width="250" height="175"></td>
                                     <td>{{$row->updated_at}}</td>

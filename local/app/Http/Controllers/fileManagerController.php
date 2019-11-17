@@ -21,7 +21,7 @@ class fileManagerController extends Controller
         $User = Auth::user();
         //
         $files_url =array();
-        $users_id = $User::where('value',$User->value)->get();
+        $users_id = $User::where('value',$User->user_role)->get();
         $Files = File::whereIn('user_id',$users_id->toArray())->orderBy('updated_at','desc')->get();
         $Files_arr = $Files->toArray();
         //
@@ -55,7 +55,7 @@ class fileManagerController extends Controller
     function getUploadFilesBoxIndex()
     {
         $Files = $this->getFilesData(1);
-        $view = view('common.image-box-manager',['Files'=>$Files]);
+        $view = view('common.box-upload.image-box-manager',['Files'=>$Files]);
         echo $view;
     }
 
@@ -76,7 +76,7 @@ class fileManagerController extends Controller
         $Files = new File;
         $file_request = $request->file('file');
         //
-        if($User->value == 'admin'){
+        if($User->user_role == 'admin'){
             //
             $CheckFile = Storage::disk('uploads');
             $file_request->store('/','uploads' );
@@ -91,7 +91,7 @@ class fileManagerController extends Controller
                 $Files->save();
             }
 
-        }elseif ($User->value == 'Author'){
+        }elseif ($User->user_role == 'Author'){
             //
             $CheckFile = Storage::disk('users');
             $request->file('file')->store($User->email.'/images/','users' );
@@ -124,16 +124,15 @@ class fileManagerController extends Controller
             $output = array(
                 'result' => 'fail'
             );
-
+            return response()->json($output);
         }
         $Files = File::find($file_id);
 
         if(isset($Files)){
-            $file_url = $Files->file_url;
+            $file_name = $Files->file_name;
 
-            Storage::delete($file_url);
-
-            if( ! Storage::exists($file_url)){
+            Storage::disk('uploads')->delete($file_name);
+            if(! Storage::disk('uploads')->exists($file_name)){
                 $Files->delete();
             }
         }

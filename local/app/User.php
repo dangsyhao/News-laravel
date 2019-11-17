@@ -20,5 +20,14 @@ class User extends Authenticatable
     //
     protected $table='users';
     //
+    public function User_category()
+    {
+        return $this->belongsTo('App\User_category','user_cat_id');
+    }
+    //
+    public function PostsTable()
+    {
+        return $this->hasMany('App\PostList', 'user_id');
+    }
 
 }

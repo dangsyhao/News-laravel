@@ -80,7 +80,7 @@
                 @endforeach
             @endif
             <div class='form-group'>
-                <button type='submit' class='btn btn-md btn-danger'>Submit</button>
+                <button type='submit' class='btn btn-sm btn-outline-danger'>Submit</button>
             </div>
         </form>
     </div>

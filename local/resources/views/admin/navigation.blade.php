@@ -14,11 +14,11 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Notification" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Notification</span>
+                    <span class="nav-link-text">Notifications</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="Notification">
                     <li>
-                        <a href="{{route('admin.notifi-getNotifi')}}">Notifi List</a>
+                        <a href="{{route('admin.notifi-getNotifi')}}">Notifications</a>
                     </li>
                 </ul>
             </li>
@@ -32,7 +32,7 @@
                         <a href="{{route('admin.user.role.getList')}}">User Category</a>
                     </li>
                     <li>
-                        <a href="{{route('admin.user.getList')}}">User List</a>
+                        <a href="{{route('admin.user.getList')}}">Users</a>
                     </li>
                 </ul>
             </li>
@@ -46,7 +46,7 @@
                         <a href="{{route('admin.getPostCategoryTable-post')}}">Post Category</a>
                     </li>
                     <li>
-                        <a href="{{route('admin.post.getPost')}}">Post List</a>
+                        <a href="{{route('admin.post.getPost')}}">Posts</a>
                     </li>
                 </ul>
             </li>
@@ -57,7 +57,7 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="Advertise">
                     <li>
-                        <a href="{{route('admin.advertise-getAdvertise')}}">Advertise List</a>
+                        <a href="{{route('admin.advertise-getAdvertise')}}">Advertises</a>
                     </li>
                 </ul>
             </li>
@@ -71,7 +71,7 @@
                         <a href="{{route('admin.menu.category.index')}}">Menu Category</a>
                     </li>
                     <li>
-                        <a href="{{route('admin.navBar-getNavBar')}}">List Menus</a>
+                        <a href="{{route('admin.navBar-getNavBar')}}">Menus</a>
                     </li>
                 </ul>
             </li>

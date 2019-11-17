@@ -20,13 +20,10 @@
                     <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                         <thead>
                              <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 5px;">Num</th>
-
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Position: activate to sort column ascending" style="width: 100px;">Image Names
                                 </th>
-                                <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                         aria-label="Position: activate to sort column ascending" style="width: 50px;">Actions
                                 </th>
                             </tr>
@@ -35,7 +32,6 @@
                             @if(isset($image_name))
                                 @foreach($image_name as $key=>$value)
                              <tr role="row" class="odd">
-                                <td class="sorting_1">1</td>
                                 <td><img src="{{asset('local/storage/app')}}/{{$value}}" alt="Smiley face" height="90px" width="125px"></td>
                                 <td class='d-flex flex-row'>
                                     <input type='text' class='form-control mr-2' name='image_path' value="{{asset('local/storage/app')}}/{{$value}}" id="{{$value}}">
