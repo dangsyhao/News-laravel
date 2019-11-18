@@ -50,17 +50,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Advertise" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Advertise</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="Advertise">
-                    <li>
-                        <a href="{{route('admin.advertise-getAdvertise')}}">Advertises</a>
-                    </li>
-                </ul>
-            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-sitemap"></i>
@@ -80,6 +69,17 @@
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Files Manager</span>
                 </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#Advertise" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text">Service Customer</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="Advertise">
+                    <li>
+                        <a href="{{route('admin.advertise-getAdvertise')}}">Advertises</a>
+                    </li>
+                </ul>
             </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">

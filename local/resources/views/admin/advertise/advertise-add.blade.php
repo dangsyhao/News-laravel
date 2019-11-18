@@ -25,7 +25,7 @@
                                         <div class="col-md-6">
                                             <div>
                                                 <div class="get-images-popup">
-                                                    <img id="img-img-ur-upload" alt="{{'Images feature not selected'}}" style="display: none"/>
+                                                    <img id="img-img-ur-upload" alt="{{'Images feature not selected'}}" />
                                                     <input id="input-img-ur-upload" type="hidden" class="form-control" name="image_url" value="{{ old('image_url') }}" required autofocus>
                                                 </div>
                                                 <button type="button" id='call-images-upload-box' class='btn btn-sm btn-outline-primary'>Chọn ảnh</button>

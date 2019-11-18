@@ -36,7 +36,7 @@ class LoginController extends Controller
           if(Auth::user()->User_Category->user_role == 'admin'){
               return redirect()->route('admin.dashboard');
           }elseif(Auth::user()->User_Category->user_role == 'author'){
-              return redirect()->route('author.dashboard');
+              return redirect()->route('author.dashboard.index');
           }else{
               return redirect()->route('site.login');
           }

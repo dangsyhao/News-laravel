@@ -18,21 +18,36 @@ class postListController extends Controller
     //
     public function show($id)
     {
-        $post_content= PostList::where('id','=',$id)->select('id','content','status')->get();
+        $post_content= PostList::select('id','content','status')->where('id','=',$id)->get();
         return view('admin.post.list.postList-show',['post_content'=>$post_content]);
     }
     //
     public function accept($id)
     {
-        PostList::where([['id', '=', $id],['status','=','1']])->update(['status' =>'2']);
+        if(isset($id)){
+            PostList::where([['id', '=', $id],['status','=','1']])->update(['status' =>'2']);
+        }
         return redirect()->route('admin.post.getPost');
     }
 
     //
     public function accept_index($id)
     {
-        PostList::where('status','=','3')->update(['status' =>'3']);
-        PostList::where([['id', '=', $id],['status','=','2']])->update(['status' =>'3']);
+        if(isset($id)){
+            $Posts = new PostList;
+
+            $Posts_query = $Posts->where('status','3');
+            //
+            if(count($Posts_query->get()->pluck('id')) > 0){
+                $Posts_query->update(['status'=>'2']);
+            }
+            //
+            $Posts_query = PostList::where([['id',$id],['status','2']]);
+            //
+            if(count($Posts_query->get()->pluck('id')) > 0){
+                $Posts_query->update(['status'=>'3']);
+            }
+        }
 
         return redirect()->route('admin.post.getPost');
     }
@@ -40,8 +55,13 @@ class postListController extends Controller
 //
     public function del($id)
     {
-        $post_category= PostList::find($id);
-        $post_category->delete();        
+        if(isset($id)){
+            $post_category= PostList::find($id);
+            if (isset($post_category->id) && $post_category->status !== '3'){
+                $post_category->delete();
+            }
+        }
+
         return redirect()->route('admin.post.getPost');
     }
 
@@ -53,8 +73,8 @@ class postListController extends Controller
             ->where('status', '>', '0')
             ->get();
         //
-        $Authors = User::select('id','name')->get();
-        $Post_cats = Post_Category::select('id','post_cat_name')->get();
+        $Authors = User::select('id','name')->whereIn('id',$post_obj_filter_data->pluck('user_id'))->get();
+        $Post_cats = Post_Category::select('id','post_cat_name')->whereIn('id',$post_obj_filter_data->pluck('post_category_id'))->get();
         $post_info = array();
         foreach ($post_obj_filter_data as $items){
             //

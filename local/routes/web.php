@@ -161,44 +161,27 @@ Route::get('/advertise-del/{id}', 'Admin\advertise\advertiseController@del')->na
 Route::middleware('dashboard_auth:web')->group(function() {
   // Login Author Page
   Route::prefix('author')->group(function() {
+  //Author->Author Dashboard
+  Route::get('/dashboard/index', 'Author\authorDashboardController@index')->name('author.dashboard.index');
+  Route::get('dashboard/note.read/{id}', 'Author\authorDashboardController@getNoteContent')->name('author.dashboard.noteContent');
 
-//Author->Author Dashboard
-  Route::get('/dashboard', 'Author\authorDashboardController@dashboard')->name('author.dashboard');
-
-   //Author->Notification
-   //***
-  Route::get('/notifi-read/{id}', 'Author\authorNotificateController@read')->name('author.notifi-read');
-    //***
-  Route::get('/notifi-getList', 'Author\authorNotificateController@getList')->name('author.notifi-getList');
-
-
-  //Author->Post
+  //Author->Posts
+  Route::get('/post-getList', 'Author\authorPostController@getPostsByFilter')->name('author.post-getList');
+  //
   Route::get('/post-getAdd', 'Author\authorPostController@getAdd')->name('author.post-getAdd');
   //***
   Route::post('/post-add', 'Author\authorPostController@add')->name('author.post-add');
   //***
-  Route::get('/post-getList', 'Author\authorPostController@getList')->name('author.post-getList');
-  //***
-  Route::get('/post-show/{id}', 'Author\authorPostController@show')->name('author.post-show');
-  //***
-  Route::post('/post-getEdit', 'Author\authorPostController@getEdit')->name('author.post-getEdit');
+  Route::get('/post-getEdit', 'Author\authorPostController@getEdit')->name('author.post-getEdit');
    //***
   Route::post('/post-edit', 'Author\authorPostController@edit')->name('author.post-edit');
-  /*******/
-  Route::get('/post-filter', 'Author\authorPostController@filter')->name('author.post-filter');
+  //***
+  Route::get('/post-show/{id}', 'Author\authorPostController@show')->name('author.post-show');
+  //
+  Route::get('/post.send-status/{id}', 'Author\authorPostController@sendStatus')->name('author.post.send-status');
+  //
+  Route::get('/post.delete/{id}', 'Author\authorPostController@delete')->name('author.post.delete');
 
-  //Author->Post Temp
-  Route::get('/postTemp-getTemp', 'Author\authorPostTempController@getTemp')->name('author.postTemp-getTemp');
-  //***
-  Route::get('/postTemp-del/{id}', 'Author\authorPostTempController@delTemp')->name('author.postTemp-del');
-  //***
-  Route::get('/postTemp-update/{id}', 'Author\authorPostTempController@update')->name('author.postTemp-update');
-  //***
-  Route::get('/postTemp-showDemo/{id}', 'Author\authorPostTempController@showDemo')->name('author.postTemp-showDemo');
-   //***
-   Route::get('/postTemp-getEdit/{id}', 'Author\authorPostTempController@getEdit')->name('author.postTemp-getEdit');
-    //***
-  Route::post('/postTemp-edit', 'Author\authorPostTempController@edit')->name('author.postTemp-edit');
 
   //Author->Image
   Route::get('/imageEditor', 'Author\imageEditorController@imageEditor')->name('author.imageEditor');

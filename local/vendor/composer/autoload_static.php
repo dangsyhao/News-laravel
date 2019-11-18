@@ -362,7 +362,6 @@ class ComposerStaticInitb28104078f722fd61b237c59ea8a6af3
         'App\\Http\\Controllers\\Auth\\AdminResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AdminResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\LogoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LogoutController.php',
-        'App\\Http\\Controllers\\Author\\AuthorNotificateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/authorNotificateController.php',
         'App\\Http\\Controllers\\Author\\authorDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/authorDashboardController.php',
         'App\\Http\\Controllers\\Author\\authorPostTempController' => __DIR__ . '/../..' . '/app/Http/Controllers/Author/authorPostTempController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',

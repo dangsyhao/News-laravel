@@ -1,16 +1,20 @@
 @extends('author.app')
 @section('content')
-    <div class="container">
-            <div class="jumbotron">
-        @if(isset($notifi_list))
-            @foreach($notifi_list as $row)
-                <h1 class="display-4">Thông Báo!</h1>
-                <p class="lead">{{$row->title}}</p>
-                    <hr class="my-4">
-                <p>{{$row->content}}</p>
-                <p class="lead"></p>
-            @endforeach
-        @endif
-            </div>
+    <div class="backend-post-content">
+        <div class="container">
+            @if(isset($notifi_list))
+                @foreach($notifi_list as $row)
+                    <div class="content">
+                        <p class="title"><h3>{{$row->title}}</h3></p>
+                        <p>{{$row->content}}</p>
+                        <p class="backend-author">Author: {{$row->UserTable->name}}</p>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+        <div class="backend-btn-act">
+            <a role="button" class="btn btn-sm btn-outline-primary" href="{{route('author.dashboard.index')}}">Back</a>
+        </div>
     </div>
+
 @endsection 

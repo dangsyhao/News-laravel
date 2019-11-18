@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\notifi;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Notificate;
 
@@ -21,22 +22,17 @@ class notificateController extends Controller
      */
     public function notifi()
     {  
-        $notifi_list=Notificate::paginate(12);
- 
+        $notifi_list=Notificate::orderBy('updated_at','desc')->paginate(10);
         return view('admin.notifi.notifi-getNotifi',['notifi_list'=>$notifi_list]);
-    
     }
-
 
     public function getAdd()
     {
         return view('admin.notifi.notifi-Add');
     }
 
-
     public function add(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:300',
             'content' => 'required|max:1000',
@@ -48,14 +44,13 @@ class notificateController extends Controller
                         ->withInput();
         }
         
-        $notifi = new Notificate;
-       
-        $notifi->title = $request->title;
-        $notifi->content = $request->content; 
-        $notifi->save();
+        $Notifi = new Notificate;
+        $Notifi->title = $request->title;
+        $Notifi->content = $request->content;
+        $Notifi->user_id = Auth::id();
+
+        $Notifi->save();
         return redirect()->route('admin.notifi-getNotifi');
-
-
     }
 
     public function getEdit($id)
@@ -66,9 +61,7 @@ class notificateController extends Controller
 
     public function edit(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
-
             'title' => 'required|max:300',
             'content' => 'required|max:1000'
         ]);
@@ -79,10 +72,11 @@ class notificateController extends Controller
                         ->withInput();
         }
         
-        $notifi =Notificate::find($request->id);
-        $notifi->title = $request->title;
-        $notifi->content = $request->content;
-        $notifi->save();
+        $Notifi =Notificate::find($request->id);
+        $Notifi->title = $request->title;
+        $Notifi->content = $request->content;
+        $Notifi->user_id = Auth::id();
+        $Notifi->save();
         return redirect()->route('admin.notifi-getNotifi');
 
     }
@@ -90,14 +84,16 @@ class notificateController extends Controller
     public function read($id)
     {
         $notifi_list= Notificate::where('id','=',$id)->get();
-                
         return view('admin.notifi.notifi-Read',['notifi_list'=>$notifi_list]);
     }
 
     public function del($id)
     {
-        $notifi= Notificate::find($id);
-        $notifi->delete();        
+        $Notifi = new Notificate;
+        $Notifi_query = $Notifi->find($id);
+        if($Notifi_query->exists){
+            $Notifi_query->delete();
+        }
         return redirect()->route('admin.notifi-getNotifi');
     }
 

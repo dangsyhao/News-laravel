@@ -1,13 +1,14 @@
 @extends('author.app')
 @section('content')
+    @if(isset($Post))
     <div class="form-group col-md-12">
-        <form class="form-horizontal" role="form" method="POST" action="{{route('author.post-add')}}">
+        <form class="form-horizontal" role="form" method="POST" action="{{route('author.post-edit')}}">
             {{ csrf_field() }}
+            <input type="hidden" name="id" value="{{$Post->id}}" required >
             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                 <label for="title" class="col-md-4 control-label">Title</label>
                 <div class="col-md-6">
-                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required
-                           autofocus>
+                    <input id="title" type="text" class="form-control" name="title" value="{{$Post->title}}" required autofocus>
                     @if ($errors->has('title'))
                         <span class="help-block">
                             <strong>{{ $errors->first('title') }}</strong>
@@ -20,8 +21,8 @@
                 <div class="col-md-6">
                     <div>
                         <div class="get-images-popup">
-                            <img id="img-img-ur-upload" src="{{url('/public/common/assets/images/image-post-none.png')}}" alt="Post feature image" />
-                            <input id="input-img-ur-upload" type="hidden" class="form-control" name="image_avatar" value="{{ old('image_avatar') }}" required autofocus>
+                            <img id="img-img-ur-upload" src="{{$Post->image_avatar}}" alt="Post feature image" />
+                            <input id="input-img-ur-upload" type="hidden" class="form-control" name="image_avatar" value="{{$Post->image_avatar}}" required autofocus>
                         </div>
                         <button type="button" id='call-images-upload-box' class='btn btn-sm btn-outline-primary'>Chọn ảnh</button>
                     </div>
@@ -39,7 +40,11 @@
                         <option selected value="{{ old('post_category_id') }}">-Chọn Chủ đề bài viết-</option>
                         @if(isset($post_category))
                             @foreach($post_category as $row)
-                                <option value="{{$row->id}}">{{$row->post_cat_name}}</option>
+                                <option value="{{$row->id}}"
+                                @if($Post->post_category_id == $row->id) {{"selected"}}@endif
+                                >
+                                    {{$row->post_cat_name}}
+                                </option>
                             @endforeach
                         @endif
                     </select>
@@ -53,8 +58,9 @@
             <div class="form-group{{ $errors->has('quotes_content') ? ' has-error' : '' }}">
                 <label for="quotes_content" class="col-md-4 control-label">Quotes</label>
                 <div class="col-md-6">
-                    <textarea id="quotes_content" type="text" class="form-control" name="quotes_content"
-                              value="{{ old('quotes_content') }}" required autofocus></textarea>
+                    <textarea id="quotes_content" type="text" class="form-control" name="quotes_content" required autofocus>
+                        {{$Post->quotes_content}}
+                    </textarea>
                     @if ($errors->has('quotes_content'))
                         <span class="help-block">
                             <strong>{{ $errors->first('quotes_content') }}</strong>
@@ -63,8 +69,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <textarea name="_content" id="_content" rows="10" cols="80"
-                          placeholder="Tạo nội dung bài viết của bạn tại đây!">
+                <textarea name="_content" id="editor1" rows="10" cols="80">
+                    {{$Post->content}}
                 </textarea>
                 <script>
                     CKEDITOR.replace('_content');
@@ -75,4 +81,5 @@
             </div>
         </form>
     </div>
+    @endif
 @endsection

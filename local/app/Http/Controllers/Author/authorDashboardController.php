@@ -12,16 +12,16 @@ class authorDashboardController extends Controller
         //
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function dashboard()
+    public function index()
     {
-        $notifi_list=Notificate::paginate('1');
-
+        $notifi_list=Notificate::orderBy('updated_at','desc')->paginate('10');
         return view('author.dashboard.dashboard',['notifi_list'=>$notifi_list]);
+    }
+
+    public function getNoteContent($id)
+    {
+        $notifi_list= Notificate::where('id','=',$id)->get();
+        return view('author.dashboard.notifi-Read',['notifi_list'=>$notifi_list]);
     }
 
 }

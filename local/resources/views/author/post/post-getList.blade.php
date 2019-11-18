@@ -1,149 +1,148 @@
 @extends('author.app')
 @section('content')
-  <div class="table-responsive">
-    <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-        <div class="row mb-2">
-            <div class="col-sm-12 col-md-10">
-                <div id="dataTable_filter" class="dataTables_filter">
-                        <form class='form-inline' method='GET' role="form" action="{{route('author.post-filter')}}" >
-                        {{ csrf_field() }}
+    <div class="table-responsive">
+        <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+            <div class="row mb-2">
+                <div class="col-sm-12 col-md-12">
+                    <div id="dataTable_filter" class="dataTables_filter">
+                        <form class='form-inline' method='GET' role="form" action="{{route('author.post-getList')}}">
+                            {{ csrf_field() }}
+                            <input type="hidden" name='get_post' value="get_post_action">
                             <div class="form-group">
-                                <select  name="user_id" class="form-control">
-                                    <option selected value='none'>-Tên Tác giả-</option>
-                                    @foreach($author_fill as $row)
-                                    <option value="{{$row->user_id}}">{{$row->getAuthorByUsersTable->name}}</option>
+                                <select name="user_id" class="form-control">
+                                    <option value='none'>-- Sellect Authors --</option>
+                                    @foreach($Authors as $items)
+                                        <option @if(isset($_REQUEST['user_id']) && $_REQUEST['user_id'] == $items['id']) {{'selected'}} @endif value="{{$items['id']}}">{{$items['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                 <select name="post_category_id" class="form-control ml-2">
-                                    <option selected value='none'>-Chủ đề-</option>
-                                    @foreach($post_category_fill as $row)
-                                    <option value="{{$row->post_category_id}}">{{$row->getPostCategoryTable->value}}</option>
+                                <select name="post_category_id" class="form-control ml-2">
+                                    <option value='none'>-- Sellect Categories --</option>
+                                    @foreach($Post_cats as $items)
+                                        <option @if(isset($_REQUEST['post_category_id']) && $_REQUEST['post_category_id'] == $items['id']){{'selected'}}@endif value="{{$items['id']}}">{{$items['post_cat_name']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <select name="status" class="form-control ml-2">
-                                    <option selected value='none'>-Trạng thái-</option>
-                                    @foreach($status_fill as $row)
-                                        @if($row->status=='1')
-                                        <option value="{{$row->status}}">
-                                            <span>Chưa duyệt</span>
-                                        </option>
+                                    <option value='none'>-- Sellect Status --</option>
+                                    @foreach($post_info['status'] as $items)
+                                        @if($items == '1')
+                                            {{ $value = 'Chưa duyệt' }}
+                                        @elseif($items == '2')
+                                            {{ $value = 'Đã duyệt' }}
+                                        @elseif($items == '3')
+                                            {{ $value = 'Trang nhất' }}
+                                        @else
+                                            {{ $value = 'Bài nháp' }}
                                         @endif
-                                         @if($row->status=='2')
-                                        <option value="{{$row->status}}">
-                                            <span>Đã duyệt</span>
+                                        <option value="{{$items}}" @if(isset($_REQUEST['status']) && $_REQUEST['status'] == $items) {{'selected'}}@endif >
+                                            <span>{{$value}}</span>
                                         </option>
-                                        @endif
-                                         @if($row->status=='3')
-                                        <option value="{{$row->status}}">
-                                            <span>Trang nhất</span>
-                                        </option>
-                                        @endif
                                     @endforeach
                                 </select>
                             </div>
-                        @if(isset($updated_fill))
+                            @if(isset($post_info))
+                                <div class="form-group">
+                                    <select name="updated_at" class="form-control ml-2">
+                                        <option selected value='none' selected>-- Select Date --</option>
+                                        @foreach($post_info['updated_at'] as $update_at_value)
+                                            <option value="{{$update_at_value}}" @if(isset($_REQUEST['updated_at']) && $_REQUEST['updated_at'] == $update_at_value) {{'selected'}}@endif>
+                                                {{$update_at_value}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
                             <div class="form-group">
-                                <select name="updated_at" class="form-control ml-2">
-                                     <option selected value='none'>-Ngày tháng-</option>
-                                     @foreach($updated_fill as $row)
-                                        <option value="{{str_limit($row->updated_at,10,null)}}">{{str_limit($row->updated_at,10,null)}}</option>
-                                    @endforeach
-                                </select>
+                                <button type="submit" class="btn btn-sm btn-outline-primary ml-2">Filter</button>
                             </div>
-                        @endif
                             <div class="form-group">
-                                <button type="submit" class="btn btn-sm btn-outline-primary ml-2">Lọc</button>
+                                <a href="{{route('author.post-getList')}}">
+                                    <button type="button" class="btn btn-sm btn-outline-primary ml-2">Reset</button>
+                                </a>
                             </div>
                         </form>
-                </div>
-                </div>
-                <div class="col-sm-12 col-md-2">
-                    <div id="dataTable_filter" class="dataTables_filter">
-                        <a role="button"  class="btn btn-outline-primary btn-sm" href="{{route('author.post-getAdd')}}">Tạo bài viết</a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                    <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                           role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                         <thead>
-                             <tr role="row">
-                                <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 5px;">Num</th>
+                        <tr role="row">
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                  aria-label="Position: activate to sort column ascending" style="width: 150px;">Tiêu đề
+                            </th>
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                  aria-label="Position: activate to sort column ascending" style="width: 42px;">Chủ đề
+                            </th>
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                  aria-label="Office: activate to sort column ascending" style="width: 3px;">Lượt xem
+                            </th>
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                  aria-label="Office: activate to sort column ascending" style="width: 3px;">Trạng thái
+                            </th>
 
-                                <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Position: activate to sort column ascending" style="width: 150px;">Tiêu đề</th>
-                            <!--     <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Position: activate to sort column ascending" style="width: 85px;">Tác giả</th> !-->
-                                <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Position: activate to sort column ascending" style="width: 55px;">Chủ đề</th>
-                                <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Office: activate to sort column ascending" style="width: 20px;">Lượt xem</th>
-                                <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Office: activate to sort column ascending" style="width: 20px;">Trạng thái</th>
-
-                                <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Age: activate to sort column ascending" style="width: 50px;">Updated at</th>
-                                <th  tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
-                                        aria-label="Start date: activate to sort column ascending" style="width:65px;">Action</th>
-                            </tr>
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                  aria-label="Age: activate to sort column ascending" style="width: 25px;">Updated at
+                            </th>
+                            <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                  aria-label="Start date: activate to sort column ascending" style="width:42px;">Action
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @if(isset($post_list))
-                                @foreach($post_list as $row)
-                             <tr role="row" class="odd">
-                                 <td class="sorting_1">{{'1'}}</td>
-                                 <td><strong>{{$row->title}}</strong></td>
-                               <!-- <td>{{$row->getAuthorByUsersTable->name}}</td>!-->
-                                <td>{{$row->getPostCategoryTable->value}}</td>
-                                <td>{{$row->view}}</td>
-                                <td>
-                                    @if($row->status=='0')
-                                        <span class='text-danger'>{{"Lưu nháp"}}</span>
-                                    @endif
-
-                                    @if($row->status=='1')
-                                        <span class='text-danger'>{{"Chưa duyệt"}}</span>
-                                    @endif
-
-                                    @if($row->status=='2')
-                                        <span class='text-primary'>{{"Đã duyệt"}}</span>
-                                    @endif
-
-                                     @if($row->status=='3')
-                                        <span class='text-success'>{{"Trang nhất"}}</span>
-                                    @endif
-
-                                </td>
-                                <td>{{$row->updated_at}}</td>
-                                <td class='d-flex flex-row'>
-                                    <a role="button" class="btn btn-sm btn-outline-primary" href="{{route('author.post-show',['id'=>$row->id] )}}">show</a>
-                                </td>
-                            </tr>
-                                @endforeach
-                            @endif
+                        @if($posts)
+                            @foreach($posts as $row)
+                                <tr role="row" class="odd">
+                                    <td><strong>{{$row->title}}</strong></td>
+                                    <td>@if(isset($row->getPostCategoryTable->post_cat_name))
+                                            {{$row->getPostCategoryTable->post_cat_name}}
+                                        @endif
+                                    </td>
+                                    <td>{{$row->view}}</td>
+                                    <td>
+                                        @if($row->status == '1')
+                                            @php $value = 'Chưa duyệt' @endphp
+                                        @elseif($row->status == '2')
+                                            @php $value = 'Đã duyệt' @endphp
+                                        @elseif($row->status == '3')
+                                            @php $value = 'Trang nhất' @endphp
+                                        @else
+                                            @php $value = 'Bài Nháp' @endphp
+                                        @endif
+                                            <span>@php echo $value @endphp</span>
+                                    </td>
+                                    <td>@if(isset($update_at_value)){{$update_at_value}} @endif</td>
+                                    <td class='d-flex flex-row'>
+                                        <a role="button" class="btn btn-sm btn-outline-primary mr-1"
+                                           href="{{route('author.post-show',['post_id'=>$row->id])}}">show</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-5">
-                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"><!--Showing 1 to 10 of 57 entries!--></div>
+                    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">
+                        <!--Showing 1 to 10 of 57 entries!--></div>
                 </div>
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                         <ul class="pagination">
-                        @if(isset($post_list))
-                            {{$post_list->links()}}
-                        @endif
+                            @if(! empty($posts) && $posts->count() > 10)
+                                {{$posts->links()}}
+                            @endif
                         </ul>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-</div>
-@endsection 
+@endsection

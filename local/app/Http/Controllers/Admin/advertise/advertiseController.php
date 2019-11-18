@@ -29,10 +29,10 @@ class advertiseController extends Controller
     public function add(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'customer' => 'required|max:300',
-            'image_url' => 'required|max:300',
-            'info' => 'required|max:300',
-            'link' => 'required|max:300',
+            'customer' => 'required|max:225',
+            'image_url' => 'required|max:225',
+            'info' => 'required|max:1000',
+            'link' => 'required|max:225',
         ]);
         if ($validator->fails()) {
             return redirect()->route('admin.advertise-getAdd')
@@ -43,21 +43,21 @@ class advertiseController extends Controller
         $advertise->customer = $request->customer;
         $advertise->image_url = $request->image_url;
         $advertise->info = $request->info;
-        $advertise->link = $request->link; 
+        $advertise->link = $request->link;
         $advertise->save();
         return redirect()->route('admin.advertise-getAdvertise');
     }
 
     public function getEdit($id)
     {
-        $advertise_edit=Advertise::where('id',$id)->paginate('12');
-        $image_name = Storage::allFiles('public/', 'local');
-        return view('admin.advertise.advertise-edit',['advertise_edit'=>$advertise_edit,'image_name'=>$image_name]);
+        if(isset($id)){
+            $advertise_edit=Advertise::where('id',$id)->paginate('10');
+        }
+        return view('admin.advertise.advertise-edit',['advertise_edit'=>$advertise_edit]);
     }
 
     public function edit(Request $request)
     {
-        
         $validator = Validator::make($request->all(), [
             'customer' => 'required|max:300',
             'image_url' => 'required|max:300',
@@ -65,7 +65,7 @@ class advertiseController extends Controller
             'link' => 'required|max:300',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails()){
             return redirect()->route('admin.advertise-getEdit',['id'=>$request->id])
                         ->withErrors($validator)
                         ->withInput();
@@ -76,22 +76,32 @@ class advertiseController extends Controller
         $advertise->info = $request->info;
         $advertise->link = $request->link; 
         $advertise->save();
+        //
         return redirect()->route('admin.advertise-getAdvertise');
-
     }
 
     public function read($id)
     {
-        $customer_info= Advertise::where('id','=',$id)->get();
-                
+        if(isset($id)){
+            $Customer_adv = new Advertise ;
+            $customer_info= $Customer_adv->where('id','=',$id)->get();
+        }
+
         return view('admin.advertise.advertise-read',['customer_info'=>$customer_info]);
     }
 
     public function del($id)
     {
-        $advertise= Advertise::find($id);
-        $advertise->delete();        
-        return redirect()->route('admin.advertise-getAdvertise');
+        if(isset($id)){
+            $Adv = new Advertise;
+            $Adv_query = $Adv->find($id);
+
+            if($Adv_query->exists()){
+                $Adv_query->delete();
+            }
+        }
+
+        return redirect()->back();
     }
 
 }

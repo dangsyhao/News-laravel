@@ -1,4 +1,4 @@
-@include('header')
+@include('layout-master.header')
 <!-- Navigation-->
 @include('admin.navigation')
 <div class="content-wrapper">
@@ -25,6 +25,6 @@
     <div class="card-footer small text-muted">{{$request->updated_at}}</div>
     @endif
 </div>
-@include('footer')
+@include('layout-master.footer')
 <!-- /.Footer-->
 

@@ -338,17 +338,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>		
 						<div class="popular-news">
 							
-							@foreach($most_view as $row)
-							<div class="popular-grid">
-								<i>{{$row->updated_at}}</i>
-								<p><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->getPostCategoryTable->value),
-																'post_name'=>str_slug($row->title),
-																'post_id'=>$row->id
-																])}}">
-								{{$row->title}}</a></p>
-							</div>
-							@endforeach
+{{--							@foreach($most_view as $row)--}}
+{{--							<div class="popular-grid">--}}
+{{--								<i>{{$row->updated_at}}</i>--}}
+{{--								<p>--}}
+{{--									<a  href="{{route('site.singlePage',[--}}
+{{--																'post_category'=>str_slug($row->getPostCategoryTable->value),--}}
+{{--																'post_name'=>str_slug($row->title),--}}
+{{--																'post_id'=>$row->id--}}
+{{--																])}}">--}}
+{{--								{{$row->title}}--}}
+{{--									</a>--}}
+{{--								</p>--}}
+{{--							</div>--}}
+{{--							@endforeach--}}
 							
 						</div>
 						<div class="clearfix"></div>
