@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layout-master.dashboard.app')
 @section('content')
             <div class="card-body">
                 <div class="table-responsive">

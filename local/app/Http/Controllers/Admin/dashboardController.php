@@ -23,7 +23,7 @@ class dashboardController extends Controller
     {
         $notifi_list=Notificate::paginate('1');
 
-        return view('admin.dashboard.dashboard',['notifi_list'=>$notifi_list]);
+        return view('dashboard.index.dashboard',['notifi_list'=>$notifi_list]);
     }
 
     

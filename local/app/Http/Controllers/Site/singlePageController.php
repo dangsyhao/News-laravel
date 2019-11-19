@@ -22,7 +22,7 @@ class singlePageController extends Controller
     // Auto +1 to Single Page
     PostList::where('id','=',$post_id)->increment('view');                   
 
-    return view('site.singlePage',['post_list'=>$post_list]);
+    return view('site.single',['post_list'=>$post_list]);
 
   }
 

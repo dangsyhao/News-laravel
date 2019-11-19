@@ -24,7 +24,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\AdminResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/AdminResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
     'App\\Http\\Controllers\\Auth\\LogoutController' => $baseDir . '/app/Http/Controllers/Auth/LogoutController.php',
-    'App\\Http\\Controllers\\Author\\authorDashboardController' => $baseDir . '/app/Http/Controllers/Author/authorDashboardController.php',
+    'App\\Http\\Controllers\\Author\\dashBoardController' => $baseDir . '/app/Http/Controllers/Author/authorDashboardController.php',
     'App\\Http\\Controllers\\Author\\authorPostTempController' => $baseDir . '/app/Http/Controllers/Author/authorPostTempController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\admin\\post\\postCategoryController' => $baseDir . '/app/Http/Controllers/Admin/post/postCategoryController.php',

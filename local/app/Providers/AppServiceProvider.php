@@ -21,37 +21,28 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // Send NavBar Item to master Layout
-        $nav_bar=NavBar::all();
+        $Menus = NavBar::with('getMenuCategoryTable');
+        $nav_bar= $Menus->get();
         View::share(['nav_bar'=>$nav_bar]);
 
         // Send Advertise Item to master Layout
-        $advertise=Advertise::all();
+        $advertise= Advertise::get();
         View::share(['advertise'=>$advertise]);
 
-
          // Send Post Item to master Layout
-         $post_list=PostList::select(
-                                    'id',
-                                    'title',
-                                    'updated_at',
-                                    'image_avatar',
-                                    'post_category_id'
-                                    )->where('status','>','1')->get();
+         $Posts=PostList::with(['getPostCategoryTable','getAuthorByUsersTable'])->where('status','>','1');
                                     
-         $collection=collect($post_list);
         //Most View
-         $most_view= $collection->sortByDesc('view')->take(10);
-         $most_view->all();
+         $most_view= $Posts->orderBy('view','desc')->get();
+//         var_dump($most_view);die();
          View::share(['most_view'=>$most_view]);
 
         //Du lich
-        $du_lich= $collection->where('post_category_id','=','13')->take(-3);
-        $du_lich->all();
+        $du_lich= $Posts->where('post_category_id','=','13')->get()->take(-3);
         View::share(['du_lich'=>$du_lich]);
 
         //Du lich Gallery
-        $du_lich_gallery= $collection->where('post_category_id','=','13')->take(-5);
-        $du_lich_gallery->all();
+        $du_lich_gallery= $Posts->where('post_category_id','=','13')->get()->take(-5);
         View::share(['du_lich_gallery'=>$du_lich_gallery]);
 
     }

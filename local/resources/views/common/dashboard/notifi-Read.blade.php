@@ -1,4 +1,4 @@
-@extends('author.app')
+@extends('layout-master.dashboard.app')
 @section('content')
     <div class="backend-post-content">
         <div class="container">
@@ -13,7 +13,7 @@
             @endif
         </div>
         <div class="backend-btn-act">
-            <a role="button" class="btn btn-sm btn-outline-primary" href="{{route('author.dashboard.index')}}">Back</a>
+            <a role="button" class="btn btn-sm btn-outline-primary" href="{{route('dashboard.index')}}">Back</a>
         </div>
     </div>
 

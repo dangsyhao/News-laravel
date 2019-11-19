@@ -18,8 +18,14 @@ class postListController extends Controller
     //
     public function show($id)
     {
-        $post_content= PostList::select('id','content','status')->where('id','=',$id)->get();
-        return view('admin.post.list.postList-show',['post_content'=>$post_content]);
+        if(isset($id)){
+            $post_content= PostList::with('getAuthorByUsersTable')->where('id','=',$id)->first();
+            if($post_content->count() > 0){
+                return view('admin.post.list.postList-show',['post_content'=>$post_content]);
+            }
+        }
+
+        return redirect()->back();
     }
     //
     public function accept($id)

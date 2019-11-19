@@ -1,4 +1,4 @@
-@extends('author.app')
+@extends('layout-master.dashboard.app')
 @section('content')
     @if(isset($Post))
     <div class="form-group col-md-12">

@@ -1,4 +1,4 @@
-@extends('author.app')
+@extends('layout-master.dashboard.app')
 @section('content')
         <div class="jumbotron">
         @if(isset($notifi_list))
@@ -7,7 +7,7 @@
                 <p class="lead">{{$row->title}}</p>
                     <hr class="my-4">
                 <p class="lead">
-                    <a class="btn btn-outline-primary btn-lg" href="{{route('author.dashboard.noteContent',['id'=>$row->id])}}" role="button">Xem Thông báo</a>
+                    <a class="btn btn-outline-primary btn-lg" href="{{route('dashboard.noteContent',['id'=>$row->id])}}" role="button">Xem Thông báo</a>
                 </p>
                 <p class="small text-muted">Ngày ra thông báo : {{$row->updated_at}}</p>
             @endforeach

@@ -1,4 +1,4 @@
-@extends('author.app')
+@extends('layout-master.dashboard.app')
 @section('content')
     <div class="table-responsive">
         <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
@@ -12,7 +12,7 @@
                                 <select name="user_id" class="form-control">
                                     <option value='none'>-- Sellect Authors --</option>
                                     @foreach($Authors as $items)
-                                        <option @if(isset($_REQUEST['user_id']) && $_REQUEST['user_id'] == $items['id']) {{'selected'}} @endif value="{{$items['id']}}">{{$items['name']}}</option>
+                                        <option value="{{$items['id']}}" selected >{{$items['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>

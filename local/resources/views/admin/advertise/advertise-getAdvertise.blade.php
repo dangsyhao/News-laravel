@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layout-master.dashboard.app')
 @section('content')
           <!-- Card-Body-->
           <div class="card-body">

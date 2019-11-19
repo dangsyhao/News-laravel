@@ -53,8 +53,9 @@ class fileManagerController extends Controller
 
     public function getFilesManagerIndex()
     {
+        $user_role = Auth::user()->User_category->user_role;
         $files_url = $this->getFilesData( 4);
-        return view('common.file-manager.file-index',['Files'=>$files_url]);
+        return view('common.file-manager.file-index',['Files'=>$files_url,'user_role'=>$user_role]);
     }
     //
     public function getResultFilesManagerByAjax()

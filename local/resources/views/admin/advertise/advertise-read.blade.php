@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layout-master.dashboard.app')
 @section('content')
     <div class="container">
         @if(isset($customer_info))

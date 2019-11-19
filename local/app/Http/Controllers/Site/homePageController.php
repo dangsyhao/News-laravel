@@ -13,19 +13,7 @@ class homePageController extends Controller
     public function index()
     {
         //PostList
-        $post_list=PostList::select('id',
-                                    'title',
-                                    'image_avatar',
-                                    'quotes_content',
-                                    'updated_at',
-                                    'post_category_id',
-                                    'view',
-                                    'status'
-                                    )
-                                    ->where('status','>','1')
-                                    ->get();
-
-
+        $post_list=PostList::with(['getPostCategoryTable','getAuthorByUsersTable'])->where('status','>','1')->get();
         $collection=collect($post_list);
 
         //Trang Nhat
@@ -89,9 +77,8 @@ class homePageController extends Controller
         $the_thao_link->all();
         $the_thao_index= $collection->where('post_category_id','=','12')->take(-3)->slice(2);
         $the_thao_index->all();
-
         // Return View
-        return view('site.index',[
+        return view('site.front-page',[
                                     'chinh_tri_link'=>$chinh_tri_link,'chinh_tri_index'=>$chinh_tri_index,
                                     'kinh_te_link'=>$kinh_te_link,'kinh_te_index'=>$kinh_te_index,
                                     'giao_duc_link'=>$giao_duc_link,'giao_duc_index'=>$giao_duc_index,
@@ -103,10 +90,7 @@ class homePageController extends Controller
                                     'the_thao_link'=>$the_thao_link,'the_thao_index'=>$the_thao_index,
                                     'page_index'=>$page_index,
                                     'hot_news'=>$hot_news,
-
                                 ]);
-
-
 
   }
 

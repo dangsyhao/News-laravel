@@ -1,4 +1,4 @@
-@extends('author.app')
+@extends('layout-master.dashboard.app')
 @section('content')
     @if(isset($post_content))
         <div class="backend-post-content">

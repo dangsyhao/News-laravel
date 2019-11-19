@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layout-master.dashboard.app')
 @section('content')
 <div class="table-responsive">
     <div id="dataTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">

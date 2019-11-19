@@ -1,28 +1,35 @@
-@extends('admin.app')
+@extends('layout-master.dashboard.app')
 @section('content')
-    <div class="card-body">
-    <!-- Data Contents-->
     @if(isset($post_content))
-        @foreach($post_content as $row)
-            {!! $row->content !!}
-    <!-- Data Contents-->
-        <div class="row">
-                <div class="col-sm-12 col-md-7">
-                    <div class='form-group'>
-                        <a role="button" class="btn btn-sm btn-outline-danger mr-1" href="{{route('admin.postList-del',['id'=>$row->id])}}">Xóa Bài Viết</a>
-                    @if($row->status=='1')
-                        <a role="button" class="btn btn-sm btn-outline-danger" href="{{route('admin.postList-accept',['id'=>$row->id])}}">Duyệt Bài Viết</a>
-                    @endif
-                    @if($row->status=='2')
-                        <a role="button" class="btn btn-sm btn-outline-danger" href="{{route('admin.postList-accept_index',['id'=>$row->id])}}">Đăng Trang Nhất</a>
-                    @endif
-                        <a role="button" class="btn btn-sm btn-outline-danger" href="{{route('admin.post.getPost')}}">Back</a>
-
-                    </div>
+        <div class="backend-post-content">
+            <div class="container">
+                <div class="content">
+                    <p class="title"><h3>{{$post_content->title}}</h3></p>
+                    <p class="quotes"><strong>{!!$post_content->quotes_content!!}</strong></p>
+                    <p>{!! $post_content->content !!}</p>
+                    <p class="backend-author">
+                        Create by:@if(isset($post_content->getAuthorByUsersTable->name))
+                                    {{$post_content->getAuthorByUsersTable->name}}
+                                    @endif
+                    </p>
                 </div>
             </div>
-        @endforeach
+            <div class="backend-btn-act">
+                <div class="row">
+                    @if($post_content->status < 3)
+                    <a role="button" class="btn btn-sm btn-outline-danger mr-1" href="{{route('admin.postList-del',['id'=>$post_content->id])}}">Xóa Bài Viết</a>
+                    @endif
+                    @if($post_content->status=='1')
+                        <a role="button" class="btn btn-sm btn-outline-danger" href="{{route('admin.postList-accept',['id'=>$post_content->id])}}">Duyệt Bài Viết</a>
+                    @endif
+                    @if($post_content->status=='2')
+                        <a role="button" class="btn btn-sm btn-outline-danger" href="{{route('admin.postList-accept_index',['id'=>$post_content->id])}}">Đăng Trang Nhất</a>
+                    @endif
+                    <a role="button" class="btn btn-sm btn-outline-danger" href="{{route('admin.post.getPost')}}">Back</a>
+                </div>
+            </div>
+        </div>
     @endif
-</div>
-
 @endsection
+
+

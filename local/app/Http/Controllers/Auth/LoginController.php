@@ -16,7 +16,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         if(Auth::check()){
-            return redirect()->back();
+            return redirect()->route('dashboard.index');
         }
 
       return view('auth.login');
@@ -33,18 +33,11 @@ class LoginController extends Controller
       // Login to Admin Dashboard
       if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location
-          if(Auth::user()->User_Category->user_role == 'admin'){
-              return redirect()->route('admin.dashboard');
-          }elseif(Auth::user()->User_Category->user_role == 'author'){
-              return redirect()->route('author.dashboard.index');
-          }else{
-              return redirect()->route('site.login');
-          }
+              return redirect()->route('dashboard.index');
       }
 
       // if unsuccessful, then redirect back to the login with the form data
       return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
-    
 }

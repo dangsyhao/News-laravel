@@ -11,8 +11,4 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    //Uploads Images function.
-    public function uploads(){
-
-    }
 }

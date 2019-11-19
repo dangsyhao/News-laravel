@@ -1,4 +1,4 @@
-@extends('author.app')
+@extends('layout-master.dashboard.app')
 @section('content')
     <div class="form-group col-md-12">
         <form class="form-horizontal" role="form" method="POST" action="{{route('author.post-add')}}">

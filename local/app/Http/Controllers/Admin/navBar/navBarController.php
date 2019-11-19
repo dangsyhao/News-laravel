@@ -37,7 +37,7 @@ class navBarController extends Controller
 
     public function getAdd()
     {   
-       $post_category=Post_Category::select('id','value')->get();
+       $post_category=Post_Category::select('id','post_cat_name')->get();
         $Menu_cate = Menu_category::select('id','name')->get();
 
         return view('admin.navBar.navBar-add',['post_category'=>$post_category,'Menu_cate'=>$Menu_cate]);
@@ -67,7 +67,7 @@ class navBarController extends Controller
             $Menus->post_cat_id = '';
         }else{
             $Menus->post_cat_id = $request->post_cat_id;
-            $post_cat_name = $Menus->getPostCategoryTable()->select('value')->where('id','=',$request->post_cat_id)->get();
+            $post_cat_name = $Menus->getPostCategoryTable()->select('post_cat_name')->where('id','=',$request->post_cat_id)->get();
             $post_cat_slug = str_slug($post_cat_name[0]->value);
             $Menus->page_link = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
             $Menus->link = '';
@@ -85,7 +85,7 @@ class navBarController extends Controller
         $Nav_bar=NavBar::with(['getPostCategoryTable','getMenuCategoryTable'])
                         ->where('id','=',$id)->paginate('12');
         $orders= NavBar::select('order')->orderBy('order','asc')->get();
-        $Post_cate = Post_Category::select('id','value')->get();
+        $Post_cate = Post_Category::select('id','post_cat_name')->get();
         $Menu_cate = Menu_category::select('id','name')->get();
         return view('admin.navBar.navBar-edit',['Nav_bar'=>$Nav_bar[0],'Post_cate'=>$Post_cate,'Menu_cate'=>$Menu_cate,'orders'=>$orders]);
     }
@@ -114,7 +114,7 @@ class navBarController extends Controller
             $Menus->post_cat_id = '';
         }else{
             $Menus->post_cat_id = $request->post_cat_id;
-            $post_cat_name = $Menus->getPostCategoryTable()->select('value')->where('id','=',$request->post_cat_id)->get();
+            $post_cat_name = $Menus->getPostCategoryTable()->select('post_cat_name')->where('id','=',$request->post_cat_id)->get();
             $post_cat_slug = str_slug($post_cat_name[0]->value);
             $Menus->page_link = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
             $Menus->link = '';

@@ -1,6 +1,11 @@
-@include('layout-master.header')
-  <!-- Navigation-->
-@include('author.navigation')
+@include('layout-master.dashboard.header')
+<!-- Navigation-->
+@if($Auth_role == 'admin')
+    @include('layout-master.dashboard.admin-navigation')
+@else
+    @include('layout-master.dashboard.author-navigation')
+@endif
+<!-- Content-->
 <div class="content-wrapper">
     <div class="container-fluid">
         <!-- Breadcrumbs-->
@@ -15,14 +20,16 @@
                 Quảng Cáo
             </div>
             <div class="card-body">
-         <!-- /.content-->
-         @yield('content')
-        <!-- /.content-->
+                <!--content-->
+            @yield('content')
+            <!-- /.content-->
             </div>
         </div>
     </div>
     @if(isset($request->updated_at))
-        <div class="card-footer small text-muted">{{$request->updated_at}}</div>
+    <div class="card-footer small text-muted">{{$request->updated_at}}</div>
     @endif
 </div>
-@include('layout-master.footer')
+@include('layout-master.dashboard.footer')
+<!-- /.Footer-->
+

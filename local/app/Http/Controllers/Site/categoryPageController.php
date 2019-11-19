@@ -41,7 +41,7 @@ class categoryPageController extends Controller
       $post_list_link= $collection->sortByDesc('id')->slice(1);
       $post_list_link->all();
 
-    return view('site.categoryPage',['post_list_index'=>$post_list_index,
+    return view('site.page-archive',['post_list_index'=>$post_list_index,
                                       'post_list_link'=>$post_list_link,
                                       'post_list_hot_news'=>$post_list_hot_news,
                                     ]);
