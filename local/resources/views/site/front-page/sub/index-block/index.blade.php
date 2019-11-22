@@ -4,19 +4,17 @@
         <div class="clearfix"></div>
     </div>
     <div class="page-index-grids">
-        @foreach($page_index as $row)
+    @if( ! empty($post_data['post_index']))
+        @foreach($post_data['post_index'] as $row)
             <div class="page-index-grid">
-                <a href="{{route('site.singlePage',[
-                                                    'post_category'=>str_slug($row->getPostCategoryTable->post_cat_name),
-                                                    'post_name'=>str_slug($row->title),
-                                                    'post_id'=>$row->id
-                                                    ])}}" class="title">
+                <a href={{getPostLinkById($Posts,$row->id)}} class="title">
                     <img src="{{$row->image_avatar}}" alt="" />
                     <p>{{$row->title}}</p>
                 </a>
                 <p>{{$row->quotes_content}}</p>
             </div>
         @endforeach
+    @endif
         <div class="clearfix"></div>
     </div>
 </div>

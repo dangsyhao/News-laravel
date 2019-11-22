@@ -2,6 +2,7 @@
     <h3>Da Nang - Gallery</h3>
     <div class="course_demo">
         <ul id="flexiselDemo">
+            @if(isset($du_lich_gallery))
             @foreach($du_lich_gallery as $row)
                 <li>
                     <a  href="{{
@@ -15,6 +16,7 @@
                     </a>
                 </li>
             @endforeach
+            @endif
         </ul>
     </div>
     <script type="text/javascript">

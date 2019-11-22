@@ -54,7 +54,7 @@
                                                 <option>-- Categories Choose --</option>
                                                 @if(isset($post_category))
                                                     @foreach($post_category as $row)
-                                                        <option value="{{$row->id}}">{{$row->value}}</option>
+                                                        <option value="{{$row->id}}">{{$row->post_cat_name}}</option>
                                                     @endforeach
                                                 @endif
                                             </select>

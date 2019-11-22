@@ -1,17 +1,15 @@
 <div class="hot-news">
     <div class="hot-news-news">
-        @foreach($hot_news as $row)
+    @if(empty($post_data['hot_new_list']))
+        @foreach($post_data['hot_new_list'] as $row)
             <div class="hot-news-grid">
                 <p>
-                    <a href="{{route('site.singlePage',[
-                                                        'post_category'=>str_slug($row->getPostCategoryTable->post_cat_name),
-                                                        'post_name'=>str_slug($row->title),
-                                                        'post_id'=>$row->id
-                                                        ])}}" class="title">
+                    <a href="{{getPostLinkById($Posts,$row->id)}}" class="title">
                         {{$row->title}}
                     </a>
                 </p>
             </div>
         @endforeach
+    @endif
     </div>
 </div>

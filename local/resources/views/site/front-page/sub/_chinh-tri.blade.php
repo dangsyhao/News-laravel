@@ -1,32 +1,27 @@
-<div class="world-news" id='chinh_tri'>
-    <div class="main-title-head">
-        <h3>Chính Trị - Xã Hội</h3>
-        <div class="clearfix"></div>
+<div class="block block-post-category" >
+    <h3 class="title">Chính Trị</h3>
+    <div class="content">
+        <ul>
+            @if(!empty($post_data['chinh_tri']))
+                @foreach($post_data['chinh_tri'] as $key => $item)
+                    @if($key == 0)
+                        <li class="post-latest">
+                            <div class="card" >
+                                <img class="card-img-top" src="{{$item->image_avatar}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{$item->title}}</h3>
+                                    <p class="card-text">{{$item->quotes_content}}</p>
+                                    <a href="{{getPostLinkById($Posts,$item->id)}}" class="btn btn-primary">view all</a>
+                                </div>
+                            </div>
+                        </li>
+                    @else
+                    <li class="post-none-latest">
+                        <a href="{{getPostLinkById($Posts,$item->id)}}" class="title">{{$item->title}}</a>
+                    </li>
+                    @endif
+                @endforeach
+            @endif
+        </ul>
     </div>
-    @foreach($chinh_tri_index as $row)
-        <div class="world-news-grids">
-            <div class="world-news-grid">
-                <img src="{{$row->image_avatar}}" alt="" />
-                <a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->getPostCategoryTable->post_cat_name),
-																'post_name'=>str_slug($row->title),
-																'post_id'=>$row->id
-																])}}" class="title">{{$row->title}}</a>
-                <p>{{$row->quotes_content}}</p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    @endforeach
-    <hr>
-    <ul>
-        @foreach($chinh_tri_link as $row)
-            <li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->getPostCategoryTable->post_cat_name),
-																	'post_name'=>str_slug($row->title),
-																	'post_id'=>$row->id
-																	])}}" class="title">
-                    {{$row->title}} </a></li>
-        @endforeach
-    </ul>
-    <div class="clearfix"></div>
 </div>

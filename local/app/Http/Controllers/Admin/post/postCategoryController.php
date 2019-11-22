@@ -30,6 +30,7 @@ class postCategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'post_cat_name' => 'required|max:255|unique:post_categories',
             'post_cat_desc' => 'required|max:1000',
+            'post_cat_slug' => 'max:225|unique:post_categories',
         ]);
 
         if ($validator->fails()) {
@@ -39,6 +40,9 @@ class postCategoryController extends Controller
         }
         $post_category= new Post_Category;
         $post_category->post_cat_name = $request->post_cat_name;
+        if( ! empty($request->post_cat_name) && empty($request->post_cat_slug)){
+            $post_category->post_cat_slug = str_slug($request->post_cat_name);
+        }
         $post_category->post_cat_desc = $request->post_cat_desc;
         $post_category->save();
 
@@ -69,6 +73,9 @@ class postCategoryController extends Controller
         if(! empty($post_category)){
             $post_category->post_cat_name = $request->post_cat_name;
             $post_category->post_cat_desc = $request->post_cat_desc;
+            if( ! empty($request->post_cat_name) && empty($request->post_cat_slug)){
+                $post_category->post_cat_slug = str_slug($request->post_cat_name);
+            }
             $post_category->save();
         }
 

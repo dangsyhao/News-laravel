@@ -18,6 +18,11 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer(
             'layout-master.dashboard.app', 'App\Http\ViewComposers\AppComposer'
         );
+
+        // Render data to view :site.app
+        View::composer(
+            'site.*', 'App\Http\ViewComposers\siteAppComposer'
+        );
     }
 
     /**

@@ -1,31 +1,27 @@
-<div class="desk-grid" id='the_thao'>
-    @foreach($the_thao_index as $row)
-        <h3>Thể Thao</h3>
-        <div class="desk">
-            <table>
-                <tr><a  href="{{route('site.singlePage',[
-																'post_category'=>str_slug($row->getPostCategoryTable->post_cat_name),
-																'post_name'=>str_slug($row->title),
-																'post_id'=>$row->id
-																])}}" class="title">
-                        {{$row->title}}</a></tr>
-                <tr>
-                    <td><img src="{{$row->image_avatar}}" width="120px" alt="" />
-                    <td><p>{{$row->quotes_content}}</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    @endforeach
-    <ul>
-        @foreach($the_thao_link as $row)
-            <li> <a href="{{route('site.singlePage',[
-																	'post_category'=>str_slug($row->getPostCategoryTable->post_cat_name),
-																	'post_name'=>str_slug($row->title),
-																	'post_id'=>$row->id
-																	])}}" class="title">
-                    {{$row->title}}</a></li>
-        @endforeach
-    </ul>
-
+<div class="block block-post-category" >
+    <h3 class="title">Thể Thao</h3>
+    <div class="content">
+        <ul>
+            @if(!empty($post_data['the_thao']))
+                @foreach($post_data['the_thao'] as $key => $item)
+                    @if($key == 0)
+                        <li class="post-latest">
+                            <div class="card" >
+                                <img class="card-img-top" src="{{$item->image_avatar}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{$item->title}}</h3>
+                                    <p class="card-text">{{$item->quotes_content}}</p>
+                                    <a href="{{getPostLinkById($Posts,$item->id)}}" class="btn btn-primary">view all</a>
+                                </div>
+                            </div>
+                        </li>
+                    @else
+                        <li class="post-none-latest">
+                            <a href="{{getPostLinkById($Posts,$item->id)}}" class="title">{{$item->title}}</a>
+                        </li>
+                    @endif
+                @endforeach
+            @endif
+        </ul>
+    </div>
 </div>

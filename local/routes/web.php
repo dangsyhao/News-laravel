@@ -175,7 +175,6 @@ Route::prefix('author')->group(function() {
 
 });/** End-Author */
 
-
 /** Files Manager **/
 //Files manager
 Route::get('/files/get.index', 'fileManagerController@getFilesManagerIndex')->name('files.index');
@@ -195,11 +194,11 @@ Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
 
 /** Sites Public */
 
-Route::get('/', 'Site\homePageController@index')->name('/');
+Route::get('/', 'Site\frontPageController@frontPage')->name('/');
 //Access single Page
 Route::get('/{post_category}/{post_name}/{post_id}','Site\singlePageController@singlePage')->name('site.singlePage');
 //Access Category Page
-Route::get('/{category_name}/{category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
+Route::get('/{category_name}?cat_id={category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
 
 
 

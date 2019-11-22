@@ -11,17 +11,31 @@
                                     <form class="form-horizontal" role="form" method="POST"
                                           action="{{ route('admin.getPostCategoryTable-add') }}">
                                             {{ csrf_field() }}
-                                        <div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
+                                        <div class="form-group{{ $errors->has('post_cat_name') ? ' has-error' : '' }}">
                                             <label for="post_cat_name" class="col-md-4 control-label">
                                                 Category Name
                                             </label>
                                             <div class="col-md-6">
                                                 <input id="post_cat_name" type="text" class="form-control"
-                                                       name="post_cat_name" value="{{ old('value') }}" required
+                                                       name="post_cat_name" value="{{ old('post_cat_name') }}" required
                                                        autofocus>
-                                                @if ($errors->has('value'))
+                                                @if ($errors->has('post_cat_name'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('value') }}</strong>
+                                                        <strong>{{ $errors->first('post_cat_name') }}</strong>
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group{{ $errors->has('post_cat_slug') ? ' has-error' : '' }}">
+                                            <label for="post_cat_slug" class="col-md-4 control-label">
+                                                Category Slug
+                                            </label>
+                                            <div class="col-md-6">
+                                                <input id="post_cat_slug" type="text" class="form-control"
+                                                       name="post_cat_slug" value="{{ old('post_cat_slug') }}" >
+                                                @if ($errors->has('post_cat_slug'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('post_cat_slug') }}</strong>
                                                     </span>
                                                 @endif
                                             </div>

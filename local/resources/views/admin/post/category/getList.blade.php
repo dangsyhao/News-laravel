@@ -16,6 +16,8 @@
                                  <tr role="row">
                                     <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Position: activate to sort column ascending" style="width: 50px;">Category Name</th>
+                                     <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                           aria-label="Position: activate to sort column ascending" style="width: 50px;">Category Slug</th>
                                     <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
                                             aria-label="Position: activate to sort column ascending" style="width: 50px;">Description</th>
                                     <th   tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
@@ -29,6 +31,7 @@
                                     @foreach($post_category as $row)
                                  <tr role="row" class="odd">
                                     <td>{{$row->post_cat_name}}</td>
+                                     <td>{{$row->post_cat_slug}}</td>
                                     <td>{{$row->post_cat_desc}}</td>
                                     <td>{{$row->updated_at}}</td>
                                     <td class='d-flex flex-row'>

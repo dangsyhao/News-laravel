@@ -12,17 +12,28 @@
                         @if(isset($getPostCategoryTable_edit))
                             @foreach($getPostCategoryTable_edit as $row)
                                 <input  type="hidden" name="id" value="{{$row->id}}">
-                                <div class="form-group{{ $errors->has('value') ? ' has-error' : '' }}">
+                                <div class="form-group{{ $errors->has('post_cat_name') ? ' has-error' : '' }}">
                                     <label for="post_cat_name" class="col-md-4 control-label">Category Name</label>
                                     <div class="col-md-6">
                                         <input id="post_cat_name" type="text" class="form-control" name="post_cat_name" value="{{$row->post_cat_name}}">
-                                        @if ($errors->has('value'))
+                                        @if ($errors->has('post_cat_name'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('value') }}</strong>
+                                                <strong>{{ $errors->first('post_cat_name') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
+                                        <div class="form-group{{ $errors->has('post_cat_slug') ? ' has-error' : '' }}">
+                                            <label for="post_cat_slug" class="col-md-4 control-label">Category Name</label>
+                                            <div class="col-md-6">
+                                                <input id="post_cat_slug" type="text" class="form-control" name="post_cat_slug" value="{{$row->post_cat_slug}}">
+                                                @if ($errors->has('post_cat_slug'))
+                                                    <span class="help-block">
+                                                <strong>{{ $errors->first('post_cat_slug') }}</strong>
+                                            </span>
+                                                @endif
+                                            </div>
+                                        </div>
                                 <div class="form-group{{ $errors->has('post_cat_desc') ? ' has-error' : '' }}">
                                     <label for="desciption" class="col-md-4 control-label">Description</label>
                                     <div class="col-md-6">

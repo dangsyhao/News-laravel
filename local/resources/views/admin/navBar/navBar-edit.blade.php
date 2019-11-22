@@ -7,8 +7,8 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            @if(isset($Nav_bar))
-                            <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.navBar-edit',['id'=>$Nav_bar->id]) }}">
+                            @if(isset($current_menu))
+                            <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.navBar-edit',['id'=>$current_menu->id]) }}">
                             {{ csrf_field() }}
 
                                 <div class="form-group{{ $errors->has('menu_cate') ? ' has-error' : '' }}">
@@ -17,7 +17,7 @@
                                         <select id="menu_cate"  name="menu_cat" class="form-control" autofocus required>
                                             <option >-- Menus Register --</option>
                                             @foreach($Menu_cate as $value)
-                                                <option value="{{$value->id}}" @if($value->id == $Nav_bar->menu_cat){{ 'selected' }} @endif>
+                                                <option value="{{$value->id}}" @if($value->id == $current_menu->menu_cat){{ 'selected' }} @endif>
                                                     {{$value->name}}
                                                 </option>
                                             @endforeach
@@ -32,7 +32,7 @@
                                 <div class="form-group{{ $errors->has('menu_name') ? ' has-error' : '' }}">
                                     <label for="menu_name" class="col-md-4 control-label">Menu Name</label>
                                     <div class="col-md-6">
-                                        <input id="menu_name" type="text" class="form-control" name="menu_name" value="{{ $Nav_bar->menu_name }}" autofocus required>
+                                        <input id="menu_name" type="text" class="form-control" name="menu_name" value="{{ $current_menu->menu_name }}" autofocus required>
                                         @if ($errors->has('menu_name'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('menu_name') }}</strong>
@@ -56,8 +56,8 @@
                                             <select id="field_post_category_id_select_tag"  name="post_cat_id" class="form-control" autofocus disabled>
                                                 <option >-- Categories Choose --</option>
                                                     @foreach($Post_cate as $value)
-                                                        <option value="{{$value->id}}" @if(isset($Nav_bar->post_cat_id) && $value->id == $Nav_bar->post_cat_id){{ 'selected' }} @endif>
-                                                            {{$value->value}}
+                                                        <option value="{{$value->id}}" @if(isset($current_menu->post_cat_id) && $value->id == $current_menu->post_cat_id){{ 'selected' }} @endif>
+                                                            {{$value->post_cat_name}}
                                                         </option>
                                                     @endforeach
                                             </select>
@@ -71,7 +71,7 @@
                                     <div class="form-group{{ $errors->has('link') ? ' has-error' : '' }}" id="field_link" style="display: none">
                                         <label for="link" class="col-md-4 control-label">Link</label>
                                         <div class="col-md-6">
-                                            <input id="link" type="text" class="form-control" name="link" value="{{ $Nav_bar->link }}" autofocus disabled>
+                                            <input id="link" type="text" class="form-control" name="link" value="{{ $current_menu->link }}" autofocus disabled>
                                             @if ($errors->has('link'))
                                                 <span class="help-block">
                                                 <strong>{{ $errors->first('link') }}</strong>
@@ -86,7 +86,7 @@
                                         <select id="order"  name="order" class="form-control" autofocus required>
                                             <option >-- Order Option --</option>
                                             @foreach($orders as $value)
-                                                <option value="{{$value->order}}" @if($value->order == $Nav_bar->order){{ 'selected' }} @endif>
+                                                <option value="{{$value->order}}" @if($value->order == $current_menu->order){{ 'selected' }} @endif>
                                                     {{$value->order}}
                                                 </option>
                                             @endforeach

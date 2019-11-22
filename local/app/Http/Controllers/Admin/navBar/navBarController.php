@@ -17,11 +17,6 @@ class navBarController extends Controller
         //
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function getNavBar(Request $request )
     {
         $Nav_bar = NavBar::with('getMenuCategoryTable')->orderBy('order','asc')->paginate('10');
@@ -72,9 +67,9 @@ class navBarController extends Controller
             $Menus->page_link = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
             $Menus->link = '';
         }
-
-        $order = $Menus->select('order')->get();
-        $Menus->order = !empty($order[0]->order) ? max($order->toArray())['order'] + 1 : 1;
+        //set order
+        $order = $Menus->select('order')->where('menu_cat',$request->menu_cat)->get();
+        $Menus->order = $order->pluck('order')->count() > 0 ? max($order->toArray())['order'] + 1 : 1;
         $Menus->save();
 
         return redirect()->route('admin.navBar-getNavBar');
@@ -82,12 +77,12 @@ class navBarController extends Controller
 
     public function getEdit($id)
     {
-        $Nav_bar=NavBar::with(['getPostCategoryTable','getMenuCategoryTable'])
-                        ->where('id','=',$id)->paginate('12');
-        $orders= NavBar::select('order')->orderBy('order','asc')->get();
+        $Menus= new NavBar;
+        $current_menu = $Menus->find($id);
+        $orders= $Menus->select('order')->where('menu_cat',$current_menu->menu_cat)->orderBy('order','asc')->get();
         $Post_cate = Post_Category::select('id','post_cat_name')->get();
         $Menu_cate = Menu_category::select('id','name')->get();
-        return view('admin.navBar.navBar-edit',['Nav_bar'=>$Nav_bar[0],'Post_cate'=>$Post_cate,'Menu_cate'=>$Menu_cate,'orders'=>$orders]);
+        return view('admin.navBar.navBar-edit',['current_menu'=>$current_menu,'Post_cate'=>$Post_cate,'Menu_cate'=>$Menu_cate,'orders'=>$orders]);
     }
 
     public function edit(Request $request)
@@ -114,9 +109,9 @@ class navBarController extends Controller
             $Menus->post_cat_id = '';
         }else{
             $Menus->post_cat_id = $request->post_cat_id;
-            $post_cat_name = $Menus->getPostCategoryTable()->select('post_cat_name')->where('id','=',$request->post_cat_id)->get();
-            $post_cat_slug = str_slug($post_cat_name[0]->value);
-            $Menus->page_link = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
+            $post_cat_name = $Menus->getPostCategoryTable()->select('post_cat_name')->where('id','=',$request->post_cat_id)->first();
+            $post_cat_slug = str_slug($post_cat_name->post_cat_name);
+            $Menus->page_link = '/'.$post_cat_slug.'?cat_id='.$request->post_cat_id;
             $Menus->link = '';
         }
 
@@ -128,11 +123,11 @@ class navBarController extends Controller
         }else {
             //Mặc định order value tuân theo dãy số tự nhiên liên tục từ 1 ->n
             if ($request_order > $current_order) {
-                $new_menu = NavBar::where('order','<=',$request_order)->orderBy('order','asc');
+                $new_menu = NavBar::where([['order','<=',$request_order],['menu_cat',$request->menu_cat]])->orderBy('order','asc');
                 $ids =$new_menu->pluck('id')->toArray();
                 for ($i = $request_order; $i > $current_order ; $i--) {
                     $k = $request_order - ($request_order - $i) - 1;
-                    NavBar::where('id','=',$ids[$i-1])->update(['order'=>$k]);
+                    NavBar::where([['id','=',$ids[$i-1]],['menu_cat',$request->menu_cat]])->update(['order'=>$k]);
                 }
                 $Menus->order = $request_order;
             }
@@ -143,7 +138,7 @@ class navBarController extends Controller
                 $m = 0;
                 for ($i = $request_order; $i < $current_order  ; $i++) {
                     $m++;
-                    NavBar::where('id','=',$ids[$i-1])->update(['order'=>$request_order + $m]);
+                    NavBar::where([['id','=',$ids[$i-1]],['menu_cat',$request->menu_cat]])->update(['order'=>$request_order + $m]);
                 }
                 $Menus->order = $request_order;
             }
@@ -155,14 +150,15 @@ class navBarController extends Controller
     public function del($id)
     {
         $menu= NavBar::find($id);
-
+        $menu_cat = '';
         if(!empty($menu)){
+            $menu_cat = $menu->menu_cat;
             $menu->delete();
         }else{
             return redirect()->route('admin.navBar-getNavBar');
         }
         //Thiết lập lại số thứ tự .
-        $Menus = NavBar::select('id','order')->orderBy('order','asc')->get();
+        $Menus = NavBar::select('id','order')->where('menu_cat',$menu_cat)->orderBy('order','asc')->get();
         $order_arr = $Menus->pluck('order')->toArray();
         $ids =  $Menus->pluck('id')->toArray();
         $max_order = count($order_arr) > 0 ? max($order_arr) : 0;
@@ -175,7 +171,7 @@ class navBarController extends Controller
                     continue;
                 }else{
                     if( isset($order_arr[$key])){
-                        NavBar::where('id','=',$ids[$key])->update(['order'=>$i]);
+                        NavBar::where([['id',$ids[$key]],['menu_cat',$menu_cat]])->update(['order'=>$i]);
                         $key ++;
                     }else{
                         break;
@@ -183,6 +179,6 @@ class navBarController extends Controller
                 }
             }
         }
-        return redirect()->route('admin.navBar-getNavBar');
+        return redirect()->back();
     }
 }
