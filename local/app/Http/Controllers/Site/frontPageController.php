@@ -27,7 +27,7 @@ class frontPageController extends Controller
         //Tin moi nhat
         $hot_new_list= $Posts_obj->where('status','>','1')->orderBy('updated_at','desc')->get()->take('10');
         $hot_new_list = $hot_new_list->count() > 0 ? $hot_new_list : '';
-        $post_data = $post_data->put('hot_new_list',$hot_new_list);
+        $post_data = $post_data->put('hot_news_list',$hot_new_list);
 
         //Chinh tri-xa hoi
         $post_cat_id = $Post_cat_slug->filter(function ($value,$key){

@@ -17,7 +17,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 body{
 	padding:0;
 	margin:0;
-	font-family:, Helvetica, sans-serif;
+	font-family: Helvetica, sans-serif;
 	background:url('../images/body-bg.jpg') no-repeat 0px 0px;
 	background-size: 100% 100%;
 }
@@ -158,7 +158,6 @@ a.btn_red {color: #FFF;}
 	background: #FFF;
 }
 
-
 .btn:hover {background: #E4E4E2;}
 .btn_red:hover {background: #9F9F9F;}
 
@@ -173,7 +172,6 @@ a.btn {color:#666; text-align: center; text-decoration: none;}
 .popupHeader .modal_close {position: absolute; right: 0; top:0; padding:10px 15px; background:#E4E4E2; cursor: pointer; color:#aaa; font-size:16px;}
 
 .popupBody {padding:20px;}
-
 
 /* Social Login Form */
 .social_login {}
@@ -516,12 +514,9 @@ hr{
 	width:100%;
 }
 
-
 .page-index-grid:nth-child(3){
 	margin-right:0;
 }
-
-
 
 .page-index-category-grid {
 	width:100%;
@@ -536,39 +531,6 @@ hr{
 	margin-right:0;
 }
 
-
-.left-posts {
-	width:48%;
-	margin-right:4%;
-	float:left;
-}
-.right-posts {
-	width:48%;
-	float:right;
-}
-.main-title-head {
-	border-bottom: 4px solid #cf0000;
-	margin-bottom:0.5em;
-}
-.main-title-head h3 {
-	color:#cf0000;
-	font-size: 1.6em;
-	font-weight: 500;
-	word-spacing:3px;
-	float:left;
-	font-family: 'Arial';
-	padding-bottom: 4px;
-}
-.main-title-head a {
-	float:right;
-	text-decoration:none;
-	color:#fff;
-	background:#cf0000;
-	text-transform:uppercase;
-	font-size:0.7em;
-	padding:3px 8px;
-	  margin-top: 8px;
-}
 .world-news-grid p {
 	color: #202021;
 	font-size: 0.95em;
@@ -1048,10 +1010,6 @@ p.spam {
 	border:none;
 	padding-bottom:0;
 }
-
-
-
-
 
 .save {
 	float:left;
@@ -2418,9 +2376,6 @@ text-align: left;
 		margin: 5px 0 10px 0;
 		font-size: 1em;
 	}
-	.main-content {
-		margin-bottom: 2em;
-	}
 }
 @media screen and (max-width: 768px) {
 	.videos {
@@ -2432,26 +2387,6 @@ text-align: left;
 		width:35%;
 		float:left;
 		margin: 0;
-	}
-	
-	.popular {
-		margin:1em 1em ;
-	}
-
-	.danang-view {
-		margin:1em 1em ;
-	}
-
-	.danang-view img{
-		width: 150px;
-	}
-
-	.hot-news {
-		width:35%;
-		height: 10px;
-		float:right;
-		margin:1em 1em ;
-		overflow:scroll;
 	}
 	.category-hot-news {
 		width:35%;
@@ -2890,9 +2825,6 @@ text-align: left;
 	}
 	.menu-strip ul li a:hover{
 		color:#fff;
-	}
-	.main-content {
-		margin-top: 1em;
 	}
 	.menu-strip ul li:last-child {
 		text-align:center;

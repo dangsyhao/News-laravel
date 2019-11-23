@@ -1,4 +1,3 @@
-<span class="menu"></span>
 <div class="menu-strip">
     <ul>
         @if(isset($Menus['main-menu']))
