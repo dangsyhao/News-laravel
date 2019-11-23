@@ -196,9 +196,9 @@ Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
 
 Route::get('/', 'Site\frontPageController@frontPage')->name('/');
 //Access single Page
-Route::get('/{post_category}/{post_name}/{post_id}','Site\singlePageController@singlePage')->name('site.singlePage');
+Route::get('/{post_category}/{post_name}/post_id={id}','Site\singlePageController@singlePage')->name('site.singlePage');
 //Access Category Page
-Route::get('/{category_name}?cat_id={category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
+Route::get('/{category_name}/cat_id={category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
 
 
 

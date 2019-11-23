@@ -12,7 +12,7 @@ if(! function_exists('getPostLinkById')){
                 $post_cat_slug = str_slug($post->getPostCategoryTable->post_cat_name);
                 $post_name_slug = str_slug($post->title);
                 $post_id = $post->id;
-                $link = url('/'.$post_cat_slug.'/'.$post_name_slug.'?post_id='.$post_id);
+                $link = url('/'.$post_cat_slug.'/'.$post_name_slug.'/post_id='.$post_id);
             }
         }else{
             var_dump('Posts does not exits !');

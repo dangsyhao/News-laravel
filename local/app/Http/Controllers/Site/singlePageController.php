@@ -23,7 +23,6 @@ class singlePageController extends Controller
     PostList::where('id','=',$post_id)->increment('view');                   
 
     return view('site.single',['post_list'=>$post_list]);
-
   }
 
 }

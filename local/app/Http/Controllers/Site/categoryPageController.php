@@ -15,19 +15,10 @@ class categoryPageController extends Controller
   public function categoryPage($category_name,$category_id){
 
     //PostList
-    $post_list=PostList::with('getPostCategoryTable')->select(
-                                                  'id',
-                                                  'title',
-                                                  'image_avatar',
-                                                  'quotes_content',
-                                                  'updated_at',
-                                                  'post_category_id',
-                                                  'view',
-                                                  'status'
-                                                  )->where([
-                                                    ['post_category_id','=',$category_id],
-                                                    ['status','>','1'],
-                                                    ])->get();
+    $post_list=PostList::with('getPostCategoryTable')->where([
+                                                                        ['post_category_id','=',$category_id],
+                                                                        ['status','>','1'],
+                                                                        ])->get();
     
     $collection=collect($post_list);
 
@@ -42,9 +33,9 @@ class categoryPageController extends Controller
       $post_list_link->all();
 
     return view('site.page-archive',['post_list_index'=>$post_list_index,
-                                      'post_list_link'=>$post_list_link,
-                                      'post_list_hot_news'=>$post_list_hot_news,
-                                    ]);
+                                          'post_list_link'=>$post_list_link,
+                                          'post_list_hot_news'=>$post_list_hot_news,
+                                        ]);
 
   }
     
