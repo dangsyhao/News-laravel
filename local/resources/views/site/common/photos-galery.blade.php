@@ -1,49 +1,16 @@
-<div class="photos">
-    <h3>Da Nang - Gallery</h3>
-    <div class="course_demo">
-        <ul id="flexiselDemo">
-            @if(isset($du_lich_gallery))
-            @foreach($du_lich_gallery as $row)
-                <li>
-                    <a  href="{{
-                                route('site.singlePage',[
-                                                        'post_category'=>str_slug($row->getMenuCategoryTable->post_cat_name),
-                                                        'post_name'=>str_slug($row->title),
-                                                        'post_id'=>$row->id
-                                                        ])
-                                }}">
-                        <img src="{{$row->image_avatar}}" alt="" />
-                    </a>
-                </li>
-            @endforeach
-            @endif
-        </ul>
+<div class="block block-post-category block-image-crosel" >
+    <div class="block-header">
+        <h4 class="title">Du Lịch Đà Nẵng</h4>
     </div>
-    <script type="text/javascript">
-        $(window).load(function() {
-            $("#flexiselDemo").flexisel({
-                visibleItems: 4,
-                animationSpeed: 1000,
-                autoPlay: true,
-                autoPlaySpeed: 3000,
-                pauseOnHover: true,
-                enableResponsiveBreakpoints: true,
-                responsiveBreakpoints: {
-                    portrait: {
-                        changePoint:480,
-                        visibleItems: 2
-                    },
-                    landscape: {
-                        changePoint:640,
-                        visibleItems: 2
-                    },
-                    tablet: {
-                        changePoint:768,
-                        visibleItems: 3
-                    }
-                }
-            });
-
-        });
-    </script>
+    <div class="content get-slick-bottom-block">
+        @if(!empty($post_data['chinh_tri']))
+            @foreach($post_data['chinh_tri'] as $key => $item)
+            <div class="image-item">
+                <a href="{{getPostLinkById($Posts,$item->id)}}">
+                    <img  src="{{$item->image_avatar}}" alt="{{$item->title}}" title="{{$item->title}}">
+                </a>
+            </div>
+            @endforeach
+        @endif
+    </div>
 </div>

@@ -25,7 +25,7 @@ class frontPageController extends Controller
         $post_data = $post_data->put('post_index',$post_index);
 
         //Tin moi nhat
-        $hot_new_list= $Posts_obj->where('status','>','1')->orderBy('updated_at','desc')->get()->take('10');
+        $hot_new_list= $Posts_obj->where('status','>','1')->orderBy('updated_at','desc')->get()->take('7');
         $hot_new_list = $hot_new_list->count() > 0 ? $hot_new_list : '';
         $post_data = $post_data->put('hot_news_list',$hot_new_list);
 
@@ -57,13 +57,13 @@ class frontPageController extends Controller
         $post_data = $post_data->put('giao_duc',$giao_duc);
 
         //Quoc Te
-        $post_cat_id = $Post_cat_slug->filter(function ($value,$key){
-            return $value->post_cat_slug = 'quoc-te';
-        });
-        $post_cat_id = ! empty($post_cat_id->pluck('id')->toArray()[0]) ? $post_cat_id->pluck('id')->toArray()[0] : '';
-        $quoc_te= $Posts_obj->where([['status','>','1'],['post_category_id',$post_cat_id]])->orderBy('updated_at','desc')->get()->take(3);
-        $quoc_te = $quoc_te->count() > 0 ? $quoc_te : '';
-        $post_data = $post_data->put('quoc_te',$quoc_te);
+//        $post_cat_id = $Post_cat_slug->filter(function ($value,$key){
+//            return $value->post_cat_slug = 'quoc-te';
+//        });
+//        $post_cat_id = ! empty($post_cat_id->pluck('id')->toArray()[0]) ? $post_cat_id->pluck('id')->toArray()[0] : '';
+//        $quoc_te= $Posts_obj->where([['status','>','1'],['post_category_id',$post_cat_id]])->orderBy('updated_at','desc')->get()->take(3);
+//        $quoc_te = $quoc_te->count() > 0 ? $quoc_te : '';
+//        $post_data = $post_data->put('quoc_te',$quoc_te);
 
         //Van Hoa
         $post_cat_id = $Post_cat_slug->filter(function ($value,$key){
@@ -84,13 +84,15 @@ class frontPageController extends Controller
         $post_data = $post_data->put('y_te',$y_te);
 
         //Phap Luat
-        $post_cat_id = $Post_cat_slug->filter(function ($value,$key){
-            return $value->post_cat_slug === 'phap-luat';
+
+        $post_cat_id_pl = $Post_cat_slug->filter(function ($value,$key){
+            return $value->post_cat_slug == 'phap-luat';
         });
-        $post_cat_id = ! empty($post_cat_id->pluck('id')->toArray()[0]) ? $post_cat_id->pluck('id')->toArray()[0] : '';
-        $phap_luat= $Posts_obj->where([['status','>','1'],['post_category_id',$post_cat_id]])->orderBy('updated_at','desc')->get()->take(3);
+        $post_cat_id_pl = ! empty($post_cat_id_pl->pluck('id')->toArray()[0]) ? $post_cat_id_pl->pluck('id')->toArray()[0] : '';
+        $phap_luat= $Posts_obj->where([['status','>','1'],['post_category_id',$post_cat_id_pl]])->orderBy('updated_at','desc')->get()->take(3);
         $phap_luat = $phap_luat->count() > 0 ? $phap_luat : '';
         $post_data = $post_data->put('phap_luat',$phap_luat);
+
 
         //Ban Doc
         $post_cat_id = $Post_cat_slug->filter(function ($value,$key){

@@ -1,6 +1,6 @@
-<div class="block block-most-view-box">
+<div class="block block-side-bar block-most-view-box">
     <div class="block-header">
-        <h3>Xem Nhiều Nhất</h3>
+        <h4>Xem Nhiều Nhất</h4>
     </div>
     <div class="content">
             <ul class="list-group">

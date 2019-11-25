@@ -1,22 +1,28 @@
 /*#######################-General-###################################*/
 
-/*main-content*/
+/*#########-main-content*#########/
 .main-content{
-    margin: 4rem;
+    margin: 2rem;
     position:relative;
 }
 /*feature-content*/
 .feature-content-right{
+    display: inline-block;
     width: 25%;
     float: right;
+    border-left: silver dashed 1px;
 }
 .feature-content-left{
+    display: inline-block;
     width: 75%;
     float: left;
-    padding-right: 2rem;
+    padding-right: 1rem;
 }
 /*Section*/
+
 .section{
+    display: block;
+    position: relative;
 }
 
 .section-post-categories{
@@ -25,15 +31,24 @@
 
 /***************-Block-************/
 .block{
-    position: relative;
+    position: inherit;
     display: block;
+    overflow:hidden;
+}
+
+.block a:hover{
+    color:inherit;
+    text-decoration-line: unset;
 }
 
 .block img{
      width: 100%;
-     height: 100%;
+    height: auto;
+    max-height: 360px;
 }
-
+.block ul.list-group{
+    margin: unset!important;
+}
 .block .block-header{
     margin-bottom: 10px;
     border-bottom-style: solid;
@@ -41,28 +56,158 @@
     border-bottom-color: #cf0000;
     color: #cf0000;
 }
+.block .content .title{
+    font-weight: bold;
+}
 
 /*Block- Index*/
 .block-post-index{
     float: left;
     width: 70%;
 }
-
-.block-lates-box div.content{
-    margin-top: 4rem;
+.block-post-index .block-header .title{
+    font-weight: normal;
 }
 
+.block-post-index .content .body{
+    margin-top: 1rem;
+}
+.block-post-index .content .body p {
+    margin-top: 1rem;
+}
+
+.block-post-index .content .body .title {
+    color: #cf0000;
+}
+
+/*Latest-Box*/
 .block-lates-box{
     float: right;
     width: 30%;
+    padding-bottom: 1rem;
 }
 
-/*Posts-grid*/
+.block-lates-box div.content{
+    margin-left: 2rem;
+    margin-top: 4rem;
+    font-weight: bold;
+    max-height: 490px;
+    overflow-y: auto;
+}
+
+.block-lates-box .content a:hover{
+    text-decoration-line: unset;
+    color:#cf0000 ;
+}
+
+.block-lates-box ul{
+    width: 100%;
+    height: 100%;
+}
+/*Block-Post-Category*/
+.block-post-category{
+    margin-bottom: 1.5rem;
+}
+.block-post-category .block-header{
+    border-bottom-width: thin;
+}
+.block-post-category img{
+    max-height: 250px;
+}
+.block-post-category .block-header .title{
+   font-weight: bold;
+}
+.block-post-category .articles-latest-item a:hover{
+    text-decoration-line: underline;
+}
+.block-post-category .content .body{
+    margin-top: 1rem;
+}
+.block-post-category .content .body .text{
+    margin: 1rem 0 0.7rem 0;
+}
+
+/*---------Posts-grid----------*/
 .posts-grid-left{
     width: 50%;
     float: left;
+    padding-right: 1.2rem;
 }
 .posts-grid-right{
     width: 50%;
     float: right;
+    padding-left: 1.2rem;
+}
+
+/*Block-Post-Category -> Block Right*/
+.posts-grid-right .block-right .articles-latest{
+    margin-bottom: 0.9rem;
+}
+
+.posts-grid-right .block-right .articles-latest .articles-latest-item a{
+    margin-bottom: unset;
+}
+
+.posts-grid-right .block-right .articles-latest .post-title h5{
+    font-weight: bold;
+}
+.posts-grid-right .block-right .articles-latest .body{
+    display: table;
+}
+.posts-grid-right .block-right .articles-latest .body img{
+    display: inline-block;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+.posts-grid-right .block-right .articles-latest .body .content-right{
+    display: inline-block;
+    float: right;
+    width: 50%;
+    height: 100%;
+    margin-top: unset;
+    padding-left: 0.5rem;
+}
+.posts-grid-right .block-right .articles-latest .body .content-right span.text{
+    color: inherit;
+}
+
+/*Block-Carosel-Bottom*/
+.block-image-crosel{
+    display: inline;
+}
+.block-image-crosel .image-item{
+    display: inline-block;
+    border-color: black;
+    border-width: thick;
+    border-style: solid;
+    margin-right: 0.5rem;
+}
+.block-image-crosel .image-item img{
+    width: 200px;
+    height: 150px;
+}
+
+/*#########-Side-Bar-#########*/
+.block-side-bar{
+    margin-bottom: 1rem;
+    width: 100%;
+}
+.block-side-bar .block-header{
+    margin-bottom: 1rem;
+    border-bottom-width: thin;
+}
+/*Block -Adv*/
+.block-side-bar-adv .block-header{
+    border-bottom-color: silver;
+    border-bottom-width: thick;
+}
+.block-side-bar-adv .block-header span{
+    color: silver;
+    display: inline;
+}
+.block-side-bar-adv .content .adv-item{
+    border: silver solid 0.5px;
+    margin-bottom: 1rem;
+    padding: 2px;
 }

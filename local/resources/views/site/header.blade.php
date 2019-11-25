@@ -8,6 +8,7 @@
     <link href="{{asset('public/site/css/bootstrap.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('public/site/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('public/site/css/site-custom.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('public/site/vendors/slick/slick/slick.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('public/site/css/popuo-box.css')}}" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="{{asset('public/site/css/flexslider.css')}}" type="text/css" media="screen" />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />

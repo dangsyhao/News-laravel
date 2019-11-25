@@ -1,6 +1,6 @@
-<div class="block" >
+<div class="block block-side-bar" >
     <div class="block-header">
-        <h3>Du Lịch Đà Nẵng</h3>
+        <h4>Du Lịch Đà Nẵng</h4>
     </div>
     @if(isset($du_lich))
     @foreach($du_lich as $item)
