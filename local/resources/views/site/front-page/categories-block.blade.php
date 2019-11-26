@@ -17,8 +17,6 @@
         <!--- Include !-->
         @include('site.front-page.sub._van-hoa')
         <!--- Include !-->
-        @include('site.front-page.sub._ban-doc')
-        <!--- Include !-->
         @include('site.front-page.sub._the-thao')
     </div>
     <div class="clearfix"></div>

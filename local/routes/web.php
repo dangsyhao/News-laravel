@@ -198,7 +198,7 @@ Route::get('/', 'Site\frontPageController@frontPage')->name('/');
 //Access single Page
 Route::get('/{post_category}/{post_name}/post_id={id}','Site\singlePageController@singlePage')->name('site.singlePage');
 //Access Category Page
-Route::get('/{category_name}/cat_id={category_id}', 'Site\categoryPageController@categoryPage')->name('site.categoryPage');
+Route::get('/{category_name}/cat_id={category_id}', 'Site\archivePageController@categoryPage')->name('site.categoryPage');
 
 
 

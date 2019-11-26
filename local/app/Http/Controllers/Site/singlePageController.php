@@ -8,21 +8,17 @@ use App\PostList;
 
 class singlePageController extends Controller
 {
-   
-  /** Single Page*/ 
+
 
   public function singlePage($post_category,$post_name,$post_id){
 
-    
-    $post_list=PostList::with('getAuthorByUsersTable','getPostCategoryTable')
-                        ->where([
-                          ['id','=',$post_id],['status','>','1'],
-                          ])->get();
+    $post_data=PostList::with('getAuthorByUsersTable','getPostCategoryTable')
+                        ->where('status','>','1')->find($post_id);
 
     // Auto +1 to Single Page
     PostList::where('id','=',$post_id)->increment('view');                   
 
-    return view('site.single',['post_list'=>$post_list]);
+    return view('site.single',['post_data'=>$post_data]);
   }
 
 }

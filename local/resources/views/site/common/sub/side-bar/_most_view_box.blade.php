@@ -1,4 +1,4 @@
-<div class="block block-side-bar block-most-view-box">
+<div class="block block-side-bar block-most-view-box" id="block-most-view-box">
     <div class="block-header">
         <h4>Xem Nhiều Nhất</h4>
     </div>

@@ -30,7 +30,7 @@ return array(
     'App\\Http\\Controllers\\author\\authorPostController' => $baseDir . '/app/Http/Controllers/Author/authorPostController.php',
     'App\\Http\\Controllers\\dashBoardController' => $baseDir . '/app/Http/Controllers/dashBoardController.php',
     'App\\Http\\Controllers\\fileManagerController' => $baseDir . '/app/Http/Controllers/fileManagerController.php',
-    'App\\Http\\Controllers\\site\\categoryPageController' => $baseDir . '/app/Http/Controllers/Site/categoryPageController.php',
+    'App\\Http\\Controllers\\site\\archivePageController' => $baseDir . '/app/Http/Controllers/Site/categoryPageController.php',
     'App\\Http\\Controllers\\site\\frontPageController' => $baseDir . '/app/Http/Controllers/Site/frontPageController.php',
     'App\\Http\\Controllers\\site\\singlePageController' => $baseDir . '/app/Http/Controllers/Site/singlePageController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

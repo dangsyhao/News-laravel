@@ -64,7 +64,7 @@ class navBarController extends Controller
             $Menus->post_cat_id = $request->post_cat_id;
             $post_cat_name = $Menus->getPostCategoryTable()->select('post_cat_name')->where('id','=',$request->post_cat_id)->get();
             $post_cat_slug = str_slug($post_cat_name[0]->value);
-            $Menus->page_link = '/'.$post_cat_slug.'/?cat_id='.$request->post_cat_id;
+            $Menus->page_link = '/'.$post_cat_slug.'/cat_id='.$request->post_cat_id;
             $Menus->link = '';
         }
         //set order
@@ -111,7 +111,7 @@ class navBarController extends Controller
             $Menus->post_cat_id = $request->post_cat_id;
             $post_cat_name = $Menus->getPostCategoryTable()->select('post_cat_name')->where('id','=',$request->post_cat_id)->first();
             $post_cat_slug = str_slug($post_cat_name->post_cat_name);
-            $Menus->page_link = '/'.$post_cat_slug.'?cat_id='.$request->post_cat_id;
+            $Menus->page_link = '/'.$post_cat_slug.'/cat_id='.$request->post_cat_id;
             $Menus->link = '';
         }
 

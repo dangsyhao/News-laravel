@@ -1,22 +1,29 @@
 /*#######################-General-###################################*/
-
-/*#########-main-content*#########/
+html,body{
+    font-family: Arial,Helvetica, sans-serif;
+}
+/*#########-main-content*#########*/
 .main-content{
     margin: 2rem;
     position:relative;
+}
+
+/*Main-Menu*/
+.menu-strip{
+    font-family: inherit;
 }
 /*feature-content*/
 .feature-content-right{
     display: inline-block;
     width: 25%;
     float: right;
-    border-left: silver dashed 1px;
 }
 .feature-content-left{
     display: inline-block;
     width: 75%;
     float: left;
-    padding-right: 1rem;
+    padding-right: 0.5rem;
+    border-right: silver dashed 1px;
 }
 /*Section*/
 
@@ -25,8 +32,16 @@
     position: relative;
 }
 
+.section-index{
+    padding-bottom: 1.5rem;
+}
 .section-post-categories{
-    margin-top: 2rem;
+    padding-top: 1.3rem;
+    border-top: silver dashed thin;
+}
+.section-posts-block{
+    padding-top: 1.3rem;
+    border-top: silver dashed thin;
 }
 
 /***************-Block-************/
@@ -60,10 +75,19 @@
     font-weight: bold;
 }
 
+.block .articles-latest-item{
+    display: block;
+    margin-bottom: 2px;
+}
+
 /*Block- Index*/
 .block-post-index{
     float: left;
     width: 70%;
+}
+.block-post-index .block-header{
+    font-weight: normal;
+    border-bottom-width: thin;
 }
 .block-post-index .block-header .title{
     font-weight: normal;
@@ -84,7 +108,6 @@
 .block-lates-box{
     float: right;
     width: 30%;
-    padding-bottom: 1rem;
 }
 
 .block-lates-box div.content{
@@ -127,11 +150,17 @@
     margin: 1rem 0 0.7rem 0;
 }
 
+/*Block -> Dulich DN*/
+#block-du-lich-dn{
+    margin: 1rem 0rem 0rem 0rem;
+}
 /*---------Posts-grid----------*/
 .posts-grid-left{
     width: 50%;
     float: left;
     padding-right: 1.2rem;
+    border-right: silver dashed thin;
+
 }
 .posts-grid-right{
     width: 50%;
@@ -174,40 +203,135 @@
 
 /*Block-Carosel-Bottom*/
 .block-image-crosel{
-    display: inline;
+    position: relative;
+    display: block;
 }
 .block-image-crosel .image-item{
     display: inline-block;
-    border-color: black;
-    border-width: thick;
-    border-style: solid;
-    margin-right: 0.5rem;
 }
-.block-image-crosel .image-item img{
-    width: 200px;
-    height: 150px;
+.block-image-crosel img{
+    width: auto;
+    height: 100%;
 }
 
-/*#########-Side-Bar-#########*/
-.block-side-bar{
-    margin-bottom: 1rem;
+#block-du-lich-dn .image-item{
+    width: auto;
+    height: 200px;
+    border-color: black;
+    border-width: thin;
+    border-style: solid;
+    margin: 0 0.5rem 0.5rem 0;
+}
+
+/*############################################-Side-Bar-#########################*/
+.side-bar{
+    padding-left: 0.5rem!important;
+}
+.side-bar .block-side-bar{
+    margin-bottom: 2rem;
     width: 100%;
 }
-.block-side-bar .block-header{
+.side-bar .block-side-bar .block-header{
+    font-weight: bold;
     margin-bottom: 1rem;
     border-bottom-width: thin;
+}
+
+.side-bar .block-side-bar .block-header h4{
+    font-weight: bold;
 }
 /*Block -Adv*/
 .block-side-bar-adv .block-header{
     border-bottom-color: silver;
-    border-bottom-width: thick;
+    border-bottom-width: thick!important;
 }
 .block-side-bar-adv .block-header span{
     color: silver;
     display: inline;
+    font-weight: normal;
 }
 .block-side-bar-adv .content .adv-item{
     border: silver solid 0.5px;
     margin-bottom: 1rem;
     padding: 2px;
+}
+
+/*Block -> Bạn Đọc*/
+#bock-side-bar-ban-doc .image-item img{
+    width: 100%;
+    height: 100%;
+}
+#bock-side-bar-ban-doc .image-item{
+    width: auto;
+    height: 220px;
+    border-color: silver;
+    border-width: thin;
+    border-style: solid;
+    padding: 0.2rem;
+}
+
+/*Block ->Most View*/
+#block-most-view-box a:hover{
+    text-decoration-line: underline;
+}
+/*#############################-Page Archive-#########################*/
+.block-posts-category .articles-items{
+    display: table;
+    margin-bottom: 1rem;
+    border-bottom: silver dashed thin;
+    padding-bottom: 0.5rem;
+}
+.block-posts-category .articles-items img{
+    display: block;
+    float: left;
+    width: 30%;
+    max-height: 150px;
+}
+.block-posts-category .articles-items .content{
+    width: 70%;
+    display: block;
+    float: right;
+    padding-left: 0.5rem;
+}
+.block-posts-category .articles-items .content .text{
+    margin-top: 0.5rem;
+}
+/*#############################-Single Page-#########################*/
+article{
+    padding:1rem 2rem 0 3rem;
+    font-family: inherit;
+    line-height: 1.43;
+}
+
+article ul{
+    list-style-type: none;
+}
+article h2.entry-title{
+    font-weight: bold;
+    color: inherit;
+}
+article .info{
+   margin-top: 1rem;
+    font-size: 11pt;
+    font-family: inherit;
+}
+article .entry-content{
+    display: block;
+    font-size:13pt;
+    color: inherit;
+    word-wrap: break-word;
+    text-align: justify;
+    margin-top: 3rem;
+}
+article footer{
+    display: block;
+    margin-top: 1rem;
+}
+article footer .author{
+    display: block;
+    float: right;
+}
+article footer .fb-comments{
+    display: block;
+    margin-top: 1rem;
 }

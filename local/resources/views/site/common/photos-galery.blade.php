@@ -1,4 +1,4 @@
-<div class="block block-post-category block-image-crosel" >
+<div class="block block-post-category block-image-crosel" id="block-du-lich-dn">
     <div class="block-header">
         <h4 class="title">Du Lịch Đà Nẵng</h4>
     </div>
