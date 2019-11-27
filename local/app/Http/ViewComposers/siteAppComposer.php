@@ -6,6 +6,7 @@ namespace App\Http\ViewComposers;
 use App\Advertise;
 use App\Menu_category;
 use App\NavBar;
+use App\Post_Category;
 use App\PostList;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
@@ -43,8 +44,11 @@ class siteAppComposer
 
         //Posts OBJ
         $Posts_obj = new PostList;
+        $Posts_cat = new Post_Category;
+        $Post_cat_slug = $Posts_cat->select('id','post_cat_slug')->get();
+        $post_data_sidebar = collect();
 
-        //get Posts object data for all site template .
+        //GLOBAL $Posts variable.
         $Posts = $Posts_obj->with(['getPostCategoryTable','getAuthorByUsersTable'])->get();
         if($Posts->count() > 0){
             $view->with('Posts',$Posts);
@@ -53,19 +57,29 @@ class siteAppComposer
         //Most View
         $most_view= $Posts_obj->where('status','>','1')->orderBy('view','desc')->get();
         if($most_view->count() > 0){
-            $view->with('most_view',$most_view);
+            $post_data_sidebar = $post_data_sidebar->put('most_view',$most_view);
         }
-        //Du lich
-        $du_lich= $Posts_obj->where([['status','>','1'],['post_category_id','=','13']])->orderBy('updated_at','desc')->get();
-        if($du_lich->count() > 0){
-            $du_lich_take = $du_lich->take(-3);
-            view('du_lich',$du_lich_take);
-        }
-        //Du lich Gallery
-        if($du_lich->count() > 0){
-            $du_lich_take = $du_lich->take(-5);
-            view('du_lich_gallery',$du_lich_take);
-        }
+
+        //Block Du Lich Da Nang
+        $post_cat_id = $Post_cat_slug->filter(function ($value,$key){
+            return $value->post_cat_slug === 'du-lich-da-nang';
+        });
+        $post_cat_id = ! empty($post_cat_id->pluck('id')->toArray()[0]) ? $post_cat_id->pluck('id')->toArray()[0] : '';
+        $dulich= $Posts_obj->where([['status','>','1'],['post_category_id',$post_cat_id],['status','<','3']])->orderBy('updated_at','desc')->get()->take(10);
+        $dulich = $dulich->count() > 0 ? $dulich : '';
+        $post_data_sidebar = $post_data_sidebar->put('du_lich',$dulich);
+
+        //Block Ban Doc
+        $post_cat_id = $Post_cat_slug->filter(function ($value,$key){
+            return $value->post_cat_slug === 'ban-doc';
+        });
+        $post_cat_id = ! empty($post_cat_id->pluck('id')->toArray()[0]) ? $post_cat_id->pluck('id')->toArray()[0] : '';
+        $bandoc= $Posts_obj->where([['status','>','1'],['post_category_id',$post_cat_id],['status','<','3']])->orderBy('updated_at','desc')->get()->take(10);
+        $bandoc = $bandoc->count() > 0 ? $bandoc : '';
+        $post_data_sidebar = $post_data_sidebar->put('ban_doc',$bandoc);
+
+        //
+        $view->with('post_data_sidebar',$post_data_sidebar);
 
     }
 

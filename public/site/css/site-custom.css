@@ -2,16 +2,20 @@
 html,body{
     font-family: Arial,Helvetica, sans-serif;
 }
+
+/*###-BreadCrum-####*/
+.bread-crumb{
+    display: block;
+    margin-top: 1rem;
+}
+.bread-crumb .breadcrumb{
+    width: 30%;
+}
 /*#########-main-content*#########*/
 .main-content{
-    margin: 2rem;
     position:relative;
 }
 
-/*Main-Menu*/
-.menu-strip{
-    font-family: inherit;
-}
 /*feature-content*/
 .feature-content-right{
     display: inline-block;
@@ -26,7 +30,6 @@ html,body{
     border-right: silver dashed 1px;
 }
 /*Section*/
-
 .section{
     display: block;
     position: relative;
@@ -42,6 +45,53 @@ html,body{
 .section-posts-block{
     padding-top: 1.3rem;
     border-top: silver dashed thin;
+}
+
+/*********CAROSEL-SETING*******/
+.block-image-crosel{
+    position: relative;
+    display: block;
+}
+.block-image-crosel .image-item{
+    display: block;
+    margin-right: 1rem;
+}
+.block-image-crosel .image-item .image-carosel {
+    opacity: 1;
+    display: block;
+    float: right;
+    width: 100%;
+    height: 100%;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+.block-image-crosel .image-item .middle {
+    position: relative;
+    display: block;
+    left: 50%;
+    top:50%;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+.block-image-crosel .image-item .text a {
+    color: white;
+}
+.block-image-crosel .image-item .text {
+    display: block;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 2rem;
+    background-color: #4CAF50;
+}
+.block-image-crosel .image-item:hover .image-carosel {
+    opacity: 0.3;
+}
+.block-image-crosel .image-item:hover .middle {
+    opacity: 1;
 }
 
 /***************-Block-************/
@@ -150,10 +200,6 @@ html,body{
     margin: 1rem 0 0.7rem 0;
 }
 
-/*Block -> Dulich DN*/
-#block-du-lich-dn{
-    margin: 1rem 0rem 0rem 0rem;
-}
 /*---------Posts-grid----------*/
 .posts-grid-left{
     width: 50%;
@@ -201,26 +247,16 @@ html,body{
     color: inherit;
 }
 
-/*Block-Carosel-Bottom*/
-.block-image-crosel{
-    position: relative;
-    display: block;
+/*Block ->DU-LICH*/
+#block-du-lich-dn{
+    margin: 2rem 0rem 0rem 0rem;
 }
-.block-image-crosel .image-item{
-    display: inline-block;
+#block-du-lich-dn{
+    border-bottom: silver solid thick;
+    padding-bottom: 1rem;
 }
-.block-image-crosel img{
-    width: auto;
-    height: 100%;
-}
-
-#block-du-lich-dn .image-item{
-    width: auto;
-    height: 200px;
-    border-color: black;
-    border-width: thin;
-    border-style: solid;
-    margin: 0 0.5rem 0.5rem 0;
+#block-du-lich-dn .slick-slide{
+    max-height: 162px;
 }
 
 /*############################################-Side-Bar-#########################*/
@@ -257,19 +293,13 @@ html,body{
 }
 
 /*Block -> Bạn Đọc*/
-#bock-side-bar-ban-doc .image-item img{
-    width: 100%;
-    height: 100%;
+#block-side-bar-ban-doc{
+    border-bottom: silver solid thick;
+    padding-bottom: 1rem
 }
-#bock-side-bar-ban-doc .image-item{
-    width: auto;
-    height: 220px;
-    border-color: silver;
-    border-width: thin;
-    border-style: solid;
-    padding: 0.2rem;
+#block-side-bar-ban-doc .slick-slide{
+    max-height: 162px;
 }
-
 /*Block ->Most View*/
 #block-most-view-box a:hover{
     text-decoration-line: underline;

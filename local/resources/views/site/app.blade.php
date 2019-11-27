@@ -1,9 +1,9 @@
 @include('site.header')
 <!-- header-section-starts -->
-<div class="container">
 	<div class="news-paper">
 		@include('site.common.header')
 		@include('site.common.main-menu')
+		@include('site.common.bread_crum')
 		<div class="main-content">
 				<div class="feature-content-left">
 					<!-- Content Master -->
@@ -20,5 +20,4 @@
 		</div>
 		@include('site.common.footer')
 	</div>
-</div>
 @include('site.footer')

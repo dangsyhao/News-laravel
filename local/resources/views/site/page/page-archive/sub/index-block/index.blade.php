@@ -1,6 +1,6 @@
 <div class="block block-post-index" >
     <div class="block-header">
-        <h4 class="title">Category Name</h4>
+        <h4 class="title">{{$Post_cat->post_cat_name}}</h4>
     </div>
     <div class="content">
         @if( ! empty($post_data['posts_cat_index']))

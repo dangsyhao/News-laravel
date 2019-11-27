@@ -4,8 +4,8 @@
     </div>
     <div class="content">
             <ul class="list-group">
-                @if(! empty($most_view))
-                    @foreach($most_view as $row)
+                @if(! empty($post_data_sidebar['most_view']))
+                    @foreach($post_data_sidebar['most_view'] as $row)
                         <li class="list-group-item">
                             <a href="{{getPostLinkById($Posts,$row->id)}}">{{$row->title}}</a>
                         </li>

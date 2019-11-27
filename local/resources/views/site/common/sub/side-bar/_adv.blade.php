@@ -8,7 +8,7 @@
     @foreach($advertise as $row)
             <div class="adv-item">
                 <a  href="{{$row->link}}" class="title">
-                    <img src="{{$row->image_url}}" alt="" />
+                    <img src="{{$row->image_url}}" alt="advertise not image" title="{{'click to website '.$row->customer}}" />
                 </a>
             </div>
 

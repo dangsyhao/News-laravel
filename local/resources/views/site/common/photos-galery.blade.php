@@ -3,11 +3,14 @@
         <h4 class="title">Du Lịch Đà Nẵng</h4>
     </div>
     <div class="content get-slick-bottom-block">
-        @if(!empty($post_data['chinh_tri']))
-            @foreach($post_data['chinh_tri'] as $key => $item)
+        @if(!empty($post_data_sidebar['du_lich']))
+            @foreach($post_data_sidebar['du_lich'] as $key => $item)
             <div class="image-item">
                 <a href="{{getPostLinkById($Posts,$item->id)}}">
-                    <img  src="{{$item->image_avatar}}" alt="{{$item->title}}" title="{{$item->title}}">
+                    <img  src="{{$item->image_avatar}}" class="image-carosel" alt="not image availble">
+                    <div class="middle">
+                        <div class="text">{{$item->title}}</div>
+                    </div>
                 </a>
             </div>
             @endforeach

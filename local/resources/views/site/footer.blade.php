@@ -15,6 +15,7 @@
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 arrows:false,
+                variableWidth: false,
                 responsive: [
                     {
                         breakpoint: 1024,
@@ -28,8 +29,8 @@
                     {
                         breakpoint: 600,
                         settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2
+                            slidesToShow: 1,
+                            slidesToScroll: 1
                         }
                     },
                     {
@@ -45,10 +46,10 @@
             $('.get-slick-bottom-block').slick({
                     dots: false,
                     infinite: true,
-                    autoplay:false,
+                    autoplay:true,
                     speed: 1000,
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
                     arrows:false,
                     responsive: [
                             {
