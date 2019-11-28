@@ -19,13 +19,16 @@ class navBarController extends Controller
 
     public function getNavBar(Request $request )
     {
-        $Nav_bar = NavBar::with('getMenuCategoryTable')->orderBy('order','asc')->paginate('10');
-        $Menu_cat = Menu_category::select('id','name')->get();
 
-        if(isset($request->menu_cat_id)){
-            $Nav_bar = $Nav_bar->where('menu_cat','=',$request->menu_cat_id);
+        $Nav_bar_obj = new NavBar;
+        $Menu_cat = Menu_category::select('id','name')->get();
+        if(! empty($request->menu_cat_id)){
+            $Nav_bar = $Nav_bar_obj->with('getMenuCategoryTable')
+                                    ->where('menu_cat','=',$request->menu_cat_id)
+                                    ->orderBy('order','asc')->get();
         }else{
-            $Nav_bar = $Nav_bar->groupBy('menu_cat')->first();
+            $Nav_bar = $Nav_bar_obj->with('getMenuCategoryTable')->orderBy('order','asc')->get();
+            $Nav_bar= $Nav_bar->first()[0];
         }
         return view('admin.navBar.navBar-getNavBar',['Nav_bar'=>$Nav_bar,'Menu_cat'=>$Menu_cat]);
     }
@@ -63,7 +66,7 @@ class navBarController extends Controller
         }else{
             $Menus->post_cat_id = $request->post_cat_id;
             $post_cat_name = $Menus->getPostCategoryTable()->select('post_cat_name')->where('id','=',$request->post_cat_id)->get();
-            $post_cat_slug = str_slug($post_cat_name[0]->value);
+            $post_cat_slug = str_slug($post_cat_name[0]->post_cat_name);
             $Menus->page_link = '/'.$post_cat_slug.'?cat_id='.$request->post_cat_id;
             $Menus->link = '';
         }

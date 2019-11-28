@@ -27,6 +27,7 @@ body a{
 	-moz-transition:0.5s all;
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
+	color: inherit;
 }
 input[type="button"],input[type="submit"]{
 	transition:0.5s all;
@@ -237,17 +238,22 @@ a.btn {color:#666; text-align: center; text-decoration: none;}
 .menu-strip {
 	display: block;
 	background:url('../images/body-bg.jpg') no-repeat 0px 0px;
-	background-size: 100% 100%;
 	font-size: 12pt;
 	font-weight: bold;
-	margin-top: 2rem;
-	padding: 2px;
+	margin: 1.6rem 0 0 0;
+	padding: 0 1rem;
+	justify-content: center;
+	overflow: hidden;
 }
 .menu-strip ul li {
-	display:inline-block;
-	padding: 6px ;
-	border-right: whitesmoke solid thin;
+	display:block;
+	float: left;
+	min-width: 5rem;
+	text-align: center;
+	margin: 0;
+	padding: 0.85rem 0.8rem;
 }
+
 .menu-strip ul li a {
 	color: #fff;
 	text-decoration-line: unset;
@@ -910,9 +916,7 @@ img.blog {
 .posts,.recent-comments,.archievs,.categories {
 	margin-bottom:3em;
 }
-span {
-	color: #cf0000;
-}
+
 .l_g_r {
 	margin-left: 3em;
 }

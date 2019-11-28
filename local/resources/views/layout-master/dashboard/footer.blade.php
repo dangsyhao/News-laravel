@@ -28,20 +28,20 @@
             </div>
         </div>
         <!-- include JavaScript/Jquery for page-->
-        <script src="{{url('public/admin/vendor/jquery/jquery.min.js')}}"></script>
-        <script src="{{url('public/admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{url('public/admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+        <script src="{{url('public/vendors/jquery/jquery.min.js')}}"></script>
+        <script src="{{url('public/vendors/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{url('public/vendors/jquery-easing/jquery.easing.min.js')}}"></script>
         <!-- Custom scripts for all pages-->
-        <script src="{{url('public/common/assets/main.js')}}"></script>
-        <script src="{{url('public/admin/js/sb-admin.min.js')}}"></script>
-        <script src="{{url('public/admin/js/main.js')}}"></script>
-        <script src="{{url('public/author/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
+        <script src="{{url('public/backend/common/assets/main.js')}}"></script>
+        <script src="{{url('public/backend/admin/js/sb-admin.min.js')}}"></script>
+        <script src="{{url('public/backend/admin/js/main.js')}}"></script>
+        <script src="{{url('public/vendors/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
         <!-- Custom scripts for vendor pages-->
-        <script src="{{url('public/admin/vendor/datatables/jquery.dataTables.js')}}"></script>
-        <script src="{{url('public/admin/vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+        <script src="{{url('public/vendors/datatables/jquery.dataTables.js')}}"></script>
+        <script src="{{url('public/vendors/datatables/dataTables.bootstrap4.js')}}"></script>
         <!-- Page level plugin JavaScript-->
-        <script src="{{asset('public/admin/vendor/chart.js/Chart.min.js')}}"></script>
+        <script src="{{asset('public/vendors/chart.js/Chart.min.js')}}"></script>
         <!-- Custom scripts for this page-->
-        <script src="{{asset('public/admin/js/sb-admin-charts.min.js')}}"></script>
+        <script src="{{asset('public/backend/admin/js/sb-admin-charts.min.js')}}"></script>
     </body>
 </html>

@@ -9,7 +9,7 @@ Auth::routes();
  * Admin Group
  */
 
-Route::middleware('dashboard_auth:web')->group(function() {
+Route::prefix('dashboard')->group(function() {
 
 /** Dash-Board */
 Route::get('/dashboard/index', 'dashBoardController@index')->name('dashboard.index');
@@ -150,11 +150,10 @@ Route::middleware('auth-admin')->prefix('admin')->group(function() {
     Route::get('/date/set.delete/{id}', 'Admin\date\dateController@setDelete');
 
 });/** End-Admin */
-
-
+//
 /** Author Page** */
 
-Route::prefix('author')->group(function() {
+Route::middleware('dashboard_auth:web')->prefix('author')->group(function() {
 
   //Author->Posts
   Route::get('/post-getList', 'Author\authorPostController@getPostsByFilter')->name('author.post-getList');
@@ -176,29 +175,38 @@ Route::prefix('author')->group(function() {
 });/** End-Author */
 
 /** Files Manager **/
-//Files manager
-Route::get('/files/get.index', 'fileManagerController@getFilesManagerIndex')->name('files.index');
-Route::get('/files/get.ajax', 'fileManagerController@getResultFilesManagerByAjax')->name('files.getResultByAjax');
-//get Upload Box
-Route::get('/upload/getbox', 'fileManagerController@getUploadFilesBoxIndex')->name('upload.getbox');
-Route::post('/upload/upload', 'fileManagerController@upload')->name('upload.upload');
-//Delete by Items
-Route::post('/files/delete', 'fileManagerController@delete')->name('files.delete');
-
-});/** End-dashboard_auth */
+Route::middleware('dashboard_auth:web')->group(function (){
+    //Files manager
+    Route::get('/files/get.index', 'fileManagerController@getFilesManagerIndex')->name('files.index');
+    Route::get('/files/get.ajax', 'fileManagerController@getResultFilesManagerByAjax')->name('files.getResultByAjax');
+    //get Upload Box
+    Route::get('/upload/getbox', 'fileManagerController@getUploadFilesBoxIndex')->name('upload.getbox');
+    Route::post('/upload/upload', 'fileManagerController@upload')->name('upload.upload');
+    //Delete by Items
+    Route::post('/files/delete', 'fileManagerController@delete')->name('files.delete');
+});
 
 /** Authenticate */
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('site.login');
 Route::post('/login_submit', 'Auth\LoginController@login')->name('login.submit');
 Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
 
-/** Sites Public */
+});/* End-dashboard-*/
 
-Route::get('/', 'Site\frontPageController@frontPage')->name('/');
-//Access single Page
-Route::get('/{post_category}/{post_name}','Site\singlePageController@singlePage')->name('single-page');
-//Access Category Page
-Route::get('/{category_name}', 'Site\archivePageController@categoryPage')->name('site.categoryPage');
+/** Site-FrontEnd **/
+//filter route have 1 argrument
 
-
-
+//Home page
+Route::get('/', 'Site\frontPageController@frontPage')->name('home');
+//Post page
+if(isset($_REQUEST['post_id'])){
+    Route::get('/{post_cat_slug}/{post_title_slug}','Site\singlePageController@getPost')->name('site.getPost');
+}
+//Archive page
+if(isset($_REQUEST['cat_id'])){
+    Route::get('/{post_cat_slug}', 'Site\archivePageController@getCategoryPage')->name('site.getCategoryPage');
+}
+//errorPage
+Route::get("/error-404.html",'Site\pageController@errorPage')->name('site.error');
+//contactPage
+Route::get('/contact.html','Site\pageController@contactPage')->name('site.contact');

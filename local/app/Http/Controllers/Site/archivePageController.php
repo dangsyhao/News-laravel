@@ -17,7 +17,7 @@ class archivePageController extends Controller
         //
     }
 
-    public function categoryPage(Request $request){
+    public function getCategoryPage(Request $request){
 
         if(isset($request->cat_id)){
             $cat_id = $request->cat_id;

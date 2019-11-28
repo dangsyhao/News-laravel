@@ -9,7 +9,7 @@ use App\PostList;
 class singlePageController extends Controller
 {
 
-  public function singlePage(Request $request){
+  public function getPost(Request $request){
 
       if(isset($request->post_id)){
           $post_id = $request->post_id;
@@ -23,5 +23,6 @@ class singlePageController extends Controller
 
       return redirect()->back();
   }
+
 
 }

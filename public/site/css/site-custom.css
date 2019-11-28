@@ -3,6 +3,9 @@ html,body{
     font-family: Arial,Helvetica, sans-serif;
 }
 
+span.read_more{
+    color: #cf0000;
+}
 /*###-BreadCrumb-####*/
 .breadcrumb {
     list-style: none;

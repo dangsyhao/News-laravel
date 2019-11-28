@@ -1,11 +1,23 @@
 
         <!---Include Jquery---->
-        <script type="text/javascript" src="{{asset('public/site/vendors/slick/slick/slick.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('public/site/js/jquery.leanModal.min.js')}}"></script>
-        <script src="{{asset('public/site/js/jquery.magnific-popup.js')}}" type="text/javascript"></script>
-        <script type="text/javascript" src="{{asset('public/site/js/jquery.flexisel.js')}}"></script>
+        <script type="text/javascript" src="{{asset('public/vendors/slick/slick/slick.min.js')}}"></script>
 
-        <!--############---Include Slick-Slide--#############-->
+        <!--############---JQUERY PLUGINS--#############-->
+
+        <!--Facebook Comment-->
+        @if(isset($_REQUEST['post_id']))
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=2152285088351327&autoLogAppEvents=1';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+        @endif
+
+        <!--Slick - Slider Setup !-->
         <script type="application/javascript">
             $('.get-slick-ban_doc-block').slick({
                 dots: false,
