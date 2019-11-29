@@ -20,8 +20,7 @@ class singlePageController extends Controller
           //
           return view('site.single',['post_data'=>$post_data]);
       }
-
-      return redirect()->back();
+      return redirect()->route('site.404');
   }
 
 

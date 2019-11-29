@@ -20,6 +20,7 @@ class archivePageController extends Controller
     public function getCategoryPage(Request $request){
 
         if(isset($request->cat_id)){
+
             $cat_id = $request->cat_id;
             $Post_cat = Post_Category::find($cat_id);
             $this->Post_cat = $Post_cat;
@@ -35,12 +36,12 @@ class archivePageController extends Controller
             if($Posts->count() > 0){
                 $post_data = $post_data->put('posts_cat_index',$Posts->take(1));
                 $post_data= $post_data->put('posts_cat_latest',$Posts->take(11)->slice(1));
+                return view('site.page-archive',['post_data'=>$post_data,'Post_cat'=>$Post_cat]);
             }
 
-            return view('site.page-archive',['post_data'=>$post_data,'Post_cat'=>$Post_cat]);
         }
 
-        return redirect()->back();
+        return redirect()->route('site.404');
   }
 
     

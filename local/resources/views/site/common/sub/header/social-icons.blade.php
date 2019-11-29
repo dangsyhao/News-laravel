@@ -1,13 +1,7 @@
 <div class="social-icons">
-    <li><a href="#"><i class="twitter"></i></a></li>
-    <li><a href="#"><i class="facebook"></i></a></li>
-    <li><a href="#"><i class="rss"></i></a></li>
-    <li>
-        <div class="facebook">
-            <div id="fb-root"></div>
-            <div id="fb-root"></div>
-        </div>
-    </li>
+    <li><a href="https://twitter.com/?lang=vi"><i class="facebook"></i></a></li>
+    <li><a href="https://www.facebook.com/"><i class="twitter"></i></a></li>
+    <li><a href="{{route('site.contact')}}"><i class="rss"></i></a></li>
     <script>
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];

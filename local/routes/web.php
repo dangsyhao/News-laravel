@@ -194,19 +194,21 @@ Route::get('/logout', 'Auth\LogoutController@logout')->name('site.logout');
 });/* End-dashboard-*/
 
 /** Site-FrontEnd **/
-//filter route have 1 argrument
-
 //Home page
 Route::get('/', 'Site\frontPageController@frontPage')->name('home');
-//Post page
-if(isset($_REQUEST['post_id'])){
-    Route::get('/{post_cat_slug}/{post_title_slug}','Site\singlePageController@getPost')->name('site.getPost');
+
+if(isset($_REQUEST['post_type'])){
+    //Post page
+    if($_REQUEST['post_type'] == 'post'){
+        Route::get('/{post_cat_slug}/{post_title_slug}','Site\singlePageController@getPost')->name('site.getPost');
+    }
+    //Archive page
+    if($_REQUEST['post_type'] == 'page_archive'){
+        Route::get('/{post_cat_slug}', 'Site\archivePageController@getCategoryPage')->name('site.getCategoryPage');
+    }
+
 }
-//Archive page
-if(isset($_REQUEST['cat_id'])){
-    Route::get('/{post_cat_slug}', 'Site\archivePageController@getCategoryPage')->name('site.getCategoryPage');
-}
-//errorPage
-Route::get("/error-404.html",'Site\pageController@errorPage')->name('site.error');
 //contactPage
-Route::get('/contact.html','Site\pageController@contactPage')->name('site.contact');
+Route::get('/contact.html', 'Site\pageController@contactPage')->name('site.contact');
+//errorPage
+Route::get("/error-404.html",'Site\pageController@errorPage')->name('site.404');

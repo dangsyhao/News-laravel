@@ -93,6 +93,10 @@ span.read_more{
     padding-top: 1.3rem;
     border-top: silver dashed thin;
 }
+.section-main{
+    padding-bottom: 0.7rem;
+    border-bottom: silver solid thin;
+}
 
 /*********CAROSEL-SETING*******/
 .block-image-crosel{
@@ -373,7 +377,16 @@ span.read_more{
 .block-posts-category .articles-items .content .text{
     margin-top: 0.5rem;
 }
-/*#############################-Single Page-#########################*/
+
+/*----------------------PAGE----------------------------------*/
+.single-page{
+    display: block;
+    padding: 0 0.2rem 2rem 0;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/*#############################-POST-#########################*/
 article{
     padding:1rem 2rem 0 3rem;
     font-family: inherit;

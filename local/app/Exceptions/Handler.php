@@ -42,8 +42,18 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+
+     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+            if ($exception->getStatusCode() == 404) {
+                return response()->view('site.page.page._errorPage');
+            }
+            //
+            if ($exception->getStatusCode() == 500) {
+                return response()->view('site.page.page._blank_data');
+            }
+        }
         return parent::render($request, $exception);
     }
 

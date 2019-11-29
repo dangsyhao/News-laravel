@@ -5,18 +5,22 @@
 		@include('site.common.main-menu')
 		@include('site.common.bread_crum')
 		<div class="main-content">
-				<div class="feature-content-left">
-					<!-- Content Master -->
+			<div class="feature-content-left">
+				<!-- Content Master -->
+				<div class="section section-main">
 					@yield('content')
-					<!-- Content Master -->
+				</div>
+				<!-- Content Master -->
+				<div class="section section-bottom">
 					@include('site.common.photos-galery')
 				</div>
-				<div class="feature-content-right">
-					<div class="side-bar">
-						@include('site.common.side-bar')
-					</div>
+			</div>
+			<div class="feature-content-right">
+				<div class="side-bar">
+					@include('site.common.side-bar')
 				</div>
-				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
 		</div>
 		@include('site.common.footer')
 	</div>
