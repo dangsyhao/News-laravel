@@ -11,7 +11,7 @@ $(document).ready(function(){
     function getImagesUploadBox(){
 
         $.ajax({
-            url: "/upload/getbox",
+            url: "/dashboard/upload/getbox",
             method: "GET",
             datatype: "text",
             cache: false,
@@ -25,7 +25,6 @@ $(document).ready(function(){
                 $('form#upload_file_form').find('button[type*="submit"]').css('display','inherit');
             }
         });
-
     }
     //
     $(document).on('click','button',function (event) {
@@ -57,7 +56,7 @@ $(document).ready(function(){
         form_data.append('file', file_data);
         //Load image manager box
         $.ajax({
-            url: "/upload/upload",
+            url: "/dashboard/upload/upload",
             method: "post",
             data: form_data,
             cache: false,
@@ -106,7 +105,7 @@ $(document).ready(function(){
     //Get image upload box.
     function loadFilesManagerPage(){
         $.ajax({
-            url: "/files/get.ajax",
+            url: "/dashboard/files/get.ajax",
             method: "GET",
             datatype: "xml",
             cache: false,
@@ -122,7 +121,7 @@ $(document).ready(function(){
     function deleteItemById(id){
         var _token = $('[name*="csrf-token"]').attr('content');
         $.ajax({
-            url: "/files/delete",
+            url: "/dashboard/files/delete",
             method: "POST",
             data:{
                 id:id
