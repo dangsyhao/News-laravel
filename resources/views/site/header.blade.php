@@ -6,8 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Include Style -->
     <link href="{{asset('/vendors/bootstrap-3.1.1/css/bootstrap.min.css')}}" rel='stylesheet' type='text/css' />
-    <link href="{{asset('/site/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('/site/css/site-custom.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/site/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('/vendors/slick/slick/slick.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/site/css/style-2.css')}}" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="{{asset('/vendors/font-awesome/css/font-awesome.min.css')}}" />

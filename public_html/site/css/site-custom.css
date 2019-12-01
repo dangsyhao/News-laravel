@@ -298,7 +298,7 @@ span.read_more{
     color: inherit;
 }
 
-/*Block ->DU-LICH*/
+/*Block ->ADV-b*/
 #block-du-lich-dn{
     margin: 2rem 0rem 0rem 0rem;
 }
@@ -309,7 +309,21 @@ span.read_more{
 #block-du-lich-dn .slick-slide{
     max-height: 162px;
 }
-
+/*Block -Adv*/
+#block-adv-content-right-bottom .block-header{
+    border-bottom-color: silver;
+    border-bottom-width: thick!important;
+}
+#block-adv-content-right-bottom .block-header span{
+    color: silver;
+    display: inline;
+    font-weight: normal;
+}
+#block-adv-content-right-bottom .content .adv-item{
+    border: silver solid 0.5px;
+    margin-bottom: 1rem;
+    padding: 2px;
+}
 /*############################################-Side-Bar-#########################*/
 .side-bar{
     padding-left: 0.5rem!important;
@@ -398,6 +412,9 @@ article{
 
 article ul{
     list-style-type: none;
+}
+article img{
+margin: 0.7rem 0 0.7rem 0;
 }
 article h2.entry-title{
     font-weight: bold;

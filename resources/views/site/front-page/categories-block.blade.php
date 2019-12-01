@@ -18,6 +18,8 @@
         @include('site.front-page.sub._van-hoa')
         <!--- Include !-->
         @include('site.front-page.sub._the-thao')
+        <!--- Include !-->
+        @include('site.front-page.sub._adv-bottom')
     </div>
     <div class="clearfix"></div>
 </div>
