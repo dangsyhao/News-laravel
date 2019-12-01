@@ -1,0 +1,8 @@
+/*CKEY-EDITOR*/
+form#form-create-new-post #cke__content{
+    margin: 0;
+}
+form#form-create-new-post #cke_1_contents{
+    width: auto;
+    height: 500px!important;
+}
