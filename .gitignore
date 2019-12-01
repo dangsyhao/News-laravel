@@ -1,9 +1,5 @@
 /node_modules
 # Public folder
-
-/storage/*.key
-/vendor
-
 Homestead.json
 Homestead.yaml
 npm-debug.log
