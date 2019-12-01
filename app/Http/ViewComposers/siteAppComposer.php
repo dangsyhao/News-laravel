@@ -55,7 +55,7 @@ class siteAppComposer
         }
 
         //Most View
-        $most_view= $Posts_obj->where('status','>','1')->orderBy('view','desc')->get();
+        $most_view= $Posts_obj->where('status','>','1')->orderBy('view','desc')->get()->take(10);
         if($most_view->count() > 0){
             $post_data_sidebar = $post_data_sidebar->put('most_view',$most_view);
         }

@@ -352,6 +352,9 @@ span.read_more{
     max-height: 162px;
 }
 /*Block ->Most View*/
+#block-most-view-box .content{
+    font-weight: bold;
+}
 #block-most-view-box a:hover{
     text-decoration-line: underline;
 }

@@ -15,7 +15,9 @@
             <div class="col-sm-12 col-md-12 offset-md-8 ">
                 <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                     <ul class="pagination">
-                    {{$notifi_list->links()}}
+                        @if(isset($notifi_list) && $notifi_list->count()>=10)
+                            {{$notifi_list->links()}}
+                        @endif
                     </ul>
                 </div>
             </div>

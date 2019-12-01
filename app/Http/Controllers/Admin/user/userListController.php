@@ -59,9 +59,7 @@ class userListController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         //Auto Create Directory
-        Storage::disk('users')->makeDirectory($request->email,0775, true);
-        Storage::disk('users')->makeDirectory($request->email.'/images',0775, true);
-
+        Storage::disk('users')->makeDirectory($request->email,777, true);
         return redirect()->route('admin.user.getList');
     }
 

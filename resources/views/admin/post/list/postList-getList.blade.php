@@ -141,7 +141,7 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                         <ul class="pagination">
-                            @if(! empty($posts) && $posts->count() > 10)
+                            @if(! empty($posts) && $posts->count() >= 10)
                                 {{$posts->links()}}
                             @endif
                         </ul>

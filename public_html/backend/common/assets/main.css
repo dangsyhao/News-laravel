@@ -1,3 +1,26 @@
+/*************************-FORM ->Class.form-horizontal**************************/
+form.form-horizontal{
+    margin: 0;
+    padding: 0;
+}
+form.form-horizontal label{
+    margin-left: 0;
+}
+form.form-horizontal select{
+    text-align-last: center;
+    text-align: center;
+}
+/*Get-image Popup*/
+form.form-horizontal .get-images-popup{
+    width: 100%;
+    min-height: 40px;
+    border: silver solid thin;
+    margin-bottom: 1rem;
+}
+form.form-horizontal .get-images-popup img{
+    max-width: 100%;
+    max-height: 300px;
+}
 
 /**************************** Images Upload Box ********************************************************/
 #over {
@@ -99,3 +122,4 @@ a, a:visited, a:active{
     z-index: 0;
     transition:all .3s ease-in-out;
 }
+

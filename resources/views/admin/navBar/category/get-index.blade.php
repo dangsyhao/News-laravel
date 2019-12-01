@@ -46,7 +46,7 @@
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                         <ul class="pagination">
-                    @if(empty($cate_menu) && $cate_menu->count() >10)
+                    @if( isset($cate_menu) && $cate_menu->count() >=10)
                         {{$cate_menu->links()}}
                     @endif
                         </ul>

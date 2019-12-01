@@ -47,7 +47,6 @@ class fileManagerController extends Controller
                 $first_key +=1;
             }
         }
-
         return $files_url;
     }
 
@@ -75,8 +74,12 @@ class fileManagerController extends Controller
     {
         $Auth = Auth::user();
         //
+        $output = array(
+            'result' => 'false'
+        );
+        //
         $rules = array(
-            'file'  => 'required|mimes:jpeg,bmp,png,pdf,doc|max:5140',
+            'file'  => 'required|mimes:jpg,jpeg,bmp,png,gif,pdf,doc|max:5140',
         );
         $error = Validator::make($request->all(), $rules);
 
@@ -101,12 +104,16 @@ class fileManagerController extends Controller
                 $Files->file_size = $file_request->getClientSize();
                 $Files->user_id = $Auth->id;
                 $Files->save();
+                //
+                $output = array(
+                    'result' => 'true'
+                );
             }
 
-        }elseif ($Auth->User_category->user_role == 'author'){
+        }elseif($Auth->User_category->user_role == 'author'){
             //
             $CheckFile = Storage::disk('users');
-            $request->file('file')->store('/'.$Auth->email,'users' );
+            $file_request->store('/'.$Auth->email.'/','users' );
             $file_hashName = $file_request->hashName();
             $exists = $CheckFile->url($file_hashName);
             if($exists){
@@ -116,14 +123,13 @@ class fileManagerController extends Controller
                 $Files->file_size = $file_request->getClientSize();
                 $Files->user_id = $Auth->id;
                 $Files->save();
+                //
+                $output = array(
+                    'result' => 'true'
+                );
             }
-        }else{
-            return false;
         }
-        //
-        $output = array(
-            'result' => 'true'
-        );
+
         return response()->json($output);
     }
 

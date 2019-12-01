@@ -52,7 +52,7 @@
                     <div class="col-sm-12 col-md-7">
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
                             <ul class="pagination">
-                        @if(isset($advertise_list))
+                        @if(isset($advertise_list) && $advertise_list->count()>= 10)
                             {{$advertise_list->links()}}
                         @endif
                             </ul>
